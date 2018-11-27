@@ -2,18 +2,18 @@ from z3 import z3
 import os
 import re, time
 class CCSLSMTTransfer:
-    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, deadlock=0, SMTOutputFile=None):
+    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, deadlock=0,lowBound = 1):
         self.ccslConstraints = ccslConstraints
         self.bound = bound
         self.period = period
         self.deadlock = deadlock
         self.realPeroid = realPeroid
-        self.SMTOutputFile = SMTOutputFile
+        self.lowBound = lowBound
         self.operator = ["<", "≤", "⊆", "#", "+", "*", "∧", "∨", "$", "∝", "☇", "|", "=="]
         self.CCSLConstraintStrList = []
         self.CCSLConstraintList = []
         self.clocks = set()
-        self.solver = z3.SolverFor("ALL")
+        self.solver = z3.Optimize()#z3.SolverFor("ALL")
         # self.solver.set('AUFLIRA',0)
         # self.solver.set-logic
         self.preIssue()
@@ -23,7 +23,6 @@ class CCSLSMTTransfer:
         self.l = z3.Int("l")
         self.p = z3.Int("p")
         self.np = z3.Int("np")
-
         self.tickDict = {}
         self.historyDict = {}
         self.Tick_result = {}
@@ -33,7 +32,7 @@ class CCSLSMTTransfer:
             if str(each).startswith("//") is False:
                 self.CCSLConstraintStrList.append(each)
         self.constraintsProduce()
-        self.solver.set(unsat_core=True)
+        # self.solver.set(unsat_core=True)
 
     def constraintsProduce(self):
         for each in self.CCSLConstraintStrList:
@@ -165,11 +164,12 @@ class CCSLSMTTransfer:
     def RealProduce(self):
         if self.bound > 0:
             self.solver.add(self.n == self.bound)
-            self.solver.add(self.l < 10)
-        self.solver.add(self.l > 0)
+            self.solver.add(self.l >= 1)
         if self.period > 0:
             if self.realPeroid == 0:
-                self.solver.add(self.p > 0)
+                self.solver.add(self.p > 0,self.p <=  self.n)
+                self.solver.add(self.p < 4)
+
             else:
                 self.solver.add(self.p == self.realPeroid)
             self.solver.add(self.k == (self.l + self.p))
@@ -213,12 +213,6 @@ class CCSLSMTTransfer:
                             )
                         )
                     )
-            # else:
-            #     x = z3.Int("x")
-            #     self.solver.add(z3.ForAll(x, z3.Implies(z3.And(x >= 1, x <= self.n),
-            #                             z3.If(tick(x),history(x + 1) == history(x) + 1,
-            #                             history(x + 1) == history(x)))))
-        # at least one clcok tick every step
         clockListTmp = []
         x = z3.Int("x")
         for each in self.tickDict.keys():
@@ -630,6 +624,13 @@ class CCSLSMTTransfer:
                         tick1(x) == tick2(x)
                     )))
 
+    def is_number(self,s):
+        try:
+            int(s)
+            return True
+        except ValueError:
+            return False
+
     def getWorkOut(self):
         if self.period > 0:
             print("k:\t%s" %self.solver.model()[self.k])
@@ -645,13 +646,6 @@ class CCSLSMTTransfer:
             self.Tick_result[each] = TmpTickList
         for each in self.Tick_result.keys():
             print(each, self.Tick_result[each])
-
-    def is_number(self,s):
-        try:
-            int(s)
-            return True
-        except ValueError:
-            return False
 
     def outPutTickByHTML(self):
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
@@ -716,24 +710,20 @@ class CCSLSMTTransfer:
                 if (i + 1) in self.Tick_result[each]:
                     result[i].append(each)
         print(result)
+
     def work(self):
         begin = time.time()
         self.RealProduce()
         self.addTickSMT()
         self.addOriginSMTConstraints()
-        if self.deadlock > 0:
-            self.addDeadLock()
+        # # if self.deadlock > 0:
+        # #     self.addDeadLock()
         print(str(self.solver.check()))
         print(time.time() - begin)
 
     def addExtraConstraints(self):
-        # if self.period > 0:
-        #     print("k:\t%s" %self.solver.model()[self.k])
-        #     print("l:\t%s" %self.solver.model()[self.l])
-        #     print("p:\t%s" %self.solver.model()[self.p])
         model = self.solver.model()
         ExtraConstraints = []
-        ExtraConstraints.append(self.p != model.eval(self.p))
         for each in self.clocks:
             self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
             for i in range(1,self.bound + 1):
@@ -742,35 +732,52 @@ class CCSLSMTTransfer:
         self.solver.add(z3.Or(ExtraConstraints))
 
     def LoopFor10Results(self):
-        html = "<html><body><style type=\"text/css\">\n"
-        for each in open("output.css", "r").readlines():
-            html += each
-        html += "</style>"
+        html = ""
         self.work()
-        f = open("m.txt","a+")
+        f = open("m.txt","w+")
         i = 0
-        f.write("%s\n" % self.solver.to_smt2())
-        while str(self.solver.check()).startswith("sat"):
-            # print(self.solver.model())
-            self.getWorkOut()
-            html += "<h1>%s</h1>" %(i)
-            html += self.outPutTickByHTML()
-            self.outputByMD()
-            f.write("%s\n" %self.solver.to_smt2())
-            self.addExtraConstraints()
-            i += 1
-            # if i == 1:
-            #     break
-
-        html += "</body></html>"
-        f = open("ouput.html", "w+",encoding="utf-8")
+        self.solver.minimize(self.l)
+        self.solver.minimize(self.k)
+        try:
+            while self.solver.check() == z3.sat:
+                self.getWorkOut()
+                html += "<h1>%s</h1>" %(i)
+                html += self.outPutTickByHTML()
+                self.outputByMD()
+                # f.write("%s\n" %self.solver.to_smt2())
+                self.addExtraConstraints()
+                i += 1
+                if i == 10:
+                    break
+                print(self.solver.check())
+        except Exception as e:
+            pass
+        f = open("ouput.html", "a+",encoding="utf-8")
         f.write(html)
         f.flush()
         f.close()
 
+def HtmlHeader():
+    html = "<html><body><style type=\"text/css\">\n"
+    for each in open("output.css", "r").readlines():
+        html += each
+    html += "</style>"
+    f = open("ouput.html", "w+", encoding="utf-8")
+    f.write(html)
+    f.flush()
+    f.close()
+def HTMLFooter():
+    html = "</body></html>"
+    f = open("ouput.html", "a+", encoding="utf-8")
+    f.write(html)
+    f.flush()
+    f.close()
+
 if __name__ == "__main__":
+    HtmlHeader()
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    ccsl = CCSLSMTTransfer(ccslConstraints, bound=30, period=1, realPeroid=2, deadlock=0)
+    bound = 30
+    ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0, deadlock=0)
     ccsl.LoopFor10Results()
