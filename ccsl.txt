@@ -1,9 +1,8 @@
-out<tmp2
-step1<step3
-step2<step3
-tmp<out
-in1≤step1
-in2≤step2
-step3≤out
-tmp2=tmp$1
-tmp=in1+in2
+T1s<T1f
+T1f≤T2s
+T2f[7]<T1s
+T2s<T2f
+T1s=msec∝5
+T2f=msec∝7
+T1s#T1f
+T2s#T2f
