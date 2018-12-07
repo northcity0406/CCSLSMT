@@ -1,12 +1,13 @@
 T1s<T1f
 T1f≤T2s
-T2f[2]<T1s
+T2f[4]<T1s
 T2s<T2f
 //T1s=msec∝3
 T2f=msec∝p_p1
 T1s#T1f
 T2s#T2f
 T1f=T1s$p_p2onmsec
-T2f=T2s$2onmsec
+T2f=T2s$p_p3onmsec
 p_p1~4,7
 p_p2~2,4
+p_p3~3,5

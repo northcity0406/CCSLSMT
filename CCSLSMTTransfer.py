@@ -540,25 +540,27 @@ class CCSLSMTTransfer:
                     )))
                 if self.bound > 0 or self.period > 0:
                     left = z3.And(x > 1, x < self.n, tick1(x))
-                    right = z3.And(tick3(x),
-                        z3.Exists(
-                            m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
-                               history2(x) - history2(m) >= 1)
-                        )
-                    )
+                    right = z3.And(x > delay,tick2(x - delay))
+                    # right = z3.And(tick3(x),
+                    #     z3.Exists(
+                    #         m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
+                    #            history2(x) - history2(m) >= 1)
+                    #     )
+                    # )
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(left, right),
                         z3.Implies(right, left)
                     )))
                 else:
                     left = z3.And(x > 1, tick1(x))
-                    right = z3.And(
-                        tick3(x),
-                        z3.Exists(
-                            m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
-                               history2(x) - history2(m) >= 1)
-                        )
-                    )
+                    right = z3.And(x > delay,tick2(x - delay))
+                    # right = z3.And(
+                    #     tick3(x),
+                    #     z3.Exists(
+                    #         m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
+                    #            history2(x) - history2(m) >= 1)
+                    #     )
+                    # )
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(left, right),
                         z3.Implies(right, left)
