@@ -30,6 +30,7 @@ class CCSLSMTTransfer:
         self.tickDict = {}
         self.historyDict = {}
         self.Tick_result = {}
+        self.parameter = {}
     # 数据预处理环节
     def preIssue(self):
         for each in str(self.ccslConstraints).split("\n"):
@@ -151,21 +152,11 @@ class CCSLSMTTransfer:
                 self.clocks.add(c2)
                 self.clocks.add(c3)
                 self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∝") and str(each).__contains__("~") is False:
+            elif str(each).__contains__("∝"):
                 tmp = str(each).split("∝")
                 clockTmp = ["∝"]
                 clockTmp.extend(tmp[0].split("="))
                 clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∝") and str(each).__contains__("~"):
-                tmp = str(each).split("∝")
-                clockTmp = ["∝"]
-                clockTmp.extend(tmp[0].split("="))
-                clockTmp.extend(tmp[1].split("~"))
                 c1 = tmp[0].split("=")[0]
                 c2 = tmp[0].split("=")[1]
                 self.clocks.add(c1)
@@ -183,6 +174,12 @@ class CCSLSMTTransfer:
                 self.clocks.add(c2)
                 self.clocks.add(c3)
                 self.CCSLConstraintList.append(clockTmp)
+            elif str(each).__contains__("~"):
+                tmp = str(each).split("~")
+                p1 = tmp[0]
+                temp = ["~", p1]
+                temp.extend(tmp[1].split(","))
+                self.CCSLConstraintList.append(temp)
         for each in self.CCSLConstraintList:
             print(each)
 
@@ -502,7 +499,11 @@ class CCSLSMTTransfer:
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 history3 = self.historyDict["h_%s" % (each[4])]
-                delay = z3.IntVal(int(each[3]))
+                if self.is_number(each[3]):
+                    delay = z3.IntVal(int(each[3]))
+                else:
+                    delay = z3.Int("%s" %each[3])
+                    self.parameter[each[3]] = delay
                 if self.period > 0:
                     self.solver.add(
                         z3.And(tick1(self.l) == tick1(self.k), tick2(self.l) == tick2(self.k), tick3(self.l) ==
@@ -572,9 +573,13 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.And(tick1(self.l) == tick1(self.k), tick2(self.l) == tick2(self.k)))
                     self.solver.add((history2(self.k) - history2(self.l)) % z3.IntVal(int(each[3])) == 0)
                 x = z3.Int("x")
-                m = z3.Int("m")
                 left = z3.And(tick1(x))
-                right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % z3.Int(each[2]) == 0)
+                if self.is_number(each[3]):
+                    right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % z3.IntVal(each[3]) == 0)
+                else:
+                    period = z3.Int("%s" %each[3])
+                    self.parameter[each[3]] = period
+                    right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % period == 0)
                 if self.bound > 0 or self.period > 0:
                     self.solver.add(z3.ForAll(x,z3.And(
                         z3.Implies(z3.And(x >= 1, x <= self.n,left),right),#)))
@@ -584,28 +589,6 @@ class CCSLSMTTransfer:
                         z3.Implies(z3.And(x >= 1,left),right),#)))
                         z3.Implies(z3.And(x >= 1, right), left),)))
 
-            elif each[0] == "∝" and len(each) == 5:
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                if self.period > 0:
-                    self.solver.add(z3.And(tick1(self.l) == tick1(self.k), tick2(self.l) == tick2(self.k)))
-                    self.solver.add((history2(self.k) - history2(self.l)) % z3.IntVal(int(each[3])) == 0)
-                x = z3.Int("x")
-                m = z3.Int("m")
-                self.solver.add(m >= z3.IntVal(each[3]))
-                self.solver.add(m <= z3.IntVal(each[4]))
-                left = z3.And(tick1(x))
-                right = z3.And(tick2(x), history2(x) > 0,(history2(x) + 1) % m == 0)
-                if self.bound > 0 or self.period > 0:
-                    self.solver.add(z3.ForAll(x,z3.And(
-                        z3.Implies(z3.And(x >= 1, x <= self.n,left),right),#)))
-                        z3.Implies(z3.And(x >= 1, x <= self.n, right), left),)))
-                else:
-                    self.solver.add(z3.ForAll(x,z3.And(
-                        z3.Implies(z3.And(x >= 1,left),right),#)))
-                        z3.Implies(z3.And(x >= 1, right), left),)))
             elif each[0] == "☇":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
@@ -683,6 +666,10 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.ForAll(x, z3.And(x >= 1, x <= self.n,tick1(x) == tick2(x))))
                 else:
                     self.solver.add(z3.ForAll(x, z3.And(x >= 1, tick1(x) == tick2(x))))
+            elif each[0] == "~":
+                m = z3.Int("%s" %each[1])
+                self.solver.add(m >= z3.IntVal(each[2]))
+                self.solver.add(m <= z3.IntVal(each[3]))
 
     def is_number(self,s):
         try:
@@ -734,33 +721,34 @@ class CCSLSMTTransfer:
         html += "<hr>"
 
 
-        for i in self.CCSLConstraintList:
-            html += "<ul><li class='name'>%s</li>" % (i)
-            for each in i[1:]:
-                if self.is_number(str(each)) is False:
-                    html += "<ul><li class='name'>%s</li>" % (each)
-                    cnt = 0
-                    res = ""
-                    for i in range(1, self.bound + 1):
-                        if i in self.Tick_result[each]:
-                            if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                html += "<li class='up'></li>"
-                            else:
-                                html += "<li class='upl'></li>"
-                        else:
-                            if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                html += "<li class='down'></li>"
-                            else:
-                                html += "<li class='downl'></li>"
-                        if i - 1 in self.Tick_result[each]:
-                            cnt += 1
-                        res += "<li class='history'>%s</li>" % (cnt)
-                    html += "</ul>"
-                    html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-            html += "<ul><li></li></ul></ul>"
-            html += "</ul>"
+        # for i in self.CCSLConstraintList:
+        #     html += "<ul><li class='name'>%s</li>" % (i)
+        #     for each in i[1:]:
+        #         if self.is_number(str(each)) is False:
+        #             html += "<ul><li class='name'>%s</li>" % (each)
+        #             cnt = 0
+        #             res = ""
+        #             for i in range(1, self.bound + 1):
+        #                 if i in self.Tick_result[each]:
+        #                     if i - 1 in self.Tick_result[each] or i - 1 == 0:
+        #                         html += "<li class='up'></li>"
+        #                     else:
+        #                         html += "<li class='upl'></li>"
+        #                 else:
+        #                     if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+        #                         html += "<li class='down'></li>"
+        #                     else:
+        #                         html += "<li class='downl'></li>"
+        #                 if i - 1 in self.Tick_result[each]:
+        #                     cnt += 1
+        #                 res += "<li class='history'>%s</li>" % (cnt)
+        #             html += "</ul>"
+        #             html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+        #     html += "<ul><li></li></ul></ul>"
+        #     html += "</ul>"
         html += "<hr>"
         html += "</div>"
+
         return html
 
     def outputByMD(self):
@@ -790,6 +778,8 @@ class CCSLSMTTransfer:
             for i in range(1,self.bound + 1):
                 tmp = self.tickDict["t_%s" % (each)]
                 ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
+        for each in self.parameter.keys():
+            ExtraConstraints.append(self.parameter[each] != model.eval(self.parameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
 
     def LoopFor10Results(self):
@@ -811,8 +801,7 @@ class CCSLSMTTransfer:
                 html += "<h1>%s</h1>" %(i)
                 html += self.outPutTickByHTML()
                 self.outputByMD()
-                if self.period == 0:
-                    f.write("%s\n" %self.solver.to_smt2())
+                f.write("%s\n" %self.solver.to_smt2())
                 self.addExtraConstraints()
                 i += 1
                 if i == 10:
@@ -846,6 +835,6 @@ if __name__ == "__main__":
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    bound = 20
+    bound = 50
     ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0, deadlock=0)
     ccsl.LoopFor10Results()
