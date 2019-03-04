@@ -40,7 +40,7 @@ html, body {
     display: inline-block;
     text-align: center;
     font-size: 10px;
-    margin: -0.5px;
+    margin: -0.2px;
     border-left: 1px solid #fff;
 }
 
@@ -53,21 +53,25 @@ html, body {
 }
 
 #dpic ul .up {
-    border-top: 1px solid #000;
+    border-bottom: 0.2px dashed #000;
+    border-top: 2px solid red;
 }
 
 #dpic ul .down {
-    border-bottom: 1px solid #000;
+    /*border-top: 0.2px dashed #000;*/
+    border-bottom: 2px solid red;
 }
 
 #dpic ul .upl {
-    border-top: 1px solid #000;
-    border-left-color: #000;
+    border-bottom: 0.2px dashed #000;
+    border-top: 2px solid red;
+    border-left: 2px solid red;
 }
 
 #dpic ul .downl {
-    border-bottom: 1px solid #000;
-    border-left-color: #000;
+    /*border-top: 0.2px dashed #000;*/
+    border-bottom: 2px solid red;
+    border-left: 2px solid red;
 }
 
 .history{

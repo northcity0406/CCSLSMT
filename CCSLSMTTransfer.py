@@ -1,7 +1,6 @@
 import time
 from z3 import z3
 from z3 import *
-# init("/usr/bin/z3/bin/Microsoft.Z3.dll")
 
 class CCSLSMTTransfer:
     def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1):
@@ -23,10 +22,10 @@ class CCSLSMTTransfer:
         self.CCSLConstraintStrList = []
         self.CCSLConstraintList = []
         self.clocks = set()
-        # if self.period > 0:
-        #     self.solver = z3.Optimize()#z3.SolverFor("ALL")
-        # else:
-        self.solver =  z3.SolverFor("ALL")
+        if self.period > 0:
+            self.solver = z3.Optimize()#z3.SolverFor("ALL")
+        else:
+            self.solver =  z3.SolverFor("LRA")
         # self.solver = z3.Optimize()
         # self.solver.set('AUFLIRA',0)
         # self.solver.set-logic
@@ -51,7 +50,6 @@ class CCSLSMTTransfer:
             if str(each).startswith("//") is False:
                 self.CCSLConstraintStrList.append(each.replace(" ",""))
         self.constraintsProduce()
-        # self.solver.set(unsat_core=True)
 
     def constraintsProduce(self):
         """
@@ -192,6 +190,15 @@ class CCSLSMTTransfer:
                 self.clocks.add(c2)
                 self.clocks.add(c3)
                 self.CCSLConstraintList.append(clockTmp)
+            elif str(each).__contains__("=="):
+                tmp = str(each).split("==")
+                clockTmp = ["=="]
+                c1 = tmp[0]
+                c2 = tmp[1]
+                clockTmp.extend(tmp)
+                self.clocks.add(c1)
+                self.clocks.add(c2)
+                self.CCSLConstraintList.append(clockTmp)
             elif str(each).__contains__("∈"):
                 tmp = str(each).split("∈")
                 p1 = tmp[0]
@@ -223,6 +230,7 @@ class CCSLSMTTransfer:
         Define the relationship between the tick of a clock and the history of a clock.
         :return:
         """
+
         for each in self.clocks:
             #Define the function of the tick, which means that the clock ticks at step i or not, and it will be represent
             # as True if it ticks, otherwise False.
@@ -231,10 +239,8 @@ class CCSLSMTTransfer:
             self.historyDict["h_%s" % (each)] = z3.Function("h_%s" % (each), z3.IntSort(), z3.IntSort())
             tick = self.tickDict["t_%s" % (each)]
             history = self.historyDict["h_%s" % (each)]
-
             # For every clock, the history of step 0 is 0.
             self.solver.add(history(1) == 0)
-
             if self.bound > 0:
                 # If the bound is finite, we define the history of the clock with a fixed bound.
                 for i in range(1, self.bound + 1):
@@ -417,7 +423,7 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(
                             z3.And(x >= 1, x <= self.n, tick1(x)),
-                            z3.Or(tick2(x), tick3(x))),
+                            z3.And(tick2(x), tick3(x))),
                         z3.Implies(
                             z3.And(x >= 1, x <= self.n, z3.And(tick2(x), tick3(x))),
                             tick1(x)),
@@ -427,7 +433,7 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(
                             z3.And(x >= 1, tick1(x)),
-                            z3.Or(tick2(x), tick3(x))),
+                            z3.And(tick2(x), tick3(x))),
                         z3.Implies(
                             z3.And(x >= 1, z3.And(tick2(x), tick3(x))),
                             tick1(x)),
@@ -482,16 +488,16 @@ class CCSLSMTTransfer:
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, x <= self.n),
-                        z3.If(history2(x) >= delay,
-                                history1(x) == history2(x) - delay,
-                                history1(x) == 0)
+                        history1(x) == z3.If(history2(x) >= delay,
+                                 history2(x) - delay,
+                                0)
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
-                        z3.If(history2(x) >= delay,
-                                history1(x) == history2(x) - delay,
-                                history1(x) == 0)
+                        history1(x) == z3.If(history2(x) >= delay,
+                                 history2(x) - delay,
+                                0)
                     )))
 
             elif each[0] == "on":
@@ -515,13 +521,8 @@ class CCSLSMTTransfer:
                 m = z3.Int("m")
                 if self.bound > 0:
                     left = z3.And(x > 1, x < self.n, tick1(x))
-                    right = z3.And(x > delay, tick2(x - delay))
-                    # right = z3.And(tick3(x),
-                    #     z3.Exists(
-                    #         m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
-                    #            history2(x) - history2(m) >= 1)
-                    #     )
-                    # )
+                    # right = z3.And(x > delay, tick2(x - delay))
+
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(left, right),
                         z3.Implies(right, left)
@@ -596,9 +597,15 @@ class CCSLSMTTransfer:
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.And(x >= 1, x <= self.n, tick1(x) == tick2(x))))
+                    self.solver.add(z3.ForAll(x, z3.Implies(
+                        z3.And(x >= 1, x <= self.n),
+                        tick1(x) == tick2(x)
+                    )))
                 else:
-                    self.solver.add(z3.ForAll(x, z3.And(x >= 1, tick1(x) == tick2(x))))
+                    self.solver.add(z3.ForAll(x, z3.Implies(
+                        x >= 1,
+                        tick1(x) == tick2(x)
+                    )))
             elif each[0] == "∈":
                 m = z3.Int("%s" % each[1])
                 self.solver.add(m >= z3.IntVal(each[2]))
@@ -681,7 +688,7 @@ class CCSLSMTTransfer:
         #             html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
         #     html += "<ul><li></li></ul></ul>"
         #     html += "</ul>"
-        html += "<hr>"
+        # html += "<hr>"
         html += "</div>"
 
         return html
@@ -700,7 +707,6 @@ class CCSLSMTTransfer:
         self.addTickSMT()
         self.addOriginSMTConstraints()
         self.addTickForever()
-        # print(self.solver.to_smt2())
         print(str(self.solver.check()))
         print(time.time() - begin)
 
@@ -716,17 +722,19 @@ class CCSLSMTTransfer:
             ExtraConstraints.append(self.parameter[each] != model.eval(self.parameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
 
-    def LoopFor10Results(self):
+    def LoopFor10Results(self,p):
         html = ""
         self.work()
         f = open("m.txt","w+")
         i = 0
-        # if self.period > 0:
-        #     self.solver.minimize(self.l)
-        #     self.solver.minimize(self.k)
+        # print(self.solver.to_smt2())
+        if self.period > 0:
+            self.solver.minimize(self.l)
+            self.solver.add(self.p == p)
+            # self.solver.minimize(self.k)
 
         try:
-            # print(self.solver.to_smt2())
+            # f.write("%s\n" % self.solver.to_smt2())
             # througput = self.historyDict["h_%s" % ("T2f")]
             # self.solver.maximize(througput(self.bound))
             while self.solver.check() == z3.sat:
@@ -770,5 +778,8 @@ if __name__ == "__main__":
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
     bound = 20
-    ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
-    ccsl.LoopFor10Results()
+    for i in range(2,bound):
+        print("Bound",i)
+        ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=1, realPeroid=0)
+        ccsl.LoopFor10Results(i)
+    HTMLFooter()
