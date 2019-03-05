@@ -501,34 +501,40 @@ class CCSLSMTTransfer:
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 history3 = self.historyDict["h_%s" % (each[4])]
-                if self.is_number(each[3]):
-                    delay = z3.IntVal(int(each[3]))
-                else:
-                    delay = z3.Int("%s" % each[3])
-                    self.parameter[each[3]] = delay
                 x = z3.Int("x")
                 m = z3.Int("m")
-                if self.bound > 0:
-                    left = tick1(x)
+                left = tick1(x)
+                right = None
+                if self.is_number(each[3]):
+                    delay = z3.IntVal(int(each[3]))
+                    # right = z3.And(x > delay, tick2(x - delay))
                     right = z3.And(
                         tick3(x),
-                        z3.Exists(
-                            m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay)
-                        )
+                        z3.Exists(m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay))
                     )
-                    # right = z3.And(x > delay, tick2(x - delay))
+                else:
+                    delay = z3.Int("%s" % each[3])
+                    delayParameter = None
+                    for t in self.CCSLConstraintList:
+                        if t[0] == "∈" and t[1] == each[3]:
+                            delayParameter = t
+                            break
+                    self.parameter[each[3]] = delay
+                    # right = z3.And(x > delay,
+                    #         delay >= z3.IntVal(delayParameter[2]),
+                    #         delay <= z3.IntVal(delayParameter[3]),
+                    #         tick2(x - delay))
+                    right = z3.And(
+                        tick3(x),
+                        z3.And(delay >= z3.IntVal(delayParameter[2]),
+                               delay <= z3.IntVal(delayParameter[3])),
+                        z3.Exists(m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay))
+                    )
+                if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(z3.And(x >= 1, x <= self.n, left), right),  # )))
                         z3.Implies(z3.And(x >= 1, x <= self.n, right), left), )))
                 else:
-                    left = tick1(x)
-                    # right = z3.And(x > delay, tick2(x - delay))
-                    right = z3.And(
-                        tick3(x),
-                        z3.Exists(
-                            m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay)
-                        )
-                    )
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(z3.And(x >= 1, left), right),  # )))
                         z3.Implies(z3.And(x >= 1, right), left), )))
@@ -546,6 +552,10 @@ class CCSLSMTTransfer:
                     period = z3.Int("%s" % each[3])
                     self.parameter[each[3]] = period
                     right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % period == 0)
+                    for t in self.CCSLConstraintList:
+                        if t[0] == "∈" and t[1] == each[3]:
+                            self.solver.add(period >= z3.IntVal(t[2]))
+                            self.solver.add(period <= z3.IntVal(t[3]))
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(z3.And(x >= 1, x <= self.n, left), right),  # )))
@@ -598,17 +608,9 @@ class CCSLSMTTransfer:
                         x >= 1,
                         tick1(x) == tick2(x)
                     )))
-            elif each[0] == "∈":
-                m = z3.Int("%s" % each[1])
-                self.solver.add(m >= z3.IntVal(each[2]))
-                self.solver.add(m <= z3.IntVal(each[3]))
 
     def is_number(self,s):
-        try:
-            int(s)
-            return True
-        except ValueError:
-            return False
+        return set(s).issubset(set("1234567890"))
 
     def getWorkOut(self):
         if self.period > 0:
@@ -633,7 +635,7 @@ class CCSLSMTTransfer:
         for each in range(1, self.bound + 1):
             html += "<li>%s</li>" % (each)
         html += "</ul>"
-        for each in [each for each in self.Tick_result.keys() if each != "idealClock"]:
+        for each in self.Tick_result.keys():
             html += "<ul><li class='name'>%s</li>" % (each)
             cnt = 0
             res = ""
@@ -654,32 +656,33 @@ class CCSLSMTTransfer:
             html += "</ul>"
         # html += "<hr>"
 
+        for w in self.CCSLConstraintList:
+            if w[0] != "∈":
+                html += "<ul><li class='name'>%s</li>" % (w)
+                for each in w[1:]:
+                    if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
+                        html += "<ul><li class='name'>%s</li>" % (each)
+                        cnt = 0
+                        res = ""
+                        for i in range(1, self.bound + 1):
+                            if i in self.Tick_result[each]:
+                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='up'></li>"
+                                else:
+                                    html += "<li class='upl'></li>"
+                            else:
+                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='down'></li>"
+                                else:
+                                    html += "<li class='downl'></li>"
+                            if i - 1 in self.Tick_result[each]:
+                                cnt += 1
+                            res += "<li class='history'>%s</li>" % (cnt)
+                        html += "</ul>"
+                        html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+                html += "<ul><li></li></ul></ul>"
+                html += "</ul>"
 
-        for i in self.CCSLConstraintList:
-            html += "<ul><li class='name'>%s</li>" % (i)
-            for each in i[1:]:
-                if self.is_number(str(each)) is False:
-                    html += "<ul><li class='name'>%s</li>" % (each)
-                    cnt = 0
-                    res = ""
-                    for i in range(1, self.bound + 1):
-                        if i in self.Tick_result[each]:
-                            if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                html += "<li class='up'></li>"
-                            else:
-                                html += "<li class='upl'></li>"
-                        else:
-                            if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                html += "<li class='down'></li>"
-                            else:
-                                html += "<li class='downl'></li>"
-                        if i - 1 in self.Tick_result[each]:
-                            cnt += 1
-                        res += "<li class='history'>%s</li>" % (cnt)
-                    html += "</ul>"
-                    html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-            html += "<ul><li></li></ul></ul>"
-            html += "</ul>"
         html += "<hr>"
         html += "</div>"
 
@@ -739,7 +742,7 @@ class CCSLSMTTransfer:
                     break
                 print(self.solver.check())
         except Exception as e:
-            pass
+            print(e.__dict__)
         f = open("ouput.html", "a+",encoding="utf-8")
         f.write(html)
         f.flush()
@@ -750,7 +753,7 @@ def HtmlHeader():
     for each in open("output.css", "r").readlines():
         html += each
     html += "</style>"
-    f = open("ouput.html", "w+", encoding="utf-8")
+    f = open("ouput.html", "w", encoding="utf-8")
     f.write(html)
     f.flush()
     f.close()
