@@ -314,14 +314,12 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, x <= self.n, history1(x) == history2(x)),
                         z3.Not(tick2(x))
-                    )
-                                                ))
+                    )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, history1(x) == history2(x)),
                         z3.Not(tick2(x))
-                    )
-                                                ))
+                    )))
 
             if each[0] == "<" and len(each) == 4:
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -334,14 +332,12 @@ class CCSLSMTTransfer:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, x <= self.n, history2(x) - history1(x) == delay),
                         z3.Not(tick2(x))
-                    )
-                                                ))
+                    )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, history2(x) - history1(x) == delay),
                         z3.Not(tick2(x))
-                    )
-                                                ))
+                    )))
 
             elif each[0] == "≤":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -351,28 +347,30 @@ class CCSLSMTTransfer:
                 x = z3.Int("x")
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
+                        z3.And(x >= 1, x <= self.n + 1),
                         history1(x) >= history2(x)
                     )))
                 else:
-                    self.solver.add(z3.ForAll(x,
-                                                x >= 1,
-                                                history1(x) >= history2(x)
-                                                ))
+                    self.solver.add(z3.ForAll(x,z3.Implies(
+                        x >= 1,
+                        history1(x) >= history2(x)
+                    )))
 
             elif each[0] == "⊆":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
+                history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n, tick1(x)), tick2(x))
-                                                ))
+                        z3.And(x >= 1, x <= self.n, tick1(x)),
+                        tick2(x)
+                    )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, tick1(x)), tick2(x))
-                                                ))
-
+                        z3.And(x >= 1, tick1(x)),
+                        tick2(x)
+                    )))
             elif each[0] == "#":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
@@ -427,7 +425,6 @@ class CCSLSMTTransfer:
                         z3.Implies(
                             z3.And(x >= 1, x <= self.n, z3.And(tick2(x), tick3(x))),
                             tick1(x)),
-
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.And(
@@ -437,7 +434,6 @@ class CCSLSMTTransfer:
                         z3.Implies(
                             z3.And(x >= 1, z3.And(tick2(x), tick3(x))),
                             tick1(x)),
-
                     )))
 
             elif each[0] == "∧":
@@ -450,13 +446,13 @@ class CCSLSMTTransfer:
                 x = z3.Int("x")
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
-                        z3.If(history2(x) >= history3(x), history1(x) == history2(x), history1(x) == history3(x))
+                        z3.And(x >= 1, x <= self.n + 1),
+                        history1 == z3.If(history2(x) >= history3(x),history2(x),history3(x))
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
-                        z3.If(history2(x) >= history3(x), history1(x) == history2(x), history1(x) == history3(x))
+                        history1 == z3.If(history2(x) >= history3(x),history2(x),history3(x))
                     )))
 
             elif each[0] == "∨":
@@ -469,13 +465,13 @@ class CCSLSMTTransfer:
                 x = z3.Int("x")
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
-                        z3.If(history2(x) <= history3(x), history1(x) == history2(x), history1(x) == history3(x))
+                        z3.And(x >= 1, x <= self.n + 1),
+                        history1 == z3.If(history2(x) <= history3(x), history2(x), history3(x))
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
-                        z3.If(history2(x) <= history3(x), history1(x) == history2(x), history1(x) == history3(x))
+                        history1 == z3.If(history2(x) <= history3(x), history2(x), history3(x))
                     )))
 
             elif each[0] == "$":
@@ -487,17 +483,15 @@ class CCSLSMTTransfer:
                 x = z3.Int("x")
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
+                        z3.And(x >= 1, x <= self.n + 1),
                         history1(x) == z3.If(history2(x) >= delay,
-                                 history2(x) - delay,
-                                0)
+                                 history2(x) - delay,0)
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
                         history1(x) == z3.If(history2(x) >= delay,
-                                 history2(x) - delay,
-                                0)
+                                 history2(x) - delay,0)
                     )))
 
             elif each[0] == "on":
@@ -512,43 +506,40 @@ class CCSLSMTTransfer:
                 else:
                     delay = z3.Int("%s" % each[3])
                     self.parameter[each[3]] = delay
-                if self.period > 0:
-                    self.solver.add(
-                        z3.And(tick1(self.l) == tick1(self.k), tick2(self.l) == tick2(self.k), tick3(self.l) ==
-                                tick3(self.k)))
-
                 x = z3.Int("x")
                 m = z3.Int("m")
                 if self.bound > 0:
-                    left = z3.And(x > 1, x < self.n, tick1(x))
+                    left = tick1(x)
+                    right = z3.And(
+                        tick3(x),
+                        z3.Exists(
+                            m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay)
+                        )
+                    )
                     # right = z3.And(x > delay, tick2(x - delay))
-
                     self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(left, right),
-                        z3.Implies(right, left)
-                    )))
+                        z3.Implies(z3.And(x >= 1, x <= self.n, left), right),  # )))
+                        z3.Implies(z3.And(x >= 1, x <= self.n, right), left), )))
                 else:
-                    left = z3.And(x > 1, tick1(x))
-                    right = z3.And(x > delay, tick2(x - delay))
-                    # right = z3.And(
-                    #     tick3(x),
-                    #     z3.Exists(
-                    #         m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay,
-                    #            history2(x) - history2(m) >= 1)
-                    #     )
-                    # )
+                    left = tick1(x)
+                    # right = z3.And(x > delay, tick2(x - delay))
+                    right = z3.And(
+                        tick3(x),
+                        z3.Exists(
+                            m, z3.And(m > 0, m < x, tick2(m), history3(x) - history3(m) == delay)
+                        )
+                    )
                     self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(left, right),
-                        z3.Implies(right, left)
-                    )))
+                        z3.Implies(z3.And(x >= 1, left), right),  # )))
+                        z3.Implies(z3.And(x >= 1, right), left), )))
 
-            elif each[0] == "∝" and len(each) == 4:
+            elif each[0] == "∝":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
-                left = z3.And(tick1(x))
+                left = tick1(x)
                 if self.is_number(each[3]):
                     right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % z3.IntVal(each[3]) == 0)
                 else:
@@ -574,23 +565,24 @@ class CCSLSMTTransfer:
                 history3 = self.historyDict["h_%s" % (each[3])]
                 x = z3.Int("x")
                 m = z3.Int("m")
-
                 if self.bound > 0:
-                    left = z3.And(x > 1, x < self.n, tick1(x))
+                    left = tick1(x)
                     right = z3.And(tick3(x),
-                                    z3.Exists(m, z3.And(m > 0, m < x, tick3(m), history3(x) - history3(m) == 1,
-                                                        history2(x) - history2(m) >= 1)))
+                            z3.Exists(m, z3.And(m > 0, m < x, tick3(m), history3(x) - history3(m) == 1,
+                                    history2(x) - history2(m) >= 1)))
                     self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(left, right),
-                        z3.Implies(right, left))))
+                        z3.Implies(z3.And(x >= 1, x <= self.n, left),right),
+                        z3.Implies(z3.And(x >= 1, x <= self.n, right),left)
+                    )))
                 else:
                     left = z3.And(x > 1, tick1(x))
                     right = z3.And(tick3(x),
-                                    z3.Exists(m, z3.And(m > 0, tick3(m), history3(x) - history3(m) == 1,
-                                                        history2(x) - history2(m) >= 1)))
+                            z3.Exists(m, z3.And(m > 0, tick3(m), history3(x) - history3(m) == 1,
+                                    history2(x) - history2(m) >= 1)))
                     self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(left, right),
-                        z3.Implies(right, left))))
+                        z3.Implies(z3.And(x >= 1, left),right),
+                        z3.Implies(z3.And(x >= 1, right),left)
+                    )))
 
             elif each[0] == "==":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -663,32 +655,32 @@ class CCSLSMTTransfer:
         # html += "<hr>"
 
 
-        # for i in self.CCSLConstraintList:
-        #     html += "<ul><li class='name'>%s</li>" % (i)
-        #     for each in i[1:]:
-        #         if self.is_number(str(each)) is False:
-        #             html += "<ul><li class='name'>%s</li>" % (each)
-        #             cnt = 0
-        #             res = ""
-        #             for i in range(1, self.bound + 1):
-        #                 if i in self.Tick_result[each]:
-        #                     if i - 1 in self.Tick_result[each] or i - 1 == 0:
-        #                         html += "<li class='up'></li>"
-        #                     else:
-        #                         html += "<li class='upl'></li>"
-        #                 else:
-        #                     if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-        #                         html += "<li class='down'></li>"
-        #                     else:
-        #                         html += "<li class='downl'></li>"
-        #                 if i - 1 in self.Tick_result[each]:
-        #                     cnt += 1
-        #                 res += "<li class='history'>%s</li>" % (cnt)
-        #             html += "</ul>"
-        #             html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-        #     html += "<ul><li></li></ul></ul>"
-        #     html += "</ul>"
-        # html += "<hr>"
+        for i in self.CCSLConstraintList:
+            html += "<ul><li class='name'>%s</li>" % (i)
+            for each in i[1:]:
+                if self.is_number(str(each)) is False:
+                    html += "<ul><li class='name'>%s</li>" % (each)
+                    cnt = 0
+                    res = ""
+                    for i in range(1, self.bound + 1):
+                        if i in self.Tick_result[each]:
+                            if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                                html += "<li class='up'></li>"
+                            else:
+                                html += "<li class='upl'></li>"
+                        else:
+                            if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                                html += "<li class='down'></li>"
+                            else:
+                                html += "<li class='downl'></li>"
+                        if i - 1 in self.Tick_result[each]:
+                            cnt += 1
+                        res += "<li class='history'>%s</li>" % (cnt)
+                    html += "</ul>"
+                    html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+            html += "<ul><li></li></ul></ul>"
+            html += "</ul>"
+        html += "<hr>"
         html += "</div>"
 
         return html
@@ -732,11 +724,8 @@ class CCSLSMTTransfer:
             self.solver.minimize(self.l)
             self.solver.add(self.p == p)
             # self.solver.minimize(self.k)
-
         try:
             # f.write("%s\n" % self.solver.to_smt2())
-            # througput = self.historyDict["h_%s" % ("T2f")]
-            # self.solver.maximize(througput(self.bound))
             while self.solver.check() == z3.sat:
                 # print(self.solver.model())
                 self.getWorkOut()
@@ -778,8 +767,11 @@ if __name__ == "__main__":
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
     bound = 20
-    for i in range(2,bound):
-        print("Bound",i)
-        ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=1, realPeroid=0)
-        ccsl.LoopFor10Results(i)
-    HTMLFooter()
+    ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
+    ccsl.LoopFor10Results(0)
+
+    # for i in range(2,bound):
+    #     print("Bound",i)
+    #     ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=1, realPeroid=0)
+    #     ccsl.LoopFor10Results(i)
+    # HTMLFooter()
