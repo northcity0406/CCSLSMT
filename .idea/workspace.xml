@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc9e1829-e780-42e5-880f-557cc05626d3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/check.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CCSLSMTTransfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/CCSLSMTTransfer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ccsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ccsl.txt" afterDir="false" />
@@ -16,57 +17,145 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/CCSLSMT$t.coverage" NAME="t Coverage Results" MODIFIED="1543843383776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CCSLSMT$check.coverage" NAME="check Coverage Results" MODIFIED="1551886775639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CCSLSMT$Transfer.coverage" NAME="Transfer Coverage Results" MODIFIED="1551886652411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CCSLSMT$s.coverage" NAME="s Coverage Results" MODIFIED="1551800689652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/CCSLSMT$CCSLSMTTransfer.coverage" NAME="CCSLSMTTransfer Coverage Results" MODIFIED="1551862521285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CCSLSMT$CCSLSMTTransfer.coverage" NAME="CCSLSMTTransfer Coverage Results" MODIFIED="1551881632091" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-67457482">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.5" value="2" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="123" />
-          <entry key="py" value="2065" />
-          <entry key="txt" value="221" />
+          <entry key="py" value="3089" />
+          <entry key="txt" value="283" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="123" />
-          <entry key="PLAIN_TEXT" value="221" />
-          <entry key="Python" value="2065" />
+          <entry key="PLAIN_TEXT" value="283" />
+          <entry key="Python" value="3089" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="4" />
+          <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="4" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CCSLSMTTransfer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="759" column="17" selection-start-line="759" selection-start-column="17" selection-end-line="759" selection-end-column="17" />
+            <state relative-caret-position="405">
+              <caret line="277" column="29" selection-start-line="277" selection-start-column="29" selection-end-line="277" selection-end-column="29" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#24255#25654#0" />
+                <element signature="e#181#1666#0" />
+                <element signature="e#1713#2123#0" />
+                <element signature="e#2167#8800#0" />
+                <element signature="e#8837#9527#0" />
+                <element signature="e#9563#12379#0" />
+                <element signature="e#12419#12882#0" />
+                <element signature="e#12931#27981#0" />
+                <element signature="e#13142#13859#0" />
+                <element signature="e#13927#14692#0" />
+                <element signature="e#14743#15419#0" />
+                <element signature="e#15470#16071#0" />
+                <element signature="e#16122#16697#0" />
+                <element signature="e#16748#17768#0" />
+                <element signature="e#17819#18841#0" />
+                <element signature="e#18892#19783#0" />
+                <element signature="e#19834#20729#0" />
+                <element signature="e#20780#21649#0" />
+                <element signature="e#24000#25914#0" />
+                <element signature="e#25450#26881#0" />
+                <element signature="e#26933#27466#0" />
+                <element signature="e#27503#27544#0" />
+                <element signature="e#27580#28293#0" />
+                <element signature="e#28335#30911#0" />
+                <element signature="e#30947#31191#0" />
+                <element signature="e#31221#31437#0" />
+                <element signature="e#31482#32030#0" />
+                <element signature="e#32074#32745#0" />
+                <element signature="e#32769#33010#0" />
+                <element signature="e#33033#33153#0" />
+                <element signature="e#33186#33542#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CCSLConstraints.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="509">
+              <caret line="168" column="64" lean-forward="true" selection-start-line="168" selection-start-column="64" selection-end-line="168" selection-end-column="64" />
+              <folding>
+                <element signature="e#60#278#0" />
+                <element signature="e#326#736#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/check.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="887">
+              <caret line="49" column="48" selection-start-line="49" selection-start-column="48" selection-end-line="49" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+                <element signature="e#351#894#0" />
+                <element signature="e#931#972#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Transfer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="591">
+              <caret line="432" selection-start-line="432" selection-end-line="434" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#196#1463#0" />
+                <element signature="e#1500#2190#0" />
+                <element signature="e#5082#5545#0" />
+                <element signature="e#5851#6568#0" />
+                <element signature="e#6636#7401#0" />
+                <element signature="e#7452#8156#0" />
+                <element signature="e#8207#8808#0" />
+                <element signature="e#8859#9434#0" />
+                <element signature="e#9485#10505#0" />
+                <element signature="e#10556#11578#0" />
+                <element signature="e#11629#12520#0" />
+                <element signature="e#12571#13466#0" />
+                <element signature="e#13517#14386#0" />
+                <element signature="e#14438#16686#0" />
+                <element signature="e#16737#18136#0" />
+                <element signature="e#20166#20207#0" />
+                <element signature="e#21169#21460#0" />
               </folding>
             </state>
           </provider>
@@ -98,7 +187,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="783">
+            <state relative-caret-position="756">
               <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
@@ -107,8 +196,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CCSL测试用例.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2349">
-              <caret line="87" column="35" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="35" />
+            <state relative-caret-position="371">
+              <caret line="76" selection-start-line="76" selection-end-line="85" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -117,7 +206,7 @@
         <entry file="file://$PROJECT_DIR$/ccsl.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="9" selection-start-column="9" selection-end-column="9" />
+              <caret column="8" selection-start-column="8" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -133,10 +222,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>outPutTickByHTML</find>
       <find>Not</find>
       <find>OR</find>
-      <find>tickDict</find>
       <find>{'out': [2, 3], 'tmp2': [], 'step1': [1, 2, 3], 'step3': [2, 3], 'idealClock': [1, 2, 3]}</find>
       <find>idealClock</find>
       <find>self.d</find>
@@ -160,6 +247,11 @@
       <find>s.</find>
       <find>BitVec</find>
       <find>&gt;0</find>
+      <find>self.clocks</find>
+      <find>each</find>
+      <find>self.</find>
+      <find>mse</find>
+      <find>tickDict</find>
     </findStrings>
     <replaceStrings>
       <replace>1)))(=</replace>
@@ -171,6 +263,8 @@
       <replace>z3.</replace>
       <replace>Int</replace>
       <replace>&gt;=0</replace>
+      <replace>self.clocks</replace>
+      <replace>self.tickDict</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -191,8 +285,11 @@
         <option value="$PROJECT_DIR$/ouput.html" />
         <option value="$PROJECT_DIR$/output.css" />
         <option value="$PROJECT_DIR$/s.py" />
-        <option value="$PROJECT_DIR$/ccsl.txt" />
         <option value="$PROJECT_DIR$/CCSLSMTTransfer.py" />
+        <option value="$PROJECT_DIR$/ccsl.txt" />
+        <option value="$PROJECT_DIR$/Transfer.py" />
+        <option value="$PROJECT_DIR$/CCSLConstraints.py" />
+        <option value="$PROJECT_DIR$/check.py" />
       </list>
     </option>
   </component>
@@ -203,16 +300,29 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="488" />
-    <option name="width" value="999" />
-    <option name="height" value="1023" />
+    <option name="x" value="574" />
+    <option name="width" value="1346" />
+    <option name="height" value="1172" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CCSLSMT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CCSLSMT" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -238,7 +348,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.CCSLSMTTransfer">
+  <component name="RunManager" selected="Python.check">
     <configuration name="CCSLSMTTransfer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CCSLSMT" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -253,6 +363,50 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CCSLSMTTransfer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Transfer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CCSLSMT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Transfer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="check" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CCSLSMT" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/check.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -309,9 +463,13 @@
       <item itemvalue="Python.t" />
       <item itemvalue="Python.CCSLSMTTransfer" />
       <item itemvalue="Python.s" />
+      <item itemvalue="Python.Transfer" />
+      <item itemvalue="Python.check" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.check" />
+        <item itemvalue="Python.Transfer" />
         <item itemvalue="Python.CCSLSMTTransfer" />
         <item itemvalue="Python.s" />
       </list>
@@ -382,15 +540,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1680" height="1023" extended-state="6" />
+    <frame x="0" y="-1" width="1920" height="1173" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2123623" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21184632" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.54565704" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41793892" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5545657" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -399,7 +557,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.72383076" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32983795" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32850778" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32824427" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32849163" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -494,24 +652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CCSLSMTTransfer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="759" column="17" selection-start-line="759" selection-start-column="17" selection-end-line="759" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#24255#25654#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ouput.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/output.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2187">
@@ -529,22 +669,119 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/s.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
+        <state relative-caret-position="756">
           <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ouput.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CCSL测试用例.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2349">
-          <caret line="87" column="35" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="35" />
+        <state relative-caret-position="371">
+          <caret line="76" selection-start-line="76" selection-end-line="85" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ccsl.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="9" selection-start-column="9" selection-end-column="9" />
+          <caret column="8" selection-start-column="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Transfer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="591">
+          <caret line="432" selection-start-line="432" selection-end-line="434" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#196#1463#0" />
+            <element signature="e#1500#2190#0" />
+            <element signature="e#5082#5545#0" />
+            <element signature="e#5851#6568#0" />
+            <element signature="e#6636#7401#0" />
+            <element signature="e#7452#8156#0" />
+            <element signature="e#8207#8808#0" />
+            <element signature="e#8859#9434#0" />
+            <element signature="e#9485#10505#0" />
+            <element signature="e#10556#11578#0" />
+            <element signature="e#11629#12520#0" />
+            <element signature="e#12571#13466#0" />
+            <element signature="e#13517#14386#0" />
+            <element signature="e#14438#16686#0" />
+            <element signature="e#16737#18136#0" />
+            <element signature="e#20166#20207#0" />
+            <element signature="e#21169#21460#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCSLSMTTransfer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="277" column="29" selection-start-line="277" selection-start-column="29" selection-end-line="277" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#181#1666#0" />
+            <element signature="e#1713#2123#0" />
+            <element signature="e#2167#8800#0" />
+            <element signature="e#8837#9527#0" />
+            <element signature="e#9563#12379#0" />
+            <element signature="e#12419#12882#0" />
+            <element signature="e#12931#27981#0" />
+            <element signature="e#13142#13859#0" />
+            <element signature="e#13927#14692#0" />
+            <element signature="e#14743#15419#0" />
+            <element signature="e#15470#16071#0" />
+            <element signature="e#16122#16697#0" />
+            <element signature="e#16748#17768#0" />
+            <element signature="e#17819#18841#0" />
+            <element signature="e#18892#19783#0" />
+            <element signature="e#19834#20729#0" />
+            <element signature="e#20780#21649#0" />
+            <element signature="e#24000#25914#0" />
+            <element signature="e#25450#26881#0" />
+            <element signature="e#26933#27466#0" />
+            <element signature="e#27503#27544#0" />
+            <element signature="e#27580#28293#0" />
+            <element signature="e#28335#30911#0" />
+            <element signature="e#30947#31191#0" />
+            <element signature="e#31221#31437#0" />
+            <element signature="e#31482#32030#0" />
+            <element signature="e#32074#32745#0" />
+            <element signature="e#32769#33010#0" />
+            <element signature="e#33033#33153#0" />
+            <element signature="e#33186#33542#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CCSLConstraints.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="168" column="64" lean-forward="true" selection-start-line="168" selection-start-column="64" selection-end-line="168" selection-end-column="64" />
+          <folding>
+            <element signature="e#60#278#0" />
+            <element signature="e#326#736#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="887">
+          <caret line="49" column="48" selection-start-line="49" selection-start-column="48" selection-end-line="49" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#351#894#0" />
+            <element signature="e#931#972#0" />
+          </folding>
         </state>
       </provider>
     </entry>

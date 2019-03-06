@@ -1,9 +1,9 @@
 import time
 from z3 import z3
 from z3 import *
-
-class CCSLSMTTransfer:
-    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1,seed = 0):
+from CCSLConstraints import CCSL
+class Transfer:
+    def __init__(self, ccslConstraintsList=None, bound=0, period=0, realPeroid=0,seed = 0,clocks = set()):
         """
         :param ccslConstraints: the CCSL constraints import from the ccsl.txt
         :param bound: the bound of this model, when bound = 0, there is no bound.Otherwise, when bound > 0, it is the real bound.
@@ -11,23 +11,18 @@ class CCSLSMTTransfer:
         :param realPeroid: This works only when period = 1, which means that you set a fixed period of this model.When
         realPeriod > 0, the period is set as a fixed number.When the realPeriod = 0,it means the period is a variable,
         it should be worked out.
-        :param lowBound:
         """
-        self.ccslConstraints = ccslConstraints
         self.bound = bound
         self.period = period
         self.realPeroid = realPeroid
-        self.lowBound = lowBound
-        self.operator = ["<", "≤", "⊆", "#", "+", "*", "∧", "∨", "$", "∝", "☇", "|", "=="]
-        self.CCSLConstraintStrList = []
-        self.CCSLConstraintList = []
-        self.clocks = set()
+        self.CCSLConstraintList = ccslConstraintsList
+        self.clocks = clocks
+        self.result = {}
         if self.period > 0:
             self.solver = z3.Optimize()
         else:
-            self.solver =  z3.SolverFor("LRA")
+            self.solver = z3.SolverFor("LRA")
         z3.set_param("smt.random_seed", seed)
-        self.preIssue()
         self.n = z3.Int("n")
         if self.period > 0:
             self.k = z3.Int("k")
@@ -37,174 +32,6 @@ class CCSLSMTTransfer:
         self.historyDict = {}
         self.Tick_result = {}
         self.parameter = {}
-    # 数据预处理环节
-    def preIssue(self):
-        """
-        This function is used to work on the CCSL constraints, and it is used to delete some commented lines and make
-        it be accessible for the spliting.
-        :return:
-        """
-        for each in str(self.ccslConstraints).split("\n"):
-            if str(each).startswith("//") is False:
-                self.CCSLConstraintStrList.append(each.replace(" ",""))
-        self.constraintsProduce()
-
-    def constraintsProduce(self):
-        """
-        Split the input constraints, and work out a feasible data structure.
-        :return:
-        """
-        for each in self.CCSLConstraintStrList:
-            # ["<", "≤", "⊆", "#", "+", "*", "∧", "∨", "$", "∝", "☇", "|", "=="]
-            if str(each).__contains__("<") and str(each).__contains__("[") is False:
-                tmp = str(each).split("<")
-                c1, c2 = tmp[0],tmp[1]
-                temp = ["<",c1,c2]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(temp)
-            elif str(each).__contains__("<") and str(each).__contains__("[") is True:
-                tmp = str(each).split("<")
-                c1, c2 = tmp[0],tmp[1]
-                tmp = c1.split("[")
-                c1,delay = tmp[0],int((tmp[1]).replace("]",""))
-                temp = ["<",c1,delay,c2]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(temp)
-            elif str(each).__contains__("≤"):
-                tmp = str(each).split("≤")
-                c1, c2 = tmp[0],tmp[1]
-                temp = ["≤",c1,c2]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(temp)
-            elif str(each).__contains__("⊆"):
-                tmp = str(each).split("⊆")
-                c1, c2 = tmp[0],tmp[1]
-                temp = ["⊆",c1,c2]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(temp)
-            elif str(each).__contains__("#"):
-                tmp = str(each).split("#")
-                c1, c2 = tmp[0],tmp[1]
-                temp = ["#",c1,c2]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(temp)
-            elif str(each).__contains__("+"):
-                tmp = str(each).split("+")
-                clockTmp = ["+"]
-                clockTmp.append(tmp[0].split("=")[0])
-                clockTmp.append(tmp[0].split("=")[1])
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                c3 = tmp[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("*"):
-                tmp = str(each).split("*")
-                clockTmp = ["*"]
-                clockTmp.append(tmp[0].split("=")[0])
-                clockTmp.append(tmp[0].split("=")[1])
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                c3 = tmp[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∧"):
-                tmp = str(each).split("∧")
-                clockTmp = ["∧"]
-                clockTmp.append(tmp[0].split("=")[0])
-                clockTmp.append(tmp[0].split("=")[1])
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                c3 = tmp[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∨"):
-                tmp = str(each).split("∨")
-                clockTmp = ["∨"]
-                clockTmp.append(tmp[0].split("=")[0])
-                clockTmp.append(tmp[0].split("=")[1])
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                c3 = tmp[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("$") and str(each).__contains__("on") is False:
-                tmp = str(each).split("$")
-                clockTmp = ["$"]
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                clockTmp.extend([c1, c2, tmp[1]])
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("on"):
-                tmp = str(each).split("$")
-                clockTmp = ["on"]
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                d = tmp[1].split("on")[0].replace(" ", "")
-                c3 = tmp[1].split("on")[1].replace(" ", "")
-                clockTmp.extend([c1, c2, d, c3])
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∝"):
-                tmp = str(each).split("∝")
-                clockTmp = ["∝"]
-                clockTmp.extend(tmp[0].split("="))
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("☇"):
-                tmp = str(each).split("☇")
-                clockTmp = ["☇"]
-                clockTmp.extend(tmp[0].split("="))
-                clockTmp.append(tmp[1])
-                c1 = tmp[0].split("=")[0]
-                c2 = tmp[0].split("=")[1]
-                c3 = tmp[1]
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.clocks.add(c3)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("=="):
-                tmp = str(each).split("==")
-                clockTmp = ["=="]
-                c1 = tmp[0]
-                c2 = tmp[1]
-                clockTmp.extend(tmp)
-                self.clocks.add(c1)
-                self.clocks.add(c2)
-                self.CCSLConstraintList.append(clockTmp)
-            elif str(each).__contains__("∈"):
-                tmp = str(each).split("∈")
-                p1 = tmp[0]
-                temp = ["∈", p1]
-                temp.extend(tmp[1].replace("[","").replace("]","").split(","))
-                self.CCSLConstraintList.append(temp)
-        for each in self.CCSLConstraintList:
-            print(each)
 
     def RealProduce(self):
         """
@@ -294,6 +121,7 @@ class CCSLSMTTransfer:
         Realize to transfer the CCSL constraints into SMT formula.
         :return:
         """
+        print(self.tickDict)
         for each in self.CCSLConstraintList:
             if each[0] == "<" and len(each) == 3:
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -331,6 +159,7 @@ class CCSLSMTTransfer:
                     )))
 
             elif each[0] == "≤":
+                print(each)
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 history1 = self.historyDict["h_%s" % (each[1])]
@@ -502,7 +331,7 @@ class CCSLSMTTransfer:
                     # right = z3.And(x > delay, tick2(x - delay))
                     right = z3.And(
                         tick3(x),
-                        z3.Exists(m, z3.And(m > 0, m <= x -delay, tick2(m), history3(x) - history3(m) == delay))
+                        z3.Exists(m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay))
                     )
                 else:
                     delay = z3.Int("%s" % each[3])
@@ -520,7 +349,7 @@ class CCSLSMTTransfer:
                         tick3(x),
                         z3.And(delay >= z3.IntVal(delayParameter[2]),
                                delay <= z3.IntVal(delayParameter[3])),
-                        z3.Exists(m, z3.And(m > 0, m <= x - delay, tick2(m), history3(x) - history3(m) == delay))
+                        z3.Exists(m, z3.And(m > 0, m <= x, tick2(m), history3(x) - history3(m) == delay))
                     )
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.And(
@@ -605,88 +434,28 @@ class CCSLSMTTransfer:
         return set(s).issubset(set("1234567890"))
 
     def getWorkOut(self):
-        if self.period > 0:
-            print("k:\t%s" %self.solver.model()[self.k])
-            print("l:\t%s" %self.solver.model()[self.l])
-            print("p:\t%s" %self.solver.model()[self.p])
+        self.result = {}
         model = self.solver.model()
+        if self.period > 0:
+            self.result["k"] = model()[self.k]
+            self.result["l"] = model()[self.l]
+            self.result["p"] = model()[self.p]
         for each in self.clocks:
-            TmpTickList = []
             tick = self.tickDict["t_%s" %each]
-            for i in range(1,self.bound + 1):
-                if model.eval(tick(i)) == True:
-                    TmpTickList.append(i)
-            self.Tick_result[each] = TmpTickList
-        for each in self.Tick_result.keys():
-            print(each, self.Tick_result[each])
-        for each in self.parameter.keys():
-            print(each,model.eval(self.parameter[each]))
-
-    def outPutTickByHTML(self):
-        html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
-        for each in range(1, self.bound + 1):
-            html += "<li>%s</li>" % (each)
-        html += "</ul>"
-        for each in self.Tick_result.keys():
-            html += "<ul><li class='name'>%s</li>" % (each)
             cnt = 0
-            res = ""
-            for i in range(1, self.bound + 1):
-                if i in self.Tick_result[each]:
-                    if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                        html += "<li class='up'></li>"
-                    else:
-                        html += "<li class='upl'></li>"
-                else:
-                    if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                        html += "<li class='down'></li>"
-                    else:
-                        html += "<li class='downl'></li>"
-                if i in self.Tick_result[each]:
+            tickResult = []
+            histroyResult = []
+            for i in range(1,self.bound + 1):
+                tickResult.append(model.eval(tick(i)))
+                histroyResult.append(cnt)
+                if model.eval(tick(i)) == True:
                     cnt += 1
-                res += "<li>%s</li>" % (cnt)
-            html += "</ul>"
-        # html += "<hr>"
-
-        for w in self.CCSLConstraintList:
-            if w[0] != "∈":
-                html += "<ul><li class='name'>%s</li>" % (w)
-                for each in w[1:]:
-                    if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
-                        html += "<ul><li class='name'>%s</li>" % (each)
-                        cnt = 0
-                        res = ""
-                        for i in range(1, self.bound + 1):
-                            if i in self.Tick_result[each]:
-                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='up'></li>"
-                                else:
-                                    html += "<li class='upl'></li>"
-                            else:
-                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='down'></li>"
-                                else:
-                                    html += "<li class='downl'></li>"
-                            if i - 1 in self.Tick_result[each]:
-                                cnt += 1
-                            res += "<li class='history'>%s</li>" % (cnt)
-                        html += "</ul>"
-                        html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-                html += "<ul><li></li></ul></ul>"
-                html += "</ul>"
-
-        html += "<hr>"
-        html += "</div>"
-
-        return html
-
-    def outputByMD(self):
-        result = [[] for _ in range(self.bound)]
-        for each in self.Tick_result.keys():
-            for i in range(self.bound):
-                if (i + 1) in self.Tick_result[each]:
-                    result[i].append(each)
-        print(result)
+            histroyResult.append(cnt)
+            self.result["%s_tick" %each] = tickResult
+            self.result["%s_history" %each] = histroyResult
+        for key in self.result.keys():
+            if str(key).endswith("_tick"):
+                print(str(key).strip("_tick"),self.result[key])
 
     def work(self):
         begin = time.time()
@@ -694,69 +463,8 @@ class CCSLSMTTransfer:
         self.addTickSMT()
         self.addOriginSMTConstraints()
         self.addTickForever()
-        print(str(self.solver.check()))
+        state = self.solver.check()
+        print(state)
         print(time.time() - begin)
-
-    def addExtraConstraints(self):
-        model = self.solver.model()
-        ExtraConstraints = []
-        for each in self.clocks:
-            self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
-            for i in range(1,self.bound + 1):
-                tmp = self.tickDict["t_%s" % (each)]
-                ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
-        for each in self.parameter.keys():
-            ExtraConstraints.append(self.parameter[each] != model.eval(self.parameter[each]))
-        self.solver.add(z3.Or(ExtraConstraints))
-
-    def LoopFor10Results(self,p):
-        html = ""
-        self.work()
-        # print(self.solver.to_smt2())
-        if self.period > 0:
-            self.solver.minimize(self.l)
-            self.solver.add(self.p == p)
-            # self.solver.minimize(self.k)
-        # print(self.solver.to_smt2())
-        if self.solver.check() == z3.sat:
+        if state == z3.sat:
             self.getWorkOut()
-            html += self.outPutTickByHTML()
-            self.outputByMD()
-            # f.write("%s\n" %self.solver.to_smt2())
-            # self.addExtraConstraints()
-        else:
-            return False
-        f = open("ouput.html", "a+",encoding="utf-8")
-        f.write(html)
-        f.flush()
-        f.close()
-        return True
-
-def HtmlHeader():
-    html = "<html><body><style type=\"text/css\">\n"
-    for each in open("output.css", "r").readlines():
-        html += each
-    html += "</style>"
-    f = open("ouput.html", "w", encoding="utf-8")
-    f.write(html)
-    f.flush()
-    f.close()
-
-def HTMLFooter():
-    html = "</body></html>"
-    f = open("ouput.html", "a+", encoding="utf-8")
-    f.write(html)
-    f.flush()
-    f.close()
-
-if __name__ == "__main__":
-    HtmlHeader()
-    ccslConstraints = ""
-    for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
-        ccslConstraints += each
-    bound = 10
-    for seed in range(10):
-        ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0,seed=seed)
-        if ccsl.LoopFor10Results(0) == False:
-            break
-    HTMLFooter()
