@@ -3,7 +3,7 @@ from z3 import z3
 from z3 import *
 
 class CCSLSMTTransfer:
-    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1):
+    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1,seed = 0):
         """
         :param ccslConstraints: the CCSL constraints import from the ccsl.txt
         :param bound: the bound of this model, when bound = 0, there is no bound.Otherwise, when bound > 0, it is the real bound.
@@ -23,12 +23,10 @@ class CCSLSMTTransfer:
         self.CCSLConstraintList = []
         self.clocks = set()
         if self.period > 0:
-            self.solver = z3.Optimize()#z3.SolverFor("ALL")
+            self.solver = z3.Optimize()
         else:
             self.solver =  z3.SolverFor("LRA")
-        # self.solver = z3.Optimize()
-        # self.solver.set('AUFLIRA',0)
-        # self.solver.set-logic
+        z3.set_param("smt.random_seed", seed)
         self.preIssue()
         self.n = z3.Int("n")
         if self.period > 0:
@@ -230,7 +228,6 @@ class CCSLSMTTransfer:
         Define the relationship between the tick of a clock and the history of a clock.
         :return:
         """
-
         for each in self.clocks:
             #Define the function of the tick, which means that the clock ticks at step i or not, and it will be represent
             # as True if it ticks, otherwise False.
@@ -253,11 +250,8 @@ class CCSLSMTTransfer:
                     self.solver.add(
                         z3.ForAll(y,z3.Implies(
                             z3.And(y >= self.k,y <= self.bound),
-                            tick((y - self.l) % self.p + self.l) == tick(y)
-                            )
-                        )
-                    )
-            if self.bound == 0:
+                            tick((y - self.l) % self.p + self.l) == tick(y))))
+            elif self.bound == 0:
                 x = z3.Int("x")
                 # If the bound is infinite, we define the history of the clock infinitely.
                 self.solver.add(z3.ForAll(x, z3.Implies(x >= 1,
@@ -269,10 +263,7 @@ class CCSLSMTTransfer:
                     self.solver.add(
                         z3.ForAll(y,z3.Implies(
                             y >= self.k,
-                            tick((y - self.l) % self.p + self.l) == tick(y)
-                            )
-                        )
-                    )
+                            tick((y - self.l) % self.p + self.l) == tick(y))))
         clockListTmp = []
         x = z3.Int("x")
         for each in self.tickDict.keys():
@@ -371,6 +362,7 @@ class CCSLSMTTransfer:
                         z3.And(x >= 1, tick1(x)),
                         tick2(x)
                     )))
+
             elif each[0] == "#":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
@@ -447,12 +439,12 @@ class CCSLSMTTransfer:
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, x <= self.n + 1),
-                        history1 == z3.If(history2(x) >= history3(x),history2(x),history3(x))
+                        history1(x) == z3.If(history2(x) >= history3(x),history2(x),history3(x))
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
-                        history1 == z3.If(history2(x) >= history3(x),history2(x),history3(x))
+                        history1(x) == z3.If(history2(x) >= history3(x),history2(x),history3(x))
                     )))
 
             elif each[0] == "∨":
@@ -466,12 +458,12 @@ class CCSLSMTTransfer:
                 if self.bound > 0:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         z3.And(x >= 1, x <= self.n + 1),
-                        history1 == z3.If(history2(x) <= history3(x), history2(x), history3(x))
+                        history1(x) == z3.If(history2(x) <= history3(x), history2(x), history3(x))
                     )))
                 else:
                     self.solver.add(z3.ForAll(x, z3.Implies(
                         x >= 1,
-                        history1 == z3.If(history2(x) <= history3(x), history2(x), history3(x))
+                        history1(x) == z3.If(history2(x) <= history3(x), history2(x), history3(x))
                     )))
 
             elif each[0] == "$":
@@ -720,33 +712,25 @@ class CCSLSMTTransfer:
     def LoopFor10Results(self,p):
         html = ""
         self.work()
-        f = open("m.txt","w+")
-        i = 0
         # print(self.solver.to_smt2())
         if self.period > 0:
             self.solver.minimize(self.l)
             self.solver.add(self.p == p)
             # self.solver.minimize(self.k)
-        try:
-            # f.write("%s\n" % self.solver.to_smt2())
-            while self.solver.check() == z3.sat:
-                # print(self.solver.model())
-                self.getWorkOut()
-                html += "<h1>%s</h1>" %(i)
-                html += self.outPutTickByHTML()
-                self.outputByMD()
-                # f.write("%s\n" %self.solver.to_smt2())
-                self.addExtraConstraints()
-                i += 1
-                if i == 10:
-                    break
-                print(self.solver.check())
-        except Exception as e:
-            print(e.__dict__)
+        # print(self.solver.to_smt2())
+        if self.solver.check() == z3.sat:
+            self.getWorkOut()
+            html += self.outPutTickByHTML()
+            self.outputByMD()
+            # f.write("%s\n" %self.solver.to_smt2())
+            # self.addExtraConstraints()
+        else:
+            return False
         f = open("ouput.html", "a+",encoding="utf-8")
         f.write(html)
         f.flush()
         f.close()
+        return True
 
 def HtmlHeader():
     html = "<html><body><style type=\"text/css\">\n"
@@ -769,12 +753,9 @@ if __name__ == "__main__":
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    bound = 20
-    ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
-    ccsl.LoopFor10Results(0)
-
-    # for i in range(2,bound):
-    #     print("Bound",i)
-    #     ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=1, realPeroid=0)
-    #     ccsl.LoopFor10Results(i)
-    # HTMLFooter()
+    bound = 10
+    for seed in range(10):
+        ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0,seed=seed)
+        if ccsl.LoopFor10Results(0) == False:
+            break
+    HTMLFooter()
