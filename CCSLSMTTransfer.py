@@ -1,6 +1,7 @@
 import time
 from z3 import z3
 from z3 import *
+import random
 
 class CCSLSMTTransfer:
     def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1,seed = 0):
@@ -237,7 +238,7 @@ class CCSLSMTTransfer:
             tick = self.tickDict["t_%s" % (each)]
             history = self.historyDict["h_%s" % (each)]
             # For every clock, the history of step 0 is 0.
-            self.solver.add(history(1) == 0)
+            self.solver.add(history(1) == z3.IntVal(0))
             if self.bound > 0:
                 # If the bound is finite, we define the history of the clock with a fixed bound.
                 for i in range(1, self.bound + 1):
@@ -499,37 +500,90 @@ class CCSLSMTTransfer:
                 right = None
                 if self.is_number(each[3]):
                     delay = z3.IntVal(int(each[3]))
-                    # right = z3.And(x > delay, tick2(x - delay))
-                    right = z3.And(
-                        tick3(x),
-                        z3.Exists(m, z3.And(m > 0, m <= x -delay, tick2(m), history3(x) - history3(m) == delay))
-                    )
+                    if self.bound > 0:
+                        self.solver.add(z3.ForAll(x, z3.And(
+                            z3.Implies(
+                                z3.And(x >= 1, x <= self.n, tick1(x)),
+                                z3.And(tick3(x), x > delay, tick2(x - delay))
+                            ),
+                            z3.Implies(
+                                z3.And(x >= 1, x <= self.n, z3.And(tick3(x), x > delay, tick2(x - delay))),
+                                tick1(x)
+                            ),
+                        )))
+                    else:
+                        self.solver.add(z3.ForAll(x, z3.And(
+                            z3.Implies(
+                                z3.And(x >= 1, tick1(x)),
+                                z3.And(tick3(x), x > delay, tick2(x - delay))
+                            ),
+                            z3.Implies(
+                                z3.And(x >= 1, z3.And(tick3(x), x > delay, tick2(x - delay))),
+                                tick1(x)
+                            ),
+                        )))
                 else:
-                    delay = z3.Int("%s" % each[3])
+                    delay = z3.Int("%s" %each[3])
                     delayParameter = None
                     for t in self.CCSLConstraintList:
                         if t[0] == "∈" and t[1] == each[3]:
                             delayParameter = t
                             break
                     self.parameter[each[3]] = delay
-                    # right = z3.And(x > delay,
-                    #         delay >= z3.IntVal(delayParameter[2]),
-                    #         delay <= z3.IntVal(delayParameter[3]),
-                    #         tick2(x - delay))
-                    right = z3.And(
-                        tick3(x),
-                        z3.And(delay >= z3.IntVal(delayParameter[2]),
-                               delay <= z3.IntVal(delayParameter[3])),
-                        z3.Exists(m, z3.And(m > 0, m <= x - delay, tick2(m), history3(x) - history3(m) == delay))
-                    )
-                if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, x <= self.n, left), right),  # )))
-                        z3.Implies(z3.And(x >= 1, x <= self.n, right), left), )))
-                else:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, left), right),  # )))
-                        z3.Implies(z3.And(x >= 1, right), left), )))
+                    if self.bound > 0:
+                        self.solver.add(z3.simplify(z3.ForAll(x, z3.And(
+                            z3.Implies(
+                                z3.And(x >= 1, x < self.n, tick1(x)),
+                                z3.Exists(
+                                    delay,
+                                    z3.And(
+                                        x > delay,
+                                        delay >= z3.IntVal(delayParameter[2]),
+                                        delay <= z3.IntVal(delayParameter[3]),
+                                        tick2(x - delay)
+                                    )
+                                )
+                            ),
+                            z3.Implies(
+                                z3.And(x >= 1, x < self.n, z3.Exists(
+                                    delay,
+                                    z3.And(
+                                        x > delay,
+                                        delay >= z3.IntVal(delayParameter[2]),
+                                        delay <= z3.IntVal(delayParameter[3]),
+                                        tick2(x - delay)
+                                    )
+                                )),
+                                tick1(x)
+                            ),
+                        ))))
+                    else:
+                        self.solver.add(z3.simplify(z3.ForAll(x, z3.And(
+                            z3.Implies(
+                                z3.And(x >= 1, tick1(x),
+                                       # z3.Exists(
+                                       #     delay,
+                                       #     z3.And(
+                                               x > delay,
+                                               delay >= z3.IntVal(delayParameter[2]),
+                                               delay <= z3.IntVal(delayParameter[3]),
+                                ),#)),
+                                tick2(x - delay)
+
+                            ),
+                            z3.Implies(
+                                z3.And(x >= 1, z3.Exists(
+                                        delay,
+                                        z3.And(
+                                            x > delay,
+                                            delay >= z3.IntVal(delayParameter[2]),
+                                            delay <= z3.IntVal(delayParameter[3]),
+                                            tick2(x - delay)
+                                        )
+                                )),
+                                tick1(x)
+                            ),
+                        ))))
 
             elif each[0] == "∝":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -619,8 +673,8 @@ class CCSLSMTTransfer:
             self.Tick_result[each] = TmpTickList
         for each in self.Tick_result.keys():
             print(each, self.Tick_result[each])
-        for each in self.parameter.keys():
-            print(each,model.eval(self.parameter[each]))
+        # for each in self.parameter.keys():
+        #     print(each,model.eval(self.parameter[each]))
 
     def outPutTickByHTML(self):
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
@@ -694,6 +748,7 @@ class CCSLSMTTransfer:
         self.addTickSMT()
         self.addOriginSMTConstraints()
         self.addTickForever()
+        # print(self.solver.to_smt2())
         print(str(self.solver.check()))
         print(time.time() - begin)
 
@@ -754,8 +809,9 @@ if __name__ == "__main__":
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    bound = 10
-    for seed in range(10):
+    bound = 7
+    for _ in range(10):
+        seed = random.randint(1,8888)
         ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0,seed=seed)
         if ccsl.LoopFor10Results(0) == False:
             break

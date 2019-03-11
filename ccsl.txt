@@ -1,1 +1,15 @@
-a=b$2onc
+T1s<T1f
+T1f[1]<T1s
+T1f≤T2s
+T2f[4]<T1s
+T2s<T2f
+T2f[1]<T2s
+//T1s=msec∝5
+T2f=msec∝p_p1
+T1s#T1f
+T2s#T2f
+T1f=T1s$2onmsec
+T2f=T2s$3onmsec
+p_p1∈[5,7]
+p_p2∈[2,4]
+p_p3∈[2,4]

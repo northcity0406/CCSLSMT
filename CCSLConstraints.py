@@ -173,6 +173,7 @@ class CCSL:
                 temp = ["∈", p1]
                 temp.extend(tmp[1].replace("[","").replace("]","").split(","))
                 self.CCSLConstraintListExists.append(temp)
+                self.CCSLConstraintListNoExists.append(temp)
         for each in self.CCSLConstraintListNoExists:
             print(each)
         for each in self.CCSLConstraintListExists:

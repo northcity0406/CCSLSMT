@@ -121,7 +121,6 @@ class Transfer:
         Realize to transfer the CCSL constraints into SMT formula.
         :return:
         """
-        print(self.tickDict)
         for each in self.CCSLConstraintList:
             if each[0] == "<" and len(each) == 3:
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -159,7 +158,6 @@ class Transfer:
                     )))
 
             elif each[0] == "≤":
-                print(each)
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 history1 = self.historyDict["h_%s" % (each[1])]
@@ -455,7 +453,7 @@ class Transfer:
             self.result["%s_history" %each] = histroyResult
         for key in self.result.keys():
             if str(key).endswith("_tick"):
-                print(str(key).strip("_tick"),self.result[key])
+                print(str(key),self.result[key])
 
     def work(self):
         begin = time.time()
@@ -464,7 +462,7 @@ class Transfer:
         self.addOriginSMTConstraints()
         self.addTickForever()
         state = self.solver.check()
-        print(state)
-        print(time.time() - begin)
+        # print(state)
+        # print(time.time() - begin)
         if state == z3.sat:
             self.getWorkOut()
