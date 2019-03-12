@@ -1,16 +1,26 @@
-#!/usr/bin/env python
-import sys
-from z3 import *
-x = z3.Int("x")
-y = z3.Int("y")
+import z3
+
+filename = "z3test.smt2"
+
+x1 = z3.Real("x1")
+x2 = z3.Real("x2")
+
 solver = z3.Solver()
-solver.add(x > 0)
-solver.add(
-    z3.Exists(
-        y,
-        x + y > 0
-    )
-)
-print(solver.check())
-if solver.check() == z3.sat:
-    print(solver.model())
+solver.add(x1 != x2)
+
+#
+# STORE
+#
+
+with open(filename, mode='w') as f:
+    f.write(solver.to_smt2())
+
+#
+# RELOAD
+#
+
+solver.reset()
+
+constraints = z3.parse_smt2_file(filename, sorts={}, decls={})
+solver.add(constraints)
+print(solver)

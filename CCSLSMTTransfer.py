@@ -2,9 +2,10 @@ import time
 from z3 import z3
 from z3 import *
 import random
+import sys
 
 class CCSLSMTTransfer:
-    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0, lowBound = 1,seed = 0):
+    def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0):
         """
         :param ccslConstraints: the CCSL constraints import from the ccsl.txt
         :param bound: the bound of this model, when bound = 0, there is no bound.Otherwise, when bound > 0, it is the real bound.
@@ -18,7 +19,6 @@ class CCSLSMTTransfer:
         self.bound = bound
         self.period = period
         self.realPeroid = realPeroid
-        self.lowBound = lowBound
         self.operator = ["<", "≤", "⊆", "#", "+", "*", "∧", "∨", "$", "∝", "☇", "|", "=="]
         self.CCSLConstraintStrList = []
         self.CCSLConstraintList = []
@@ -26,8 +26,7 @@ class CCSLSMTTransfer:
         if self.period > 0:
             self.solver = z3.Optimize()
         else:
-            self.solver =  z3.SolverFor("LRA")
-        z3.set_param("smt.random_seed", seed)
+            self.solver = z3.SolverFor("AUFLIA")
         self.preIssue()
         self.n = z3.Int("n")
         if self.period > 0:
@@ -37,6 +36,8 @@ class CCSLSMTTransfer:
         self.tickDict = {}
         self.historyDict = {}
         self.Tick_result = {}
+        self.tickStep = {}
+        self.tickStepTmp = {}
         self.parameter = {}
     # 数据预处理环节
     def preIssue(self):
@@ -265,6 +266,7 @@ class CCSLSMTTransfer:
                         z3.ForAll(y,z3.Implies(
                             y >= self.k,
                             tick((y - self.l) % self.p + self.l) == tick(y))))
+
         clockListTmp = []
         x = z3.Int("x")
         for each in self.tickDict.keys():
@@ -496,94 +498,43 @@ class CCSLSMTTransfer:
                 history3 = self.historyDict["h_%s" % (each[4])]
                 x = z3.Int("x")
                 m = z3.Int("m")
-                left = tick1(x)
-                right = None
-                if self.is_number(each[3]):
-                    delay = z3.IntVal(int(each[3]))
-                    if self.bound > 0:
-                        self.solver.add(z3.ForAll(x, z3.And(
-                            z3.Implies(
-                                z3.And(x >= 1, x <= self.n, tick1(x)),
-                                z3.And(tick3(x), x > delay, tick2(x - delay))
-                            ),
-                            z3.Implies(
-                                z3.And(x >= 1, x <= self.n, z3.And(tick3(x), x > delay, tick2(x - delay))),
-                                tick1(x)
-                            ),
-                        )))
-                    else:
-                        self.solver.add(z3.ForAll(x, z3.And(
-                            z3.Implies(
-                                z3.And(x >= 1, tick1(x)),
-                                z3.And(tick3(x), x > delay, tick2(x - delay))
-                            ),
-                            z3.Implies(
-                                z3.And(x >= 1, z3.And(tick3(x), x > delay, tick2(x - delay))),
-                                tick1(x)
-                            ),
-                        )))
-                else:
-                    delay = z3.Int("%s" %each[3])
-                    delayParameter = None
-                    for t in self.CCSLConstraintList:
-                        if t[0] == "∈" and t[1] == each[3]:
-                            delayParameter = t
-                            break
-                    self.parameter[each[3]] = delay
-                    if self.bound > 0:
-                        self.solver.add(z3.simplify(z3.ForAll(x, z3.And(
-                            z3.Implies(
-                                z3.And(x >= 1, x < self.n, tick1(x)),
+                delay = z3.IntVal(int(each[3]))
+                if self.bound > 0:
+                    self.solver.add(z3.ForAll(x,
+                        z3.Implies(
+                            z3.And(x >= 1, x <= self.n),
+                            tick1(x) == z3.And(
+                                tick3(x),
                                 z3.Exists(
-                                    delay,
+                                    m,
                                     z3.And(
-                                        x > delay,
-                                        delay >= z3.IntVal(delayParameter[2]),
-                                        delay <= z3.IntVal(delayParameter[3]),
-                                        tick2(x - delay)
+                                        m >= 1,
+                                        m <= x - delay,
+                                        tick2(m),
+                                        history3(x) - history3(m) == delay
                                     )
                                 )
-                            ),
-                            z3.Implies(
-                                z3.And(x >= 1, x < self.n, z3.Exists(
-                                    delay,
-                                    z3.And(
-                                        x > delay,
-                                        delay >= z3.IntVal(delayParameter[2]),
-                                        delay <= z3.IntVal(delayParameter[3]),
-                                        tick2(x - delay)
-                                    )
-                                )),
-                                tick1(x)
-                            ),
-                        ))))
-                    else:
-                        self.solver.add(z3.simplify(z3.ForAll(x, z3.And(
-                            z3.Implies(
-                                z3.And(x >= 1, tick1(x),
-                                       # z3.Exists(
-                                       #     delay,
-                                       #     z3.And(
-                                               x > delay,
-                                               delay >= z3.IntVal(delayParameter[2]),
-                                               delay <= z3.IntVal(delayParameter[3]),
-                                ),#)),
-                                tick2(x - delay)
-
-                            ),
-                            z3.Implies(
-                                z3.And(x >= 1, z3.Exists(
-                                        delay,
-                                        z3.And(
-                                            x > delay,
-                                            delay >= z3.IntVal(delayParameter[2]),
-                                            delay <= z3.IntVal(delayParameter[3]),
-                                            tick2(x - delay)
-                                        )
-                                )),
-                                tick1(x)
-                            ),
-                        ))))
+                            )
+                        )
+                    ))
+                else:
+                    self.solver.add(z3.ForAll(x,
+                          z3.Implies(
+                              x >= 1,
+                              tick1(x) == z3.And(
+                                  tick3(x),
+                                  z3.Exists(
+                                      m,
+                                      z3.And(
+                                          m >= 1,
+                                          m <= x - delay,
+                                          tick2(m),
+                                          history3(x) - history3(m) == delay
+                                      )
+                                  )
+                              )
+                          )
+                    ))
 
             elif each[0] == "∝":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -591,25 +542,50 @@ class CCSLSMTTransfer:
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
-                left = tick1(x)
                 if self.is_number(each[3]):
-                    right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % z3.IntVal(each[3]) == 0)
+                    if self.bound > 0:
+                        self.solver.add(z3.ForAll(x,
+                          z3.Implies(z3.And(x >= 1, x <= self.n),
+                                     tick1(x) == z3.And(
+                                         tick2(x),
+                                         history2(x) > 0,
+                                         (history2(x) + 1) % z3.IntVal(int(each[3])) == 0)
+                                     )
+                            ))
+                    else:
+                        self.solver.add(z3.ForAll(x,
+                          z3.Implies(x > 1,
+                                     tick1(x) == z3.And(
+                                         tick2(x),
+                                         history2(x) > 0,
+                                         (history2(x) + 1) % z3.IntVal(int(each[3])) == 0)
+                                     )
+                          ))
                 else:
                     period = z3.Int("%s" % each[3])
                     self.parameter[each[3]] = period
-                    right = z3.And(tick2(x), history2(x) > 0, (history2(x) + 1) % period == 0)
-                    for t in self.CCSLConstraintList:
-                        if t[0] == "∈" and t[1] == each[3]:
-                            self.solver.add(period >= z3.IntVal(t[2]))
-                            self.solver.add(period <= z3.IntVal(t[3]))
-                if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, x <= self.n, left), right),  # )))
-                        z3.Implies(z3.And(x >= 1, x <= self.n, right), left), )))
-                else:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, left), right),  # )))
-                        z3.Implies(z3.And(x >= 1, right), left), )))
+                    for m in self.CCSLConstraintList:
+                        if each[0] == "∈" and each[3] == m[1]:
+                            self.solver.add(period >= z3.IntVal(m[2]))
+                            self.solver.add(period <= z3.IntVal(m[3]))
+                    if self.bound > 0:
+                        self.solver.add(z3.ForAll(x,
+                          z3.Implies(z3.And(x >= 1, x <= self.n),
+                                     tick1(x) == z3.And(
+                                         tick2(x),
+                                         history2(x) > 0,
+                                         (history2(x) + 1) % period == 0)
+                                     )
+                            ))
+                    else:
+                        self.solver.add(z3.ForAll(x,
+                          z3.Implies(x > 1,
+                                     tick1(x) == z3.And(
+                                         tick2(x),
+                                         history2(x) > 0,
+                                         (history2(x) + 1) % period == 0)
+                                     )
+                          ))
 
             elif each[0] == "☇":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -622,23 +598,41 @@ class CCSLSMTTransfer:
                 x = z3.Int("x")
                 m = z3.Int("m")
                 if self.bound > 0:
-                    left = tick1(x)
-                    right = z3.And(tick3(x),
-                            z3.Exists(m, z3.And(m > 0, m < x, tick3(m), history3(x) - history3(m) == 1,
-                                    history2(x) - history2(m) >= 1)))
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, x <= self.n, left),right),
-                        z3.Implies(z3.And(x >= 1, x <= self.n, right),left)
-                    )))
+                    self.solver.add(
+                        z3.Implies(
+                            z3.And(x >= 1, x <= self.n),
+                            tick1(x) == z3.And(
+                                tick3(x),
+                                z3.Exists(
+                                    m,
+                                    z3.And(
+                                        m >= 1,
+                                        m <= x,
+                                        tick3(m) == (history3(x) - history3(m) == 1),
+                                        history2(x) - history2(m) >= 1
+                                    )
+                                )
+                            )
+                        )
+                    )
                 else:
-                    left = z3.And(x > 1, tick1(x))
-                    right = z3.And(tick3(x),
-                            z3.Exists(m, z3.And(m > 0, tick3(m), history3(x) - history3(m) == 1,
-                                    history2(x) - history2(m) >= 1)))
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(z3.And(x >= 1, left),right),
-                        z3.Implies(z3.And(x >= 1, right),left)
-                    )))
+                    self.solver.add(
+                        z3.Implies(
+                            x >= 1,
+                            tick1(x) == z3.And(
+                                tick3(x),
+                                z3.Exists(
+                                    m,
+                                    z3.And(
+                                        m >= 1,
+                                        m <= x,
+                                        tick3(m) == (history3(x) - history3(m) == 1),
+                                        history2(x) - history2(m) >= 1
+                                    )
+                                )
+                            )
+                        )
+                    )
 
             elif each[0] == "==":
                 tick1 = self.tickDict["t_%s" % (each[1])]
@@ -673,8 +667,8 @@ class CCSLSMTTransfer:
             self.Tick_result[each] = TmpTickList
         for each in self.Tick_result.keys():
             print(each, self.Tick_result[each])
-        # for each in self.parameter.keys():
-        #     print(each,model.eval(self.parameter[each]))
+        for each in self.parameter.keys():
+            print(each,model.eval(self.parameter[each]))
 
     def outPutTickByHTML(self):
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
@@ -743,14 +737,10 @@ class CCSLSMTTransfer:
         print(result)
 
     def work(self):
-        begin = time.time()
         self.RealProduce()
         self.addTickSMT()
         self.addOriginSMTConstraints()
-        self.addTickForever()
-        # print(self.solver.to_smt2())
-        print(str(self.solver.check()))
-        print(time.time() - begin)
+        # self.addTickForever()
 
     def addExtraConstraints(self):
         model = self.solver.model()
@@ -764,35 +754,45 @@ class CCSLSMTTransfer:
             ExtraConstraints.append(self.parameter[each] != model.eval(self.parameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
 
-    def LoopFor10Results(self,p):
+    def LoopFor10Results(self):
         html = ""
         self.work()
-        # print(self.solver.to_smt2())
-        if self.period > 0:
-            self.solver.minimize(self.l)
-            self.solver.add(self.p == p)
-            # self.solver.minimize(self.k)
-        # print(self.solver.to_smt2())
-        if self.solver.check() == z3.sat:
-            self.getWorkOut()
-            html += self.outPutTickByHTML()
-            self.outputByMD()
-            # f.write("%s\n" %self.solver.to_smt2())
-            # self.addExtraConstraints()
-        else:
-            return False
-        f = open("ouput.html", "a+",encoding="utf-8")
+        # f = open("m.txt", "w+")
+        i = 0
+        # if self.period > 0:
+        #     self.solver.minimize(self.l)
+        #     self.solver.minimize(self.k)
+        print(self.solver.to_smt2())
+        try:
+            state = self.solver.check()
+            print(state)
+            while state == z3.sat:
+                # print(self.solver.model())
+                self.getWorkOut()
+                html += "<h1>%s</h1>" % (i)
+                html += self.outPutTickByHTML()
+                self.outputByMD()
+                # f.write("%s\n" % self.solver.to_smt2())
+                self.addExtraConstraints()
+                i += 1
+                if i == 10:
+                    break
+
+                state = self.solver.check()
+                print(state)
+        except Exception as e:
+            pass
+        f = open("ouput.html", "a+", encoding="utf-8")
         f.write(html)
         f.flush()
         f.close()
-        return True
 
 def HtmlHeader():
     html = "<html><body><style type=\"text/css\">\n"
     for each in open("output.css", "r").readlines():
         html += each
     html += "</style>"
-    f = open("ouput.html", "w", encoding="utf-8")
+    f = open("ouput.html", "w+", encoding="utf-8")
     f.write(html)
     f.flush()
     f.close()
@@ -809,10 +809,6 @@ if __name__ == "__main__":
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    bound = 7
-    for _ in range(10):
-        seed = random.randint(1,8888)
-        ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0,seed=seed)
-        if ccsl.LoopFor10Results(0) == False:
-            break
-    HTMLFooter()
+    bound = 20
+    ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
+    ccsl.LoopFor10Results()

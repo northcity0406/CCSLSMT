@@ -8,8 +8,12 @@ T2f[1]<T2s
 T2f=msec∝p_p1
 T1s#T1f
 T2s#T2f
-T1f=T1s$2onmsec
-T2f=T2s$3onmsec
+m=T1s$2onmsec
+n=T1s$4onmsec
+m≤T1f
+T1f≤n
+x=T2s$3onmsec
+y=T2s$5onmsec
+x≤T2f
+T2f≤y
 p_p1∈[5,7]
-p_p2∈[2,4]
-p_p3∈[2,4]

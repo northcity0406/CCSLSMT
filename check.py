@@ -30,9 +30,10 @@ class Check:
 
     def setDefaultValue(self):
         for each in self.ccslConstraintsExists:
-            self.clocks.add(each[1])
-            self.clocks.add(each[2])
-            self.clocks.add(each[4])
+            if each[0] == "on":
+                self.clocks.add(each[1])
+                self.clocks.add(each[2])
+                self.clocks.add(each[4])
 
         for each in self.clocks:
             self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
