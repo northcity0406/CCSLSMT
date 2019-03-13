@@ -3,6 +3,7 @@ from z3 import z3
 from z3 import *
 import random
 import sys
+import os
 
 class CCSLSMTTransfer:
     def __init__(self, ccslConstraints=None, bound=0, period=0, realPeroid=0):
@@ -26,19 +27,22 @@ class CCSLSMTTransfer:
         if self.period > 0:
             self.solver = z3.Optimize()
         else:
-            self.solver = z3.SolverFor("AUFLIA")
+            self.solver = z3.SolverFor("QF_UFNIA")
         self.preIssue()
-        self.n = z3.Int("n")
-        if self.period > 0:
-            self.k = z3.Int("k")
-            self.l = z3.Int("l")
-            self.p = z3.Int("p")
-        self.tickDict = {}
-        self.historyDict = {}
-        self.Tick_result = {}
-        self.tickStep = {}
-        self.tickStepTmp = {}
         self.parameter = {}
+        self.smt = ""
+        self.smt += "(set-option :print-success false)\n"
+        self.smt += "(set-option :produce-models true)\n"
+        self.smt += "(set-logic AUFLIRA)\n"
+        self.smt += "(declare-fun n () Int)\n"
+        if self.period > 0:
+            self.smt += "(declare-fun k () Int)\n"
+            self.smt += "(declare-fun l () Int)\n"
+            self.smt += "(declare-fun p () Int)\n"
+        self.getValue = ""
+        self.tickResult = {}
+        self.historyResult = {}
+
     # 数据预处理环节
     def preIssue(self):
         """
@@ -214,69 +218,39 @@ class CCSLSMTTransfer:
         :return:
         """
         if self.bound > 0:
-            self.solver.add(self.n == self.bound)
+            self.smt += "(assert (= n %s))\n" %(self.bound)
         # If the model want you to work out a model with period
         if self.period > 0:
-            self.solver.add(self.l >= 1)
+            self.smt += "(assert (> l 0))\n"
             if self.realPeroid == 0: #the period is not a fixed value.
-                self.solver.add(self.p > 0,self.p <=  self.n)
+                self.smt += "(assert (> p 0))\n"
+                self.smt += "(assert (< p n))\n"
             else:#the period is not a fixed value.
-                self.solver.add(self.p == self.realPeroid)
-            self.solver.add(self.k == (self.l + self.p))
-            self.solver.add(self.k <= self.n)
+                self.smt += "(assert (= p %s))\n" %(self.realPeroid)
+            self.smt += "(assert (= k (+ l p)))\n"
+            self.smt += "(assert (<= k n))\n"
 
     def addTickSMT(self):
         """
         Define the relationship between the tick of a clock and the history of a clock.
         :return:
         """
+        tmp = ""
         for each in self.clocks:
-            #Define the function of the tick, which means that the clock ticks at step i or not, and it will be represent
-            # as True if it ticks, otherwise False.
-            self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
-            #Define the function of history, which records how many times the clock ticks before this step.
-            self.historyDict["h_%s" % (each)] = z3.Function("h_%s" % (each), z3.IntSort(), z3.IntSort())
-            tick = self.tickDict["t_%s" % (each)]
-            history = self.historyDict["h_%s" % (each)]
-            # For every clock, the history of step 0 is 0.
-            self.solver.add(history(1) == z3.IntVal(0))
+            self.smt += "(declare-fun t_%s (Int) Bool)\n" %(each)
+            self.smt += "(declare-fun h_%s (Int) Int)\n" %(each)
+            self.smt += "(assert (= (h_%s 1) 0))\n" %(each)
+            tmp += "(t_%s x) " %(each)
             if self.bound > 0:
-                # If the bound is finite, we define the history of the clock with a fixed bound.
-                for i in range(1, self.bound + 1):
-                    self.solver.add(z3.If(tick(i),
-                                          history(i + 1) == history(i) + 1,
-                                          history(i + 1) == history(i)))
-                y = z3.Int("y")
-                # The next statement shows the conduction of the period.
-                if self.period > 0:
-                    self.solver.add(
-                        z3.ForAll(y,z3.Implies(
-                            z3.And(y >= self.k,y <= self.bound),
-                            tick((y - self.l) % self.p + self.l) == tick(y))))
-            elif self.bound == 0:
-                x = z3.Int("x")
-                # If the bound is infinite, we define the history of the clock infinitely.
-                self.solver.add(z3.ForAll(x, z3.Implies(x >= 1,
-                                            z3.If(tick(x),history(x + 1) == history(x) + 1,
-                                            history(x + 1) == history(x)))))
-                # The next statement shows the conduction of the period.
-                if self.period > 0:
-                    y = z3.Int("y")
-                    self.solver.add(
-                        z3.ForAll(y,z3.Implies(
-                            y >= self.k,
-                            tick((y - self.l) % self.p + self.l) == tick(y))))
-
-        clockListTmp = []
-        x = z3.Int("x")
-        for each in self.tickDict.keys():
-            tick = self.tickDict[each]
-            clockListTmp.append(tick(x))
-        # For the model, there are at least one tick clock as each step.
+                for i in range(1,self.bound + 1):
+                    self.smt += "(assert (ite (t_%s %s) (= (h_%s %s) (+ (h_%s %s) 1)) (= (h_%s %s) (h_%s %s))))\n" %(each,i,each,i + 1,each,i,each,i + 1,each,i)
+            else:
+                self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (ite (t_%s x) (= (h_%s (+ x 1)) (+ (h_%s x) 1)) (= (h_%s (+ x 1)) (h_%s x))))))\n" %(each,each,each,each,each)
+                    
         if self.bound == 0:
-            self.solver.add(z3.ForAll(x, z3.Implies(x >= 1, z3.Or(clockListTmp))))
+            self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (or %s))))\n" %(tmp)
         else:
-            self.solver.add(z3.ForAll(x, z3.Implies(z3.And(x >= 1, x <= self.n), z3.Or(clockListTmp))))
+            self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (or %s))))\n" %(tmp)
 
     def addTickForever(self):
         """
@@ -284,13 +258,10 @@ class CCSLSMTTransfer:
         :return:
         """
         if "msec" in self.clocks:
-            tick = self.tickDict["t_%s" %("msec")]
             if self.bound > 0:
-                for i in range(1,self.bound + 1):
-                    self.solver.add(tick(i) == True)
+                self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_msec x) true))))\n"
             else:
-                x = z3.Int("x")
-                self.solver.add(z3.ForAll(x, z3.Implies(x >= 1, tick(x) == True)))
+                self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_msec x) true))))\n"
 
     def addOriginSMTConstraints(self):
         """
@@ -299,398 +270,134 @@ class CCSLSMTTransfer:
         """
         for each in self.CCSLConstraintList:
             if each[0] == "<" and len(each) == 3:
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n, history1(x) == history2(x)),
-                        z3.Not(tick2(x))
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (h_%s  x) (h_%s x)) (not (t_%s x)))))\n" %(each[1],each[2],each[2])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, history1(x) == history2(x)),
-                        z3.Not(tick2(x))
-                    )))
-
-            if each[0] == "<" and len(each) == 4:
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                delay = each[2]
-                tick2 = self.tickDict["t_%s" % (each[3])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[3])]
-                x = z3.Int("x")
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (h_%s x) (h_%s x)) (not (t_%s x)))))\n" %(each[1],each[2],each[2])
+            elif each[0] == "<" and len(each) == 4:
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n, history2(x) - history1(x) == delay),
-                        z3.Not(tick2(x))
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (- (h_%s  x) (h_%s x)) %s) (not (t_%s x)))))\n" %(each[3],each[1],each[2],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, history2(x) - history1(x) == delay),
-                        z3.Not(tick2(x))
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (- (h_%s  x) (h_%s x)) %s) (not (t_%s x)))))\n" %(each[3],each[1],each[2],each[3])
             elif each[0] == "≤":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n + 1),
-                        history1(x) >= history2(x)
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x (+ n 1))) (>= (h_%s x) (h_%s x)))))\n" %(each[1],each[2])
                 else:
-                    self.solver.add(z3.ForAll(x,z3.Implies(
-                        x >= 1,
-                        history1(x) >= history2(x)
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (>= (h_%s x) (h_%s x)))))\n" %(each[1],each[2])
             elif each[0] == "⊆":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n, tick1(x)),
-                        tick2(x)
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (=> (t_%s x) (t_%s x)))))\n" %(each[1],each[2])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, tick1(x)),
-                        tick2(x)
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (=> (t_%s x) (t_%s x)))))\n" %(each[1],each[2])
             elif each[0] == "#":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
-                        z3.Or(z3.Not(tick1(x)), z3.Not(tick2(x)))
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (or (not (t_%s x)) (not (t_%s x))))))\n" %(each[1],each[2])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        x >= 1,
-                        z3.Or(z3.Not(tick1(x)), z3.Not(tick2(x)))
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (or (not (t_%s x)) (not (t_%s x))))))\n" %(each[1],each[2])
             elif each[0] == "+":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[3])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n, tick1(x)),
-                            z3.Or(tick2(x), tick3(x))),
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n, z3.Or(tick2(x), tick3(x))),
-                            tick1(x)),
-
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (or (t_%s x) (t_%s x))))))\n" %(each[1],each[2],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(
-                            z3.And(x >= 1, tick1(x)),
-                            z3.Or(tick2(x), tick3(x))),
-                        z3.Implies(
-                            z3.And(x >= 1, z3.Or(tick2(x), tick3(x))),
-                            tick1(x)),
-
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_%s x) (or (t_%s x) (t_%s x))))))\n" %(each[1],each[2],each[3])
             elif each[0] == "*":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[3])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n, tick1(x)),
-                            z3.And(tick2(x), tick3(x))),
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n, z3.And(tick2(x), tick3(x))),
-                            tick1(x)),
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (and (t_%s x) (t_%s x))))))\n" %(each[1],each[2],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.And(
-                        z3.Implies(
-                            z3.And(x >= 1, tick1(x)),
-                            z3.And(tick2(x), tick3(x))),
-                        z3.Implies(
-                            z3.And(x >= 1, z3.And(tick2(x), tick3(x))),
-                            tick1(x)),
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_%s x) (and (t_%s x) (t_%s x))))))\n" %(each[1],each[2],each[3])
             elif each[0] == "∧":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[3])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                history3 = self.historyDict["h_%s" % (each[3])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n + 1),
-                        history1(x) == z3.If(history2(x) >= history3(x),history2(x),history3(x))
-                    )))
+                    self.smt += " (forall ((x Int)) (=> (and (>= x 1) (<= x (+ n 1))) (ite (>= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)))))\n" %(each[2],each[3],each[1],each[2],each[1],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        x >= 1,
-                        history1(x) == z3.If(history2(x) >= history3(x),history2(x),history3(x))
-                    )))
-
+                    self.smt += " (forall ((x Int)) (=> (>= x 1)(ite (>= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)))))\n" %(each[2],each[3],each[1],each[2],each[1],each[3])
             elif each[0] == "∨":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[3])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                history3 = self.historyDict["h_%s" % (each[3])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n + 1),
-                        history1(x) == z3.If(history2(x) <= history3(x), history2(x), history3(x))
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x (+ n 1))) (ite (<= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x))))))\n" %(each[2],each[3],each[1],each[2],each[1],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        x >= 1,
-                        history1(x) == z3.If(history2(x) <= history3(x), history2(x), history3(x))
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1)(ite (<= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x)) (= (h_%s x) (h_%s x))))))\n" %(each[2],each[3],each[1],each[2],each[1],each[3])
             elif each[0] == "$":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                delay = z3.IntVal(int(each[3]))
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n + 1),
-                        history1(x) == z3.If(history2(x) >= delay,
-                                 history2(x) - delay,0)
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x (+ n 1))) (ite (>= (h_%s x) %s) (= (h_%s x) (- (h_%s x) %s)) (= (h_%s x) 0)))))\n" %(each[2],each[3],each[1],each[2],each[3],each[1])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        x >= 1,
-                        history1(x) == z3.If(history2(x) >= delay,
-                                 history2(x) - delay,0)
-                    )))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (ite (>= (h_%s x) %s) (= (h_%s x) (- (h_%s x) %s)) (= (h_%s x) 0)))))\n" %(each[2],each[3],each[1],each[2],each[3],each[1])
             elif each[0] == "on":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[4])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                history3 = self.historyDict["h_%s" % (each[4])]
-                x = z3.Int("x")
-                m = z3.Int("m")
-                delay = z3.IntVal(int(each[3]))
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x,
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n),
-                            tick1(x) == z3.And(
-                                tick3(x),
-                                z3.Exists(
-                                    m,
-                                    z3.And(
-                                        m >= 1,
-                                        m <= x - delay,
-                                        tick2(m),
-                                        history3(x) - history3(m) == delay
-                                    )
-                                )
-                            )
-                        )
-                    ))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x %s) (<= x n)) (= (t_%s x) (t_%s (x - %s))))))\n" % (int(each[3]) + 1,each[1], each[2], each[3])
+                    # self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (and (t_%s x) (exists ((m Int)) (and (>= m 1) (<= m x) (t_%s m) (= (- (h_%s x) (h_%s m)) %s))))))))\n" %(each[1],each[4],each[2],each[4],each[4],each[3])
                 else:
-                    self.solver.add(z3.ForAll(x,
-                          z3.Implies(
-                              x >= 1,
-                              tick1(x) == z3.And(
-                                  tick3(x),
-                                  z3.Exists(
-                                      m,
-                                      z3.And(
-                                          m >= 1,
-                                          m <= x - delay,
-                                          tick2(m),
-                                          history3(x) - history3(m) == delay
-                                      )
-                                  )
-                              )
-                          )
-                    ))
-
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_%s x) (and (t_%s x) (exists ((m Int)) (and (>= m 1) (<= m x) (t_%s m) (= (- (h_%s x) (h_%s m)) %s))))))))\n" %(each[1],each[4],each[2],each[4],each[4],each[3])
             elif each[0] == "∝":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                x = z3.Int("x")
-                if self.is_number(each[3]):
-                    if self.bound > 0:
-                        self.solver.add(z3.ForAll(x,
-                          z3.Implies(z3.And(x >= 1, x <= self.n),
-                                     tick1(x) == z3.And(
-                                         tick2(x),
-                                         history2(x) > 0,
-                                         (history2(x) + 1) % z3.IntVal(int(each[3])) == 0)
-                                     )
-                            ))
-                    else:
-                        self.solver.add(z3.ForAll(x,
-                          z3.Implies(x > 1,
-                                     tick1(x) == z3.And(
-                                         tick2(x),
-                                         history2(x) > 0,
-                                         (history2(x) + 1) % z3.IntVal(int(each[3])) == 0)
-                                     )
-                          ))
-                else:
-                    period = z3.Int("%s" % each[3])
-                    self.parameter[each[3]] = period
+                if self.is_number(each[3]) is False:
+                    self.parameter[each[3]] = each[3]
                     for m in self.CCSLConstraintList:
-                        if each[0] == "∈" and each[3] == m[1]:
-                            self.solver.add(period >= z3.IntVal(m[2]))
-                            self.solver.add(period <= z3.IntVal(m[3]))
-                    if self.bound > 0:
-                        self.solver.add(z3.ForAll(x,
-                          z3.Implies(z3.And(x >= 1, x <= self.n),
-                                     tick1(x) == z3.And(
-                                         tick2(x),
-                                         history2(x) > 0,
-                                         (history2(x) + 1) % period == 0)
-                                     )
-                            ))
-                    else:
-                        self.solver.add(z3.ForAll(x,
-                          z3.Implies(x > 1,
-                                     tick1(x) == z3.And(
-                                         tick2(x),
-                                         history2(x) > 0,
-                                         (history2(x) + 1) % period == 0)
-                                     )
-                          ))
-
+                        if m[0] == "∈" and m[1] == each[3]:
+                            self.smt += "(declare-fun %s () Int)\n" %(each[3])
+                            self.smt += "(assert (>= %s %s))\n" %(m[1],m[2])
+                            self.smt += "(assert (<= %s %s))\n" %(m[1],m[3])
+                            break
+                if self.bound > 0:
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (and (t_%s x) (> (h_%s x) 0) (= (mod (h_%s x) %s) 0))))))\n" %(each[1],each[2],each[2],each[2],each[3])
+                else:
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_%s x) (and (t_%s x) (> (h_%s x) 0) (= (mod (h_%s x) %s) 0))))))\n" %(each[1],each[2],each[2],each[2],each[3])
             elif each[0] == "☇":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                tick3 = self.tickDict["t_%s" % (each[3])]
-
-                history1 = self.historyDict["h_%s" % (each[1])]
-                history2 = self.historyDict["h_%s" % (each[2])]
-                history3 = self.historyDict["h_%s" % (each[3])]
-                x = z3.Int("x")
-                m = z3.Int("m")
                 if self.bound > 0:
-                    self.solver.add(
-                        z3.Implies(
-                            z3.And(x >= 1, x <= self.n),
-                            tick1(x) == z3.And(
-                                tick3(x),
-                                z3.Exists(
-                                    m,
-                                    z3.And(
-                                        m >= 1,
-                                        m <= x,
-                                        tick3(m) == (history3(x) - history3(m) == 1),
-                                        history2(x) - history2(m) >= 1
-                                    )
-                                )
-                            )
-                        )
-                    )
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (and (t_%s x) (exists ((m Int)) (and (>= m 1) (<= m x) (t_%s m) (= (- (h_%s x) (h_%s m)) 1) (>= (- (h_%s x) (h_%s m)) 1))))))))\n" %(each[1],each[3],each[3],each[3],each[3],each[2],each[2])
                 else:
-                    self.solver.add(
-                        z3.Implies(
-                            x >= 1,
-                            tick1(x) == z3.And(
-                                tick3(x),
-                                z3.Exists(
-                                    m,
-                                    z3.And(
-                                        m >= 1,
-                                        m <= x,
-                                        tick3(m) == (history3(x) - history3(m) == 1),
-                                        history2(x) - history2(m) >= 1
-                                    )
-                                )
-                            )
-                        )
-                    )
-
+                    self.bound += "(assert (forall ((x Int)) (=> (>= x 1)(= (t_%s x) (and (t_%s x) (exists ((m Int)) (and (>= m 1) (<= m x) (t_%s m) (= (- (h_%s x) (h_%s m)) 1) (>= (- (h_%s x) (h_%s m)) 1))))))))\n" %(each[1],each[3],each[3],each[3],each[3],each[2],each[2])
             elif each[0] == "==":
-                tick1 = self.tickDict["t_%s" % (each[1])]
-                tick2 = self.tickDict["t_%s" % (each[2])]
-                x = z3.Int("x")
                 if self.bound > 0:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        z3.And(x >= 1, x <= self.n),
-                        tick1(x) == tick2(x)
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (and (>= x 1) (<= x n)) (= (t_%s x) (t_%s x)))))\n" %(each[1],each[2])
                 else:
-                    self.solver.add(z3.ForAll(x, z3.Implies(
-                        x >= 1,
-                        tick1(x) == tick2(x)
-                    )))
+                    self.smt += "(assert (forall ((x Int)) (=> (>= x 1) (= (t_%s x) (t_%s x)))))\n" %(each[1],each[2])
 
     def is_number(self,s):
         return set(s).issubset(set("1234567890"))
 
     def getWorkOut(self):
+        self.getValue += "(check-sat)\n"
         if self.period > 0:
-            print("k:\t%s" %self.solver.model()[self.k])
-            print("l:\t%s" %self.solver.model()[self.l])
-            print("p:\t%s" %self.solver.model()[self.p])
-        model = self.solver.model()
+            self.getValue += "(get-value (k))\n"
+            self.getValue += "(get-value (l))\n"
+            self.getValue += "(get-value (p))\n"
         for each in self.clocks:
-            TmpTickList = []
-            tick = self.tickDict["t_%s" %each]
             for i in range(1,self.bound + 1):
-                if model.eval(tick(i)) == True:
-                    TmpTickList.append(i)
-            self.Tick_result[each] = TmpTickList
-        for each in self.Tick_result.keys():
-            print(each, self.Tick_result[each])
-        for each in self.parameter.keys():
-            print(each,model.eval(self.parameter[each]))
+                self.getValue += "(get-value ((t_%s %s)))\n" %(each,i)
+        # for each in self.parameter:
+        #     self.getValue += "(get-value (%s))" % (each)
 
-    def outPutTickByHTML(self):
+    def outPutTickByHTML(self,smt):
+        for clock in self.clocks:
+            self.tickResult[clock] = []
+            self.historyResult[clock] = []
+        for m in smt:
+            if str(m).__contains__("t_"):
+                tmp = str(m).replace("(","").replace(")","").split(" ")
+                if tmp[2] == "true":
+                    self.tickResult[tmp[0].replace("t_","")].append(int(tmp[1]))
+
+        for key in self.tickResult.keys():
+            print(key,self.tickResult[key])
+
+
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
         for each in range(1, self.bound + 1):
             html += "<li>%s</li>" % (each)
         html += "</ul>"
-        for each in self.Tick_result.keys():
+        for each in self.tickResult.keys():
             html += "<ul><li class='name'>%s</li>" % (each)
             cnt = 0
             res = ""
             for i in range(1, self.bound + 1):
-                if i in self.Tick_result[each]:
-                    if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                if i in self.tickResult[each]:
+                    if i - 1 in self.tickResult[each] or i - 1 == 0:
                         html += "<li class='up'></li>"
                     else:
                         html += "<li class='upl'></li>"
                 else:
-                    if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                    if i - 1 not in self.tickResult[each] or i - 1 == 0:
                         html += "<li class='down'></li>"
                     else:
                         html += "<li class='downl'></li>"
-                if i in self.Tick_result[each]:
+                if i in self.tickResult[each]:
                     cnt += 1
                 res += "<li>%s</li>" % (cnt)
             html += "</ul>"
@@ -705,17 +412,17 @@ class CCSLSMTTransfer:
                         cnt = 0
                         res = ""
                         for i in range(1, self.bound + 1):
-                            if i in self.Tick_result[each]:
-                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                            if i in self.tickResult[each]:
+                                if i - 1 in self.tickResult[each] or i - 1 == 0:
                                     html += "<li class='up'></li>"
                                 else:
                                     html += "<li class='upl'></li>"
                             else:
-                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                                if i - 1 not in self.tickResult[each] or i - 1 == 0:
                                     html += "<li class='down'></li>"
                                 else:
                                     html += "<li class='downl'></li>"
-                            if i - 1 in self.Tick_result[each]:
+                            if i - 1 in self.tickResult[each]:
                                 cnt += 1
                             res += "<li class='history'>%s</li>" % (cnt)
                         html += "</ul>"
@@ -728,19 +435,35 @@ class CCSLSMTTransfer:
 
         return html
 
-    def outputByMD(self):
-        result = [[] for _ in range(self.bound)]
-        for each in self.Tick_result.keys():
-            for i in range(self.bound):
-                if (i + 1) in self.Tick_result[each]:
-                    result[i].append(each)
-        print(result)
 
     def work(self):
         self.RealProduce()
         self.addTickSMT()
         self.addOriginSMTConstraints()
-        # self.addTickForever()
+        self.addTickForever()
+        self.getWorkOut()
+        self.smt += self.getValue
+        f = open("print.smt2","w")
+        f.write(self.smt)
+        f.close()
+        start = time.time()
+
+        f = os.popen('z3 print.smt2')
+        # print(f.read())
+        smt = str(f.read()).split("\n")
+        print(time.time() - start)
+        for i in range(len(smt)):
+            if str(smt[i]).startswith("sat"):
+                print("sat")
+                html = self.outPutTickByHTML(smt[i + 1:])
+                f = open("ouput.html", "a+", encoding="utf-8")
+                f.write(html)
+                f.flush()
+                f.close()
+                break
+            if str(smt[i]).startswith("unsat"):
+                print("unsat")
+
 
     def addExtraConstraints(self):
         model = self.solver.model()
@@ -753,39 +476,6 @@ class CCSLSMTTransfer:
         for each in self.parameter.keys():
             ExtraConstraints.append(self.parameter[each] != model.eval(self.parameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
-
-    def LoopFor10Results(self):
-        html = ""
-        self.work()
-        # f = open("m.txt", "w+")
-        i = 0
-        # if self.period > 0:
-        #     self.solver.minimize(self.l)
-        #     self.solver.minimize(self.k)
-        print(self.solver.to_smt2())
-        try:
-            state = self.solver.check()
-            print(state)
-            while state == z3.sat:
-                # print(self.solver.model())
-                self.getWorkOut()
-                html += "<h1>%s</h1>" % (i)
-                html += self.outPutTickByHTML()
-                self.outputByMD()
-                # f.write("%s\n" % self.solver.to_smt2())
-                self.addExtraConstraints()
-                i += 1
-                if i == 10:
-                    break
-
-                state = self.solver.check()
-                print(state)
-        except Exception as e:
-            pass
-        f = open("ouput.html", "a+", encoding="utf-8")
-        f.write(html)
-        f.flush()
-        f.close()
 
 def HtmlHeader():
     html = "<html><body><style type=\"text/css\">\n"
@@ -811,4 +501,6 @@ if __name__ == "__main__":
         ccslConstraints += each
     bound = 20
     ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
-    ccsl.LoopFor10Results()
+    ccsl.work()
+
+    HTMLFooter()
