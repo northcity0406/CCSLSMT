@@ -1,2 +1,1 @@
-T2f=T2s$2onmsec
-T2f=msec∝5
+T1f=T1s$2onmsec

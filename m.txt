@@ -1,0 +1,858 @@
+; benchmark generated from python API
+(set-info :status unknown)
+(declare-fun n () Int)
+(declare-fun h_T1f (Int) Int)
+(declare-fun t_T1f (Int) Bool)
+(declare-fun h_msec (Int) Int)
+(declare-fun t_msec (Int) Bool)
+(declare-fun h_T1s (Int) Int)
+(declare-fun t_T1s (Int) Bool)
+(declare-fun d_msec (Int Int) Int)
+(assert
+ (= n 50))
+(assert
+ (let ((?x26 (h_T1f 1)))
+ (= 0 ?x26)))
+(assert
+ (ite (t_T1f 1) (= (h_T1f 2) (+ (h_T1f 1) 1)) (= (h_T1f 2) (h_T1f 1))))
+(assert
+ (ite (t_T1f 2) (= (h_T1f 3) (+ (h_T1f 2) 1)) (= (h_T1f 3) (h_T1f 2))))
+(assert
+ (let (($x43 (t_T1f 3)))
+ (ite $x43 (= (h_T1f 4) (+ (h_T1f 3) 1)) (= (h_T1f 4) (h_T1f 3)))))
+(assert
+ (let (($x50 (t_T1f 4)))
+ (ite $x50 (= (h_T1f 5) (+ (h_T1f 4) 1)) (= (h_T1f 5) (h_T1f 4)))))
+(assert
+ (let (($x57 (t_T1f 5)))
+ (ite $x57 (= (h_T1f 6) (+ (h_T1f 5) 1)) (= (h_T1f 6) (h_T1f 5)))))
+(assert
+ (let (($x64 (t_T1f 6)))
+ (ite $x64 (= (h_T1f 7) (+ (h_T1f 6) 1)) (= (h_T1f 7) (h_T1f 6)))))
+(assert
+ (let (($x71 (t_T1f 7)))
+ (ite $x71 (= (h_T1f 8) (+ (h_T1f 7) 1)) (= (h_T1f 8) (h_T1f 7)))))
+(assert
+ (let (($x78 (t_T1f 8)))
+ (ite $x78 (= (h_T1f 9) (+ (h_T1f 8) 1)) (= (h_T1f 9) (h_T1f 8)))))
+(assert
+ (let (($x85 (t_T1f 9)))
+ (ite $x85 (= (h_T1f 10) (+ (h_T1f 9) 1)) (= (h_T1f 10) (h_T1f 9)))))
+(assert
+ (let (($x92 (t_T1f 10)))
+ (ite $x92 (= (h_T1f 11) (+ (h_T1f 10) 1)) (= (h_T1f 11) (h_T1f 10)))))
+(assert
+ (let (($x99 (t_T1f 11)))
+ (ite $x99 (= (h_T1f 12) (+ (h_T1f 11) 1)) (= (h_T1f 12) (h_T1f 11)))))
+(assert
+ (let (($x106 (t_T1f 12)))
+ (ite $x106 (= (h_T1f 13) (+ (h_T1f 12) 1)) (= (h_T1f 13) (h_T1f 12)))))
+(assert
+ (let (($x113 (t_T1f 13)))
+ (ite $x113 (= (h_T1f 14) (+ (h_T1f 13) 1)) (= (h_T1f 14) (h_T1f 13)))))
+(assert
+ (let (($x120 (t_T1f 14)))
+ (ite $x120 (= (h_T1f 15) (+ (h_T1f 14) 1)) (= (h_T1f 15) (h_T1f 14)))))
+(assert
+ (let (($x127 (t_T1f 15)))
+ (ite $x127 (= (h_T1f 16) (+ (h_T1f 15) 1)) (= (h_T1f 16) (h_T1f 15)))))
+(assert
+ (let (($x134 (t_T1f 16)))
+ (ite $x134 (= (h_T1f 17) (+ (h_T1f 16) 1)) (= (h_T1f 17) (h_T1f 16)))))
+(assert
+ (let (($x141 (t_T1f 17)))
+ (ite $x141 (= (h_T1f 18) (+ (h_T1f 17) 1)) (= (h_T1f 18) (h_T1f 17)))))
+(assert
+ (let (($x148 (t_T1f 18)))
+ (ite $x148 (= (h_T1f 19) (+ (h_T1f 18) 1)) (= (h_T1f 19) (h_T1f 18)))))
+(assert
+ (let (($x155 (t_T1f 19)))
+ (ite $x155 (= (h_T1f 20) (+ (h_T1f 19) 1)) (= (h_T1f 20) (h_T1f 19)))))
+(assert
+ (let (($x162 (t_T1f 20)))
+ (ite $x162 (= (h_T1f 21) (+ (h_T1f 20) 1)) (= (h_T1f 21) (h_T1f 20)))))
+(assert
+ (let (($x169 (t_T1f 21)))
+ (ite $x169 (= (h_T1f 22) (+ (h_T1f 21) 1)) (= (h_T1f 22) (h_T1f 21)))))
+(assert
+ (let (($x176 (t_T1f 22)))
+ (ite $x176 (= (h_T1f 23) (+ (h_T1f 22) 1)) (= (h_T1f 23) (h_T1f 22)))))
+(assert
+ (let (($x183 (t_T1f 23)))
+ (ite $x183 (= (h_T1f 24) (+ (h_T1f 23) 1)) (= (h_T1f 24) (h_T1f 23)))))
+(assert
+ (let (($x190 (t_T1f 24)))
+ (ite $x190 (= (h_T1f 25) (+ (h_T1f 24) 1)) (= (h_T1f 25) (h_T1f 24)))))
+(assert
+ (let (($x197 (t_T1f 25)))
+ (ite $x197 (= (h_T1f 26) (+ (h_T1f 25) 1)) (= (h_T1f 26) (h_T1f 25)))))
+(assert
+ (let (($x204 (t_T1f 26)))
+ (ite $x204 (= (h_T1f 27) (+ (h_T1f 26) 1)) (= (h_T1f 27) (h_T1f 26)))))
+(assert
+ (let (($x211 (t_T1f 27)))
+ (ite $x211 (= (h_T1f 28) (+ (h_T1f 27) 1)) (= (h_T1f 28) (h_T1f 27)))))
+(assert
+ (let (($x218 (t_T1f 28)))
+ (ite $x218 (= (h_T1f 29) (+ (h_T1f 28) 1)) (= (h_T1f 29) (h_T1f 28)))))
+(assert
+ (let (($x225 (t_T1f 29)))
+ (ite $x225 (= (h_T1f 30) (+ (h_T1f 29) 1)) (= (h_T1f 30) (h_T1f 29)))))
+(assert
+ (let (($x232 (t_T1f 30)))
+ (ite $x232 (= (h_T1f 31) (+ (h_T1f 30) 1)) (= (h_T1f 31) (h_T1f 30)))))
+(assert
+ (let (($x239 (t_T1f 31)))
+ (ite $x239 (= (h_T1f 32) (+ (h_T1f 31) 1)) (= (h_T1f 32) (h_T1f 31)))))
+(assert
+ (let (($x246 (t_T1f 32)))
+ (ite $x246 (= (h_T1f 33) (+ (h_T1f 32) 1)) (= (h_T1f 33) (h_T1f 32)))))
+(assert
+ (let (($x253 (t_T1f 33)))
+ (ite $x253 (= (h_T1f 34) (+ (h_T1f 33) 1)) (= (h_T1f 34) (h_T1f 33)))))
+(assert
+ (let (($x260 (t_T1f 34)))
+ (ite $x260 (= (h_T1f 35) (+ (h_T1f 34) 1)) (= (h_T1f 35) (h_T1f 34)))))
+(assert
+ (let (($x267 (t_T1f 35)))
+ (ite $x267 (= (h_T1f 36) (+ (h_T1f 35) 1)) (= (h_T1f 36) (h_T1f 35)))))
+(assert
+ (let (($x274 (t_T1f 36)))
+ (ite $x274 (= (h_T1f 37) (+ (h_T1f 36) 1)) (= (h_T1f 37) (h_T1f 36)))))
+(assert
+ (let (($x281 (t_T1f 37)))
+ (ite $x281 (= (h_T1f 38) (+ (h_T1f 37) 1)) (= (h_T1f 38) (h_T1f 37)))))
+(assert
+ (let (($x288 (t_T1f 38)))
+ (ite $x288 (= (h_T1f 39) (+ (h_T1f 38) 1)) (= (h_T1f 39) (h_T1f 38)))))
+(assert
+ (let (($x295 (t_T1f 39)))
+ (ite $x295 (= (h_T1f 40) (+ (h_T1f 39) 1)) (= (h_T1f 40) (h_T1f 39)))))
+(assert
+ (let (($x302 (t_T1f 40)))
+ (ite $x302 (= (h_T1f 41) (+ (h_T1f 40) 1)) (= (h_T1f 41) (h_T1f 40)))))
+(assert
+ (let (($x309 (t_T1f 41)))
+ (ite $x309 (= (h_T1f 42) (+ (h_T1f 41) 1)) (= (h_T1f 42) (h_T1f 41)))))
+(assert
+ (let (($x316 (t_T1f 42)))
+ (ite $x316 (= (h_T1f 43) (+ (h_T1f 42) 1)) (= (h_T1f 43) (h_T1f 42)))))
+(assert
+ (let (($x323 (t_T1f 43)))
+ (ite $x323 (= (h_T1f 44) (+ (h_T1f 43) 1)) (= (h_T1f 44) (h_T1f 43)))))
+(assert
+ (let (($x330 (t_T1f 44)))
+ (ite $x330 (= (h_T1f 45) (+ (h_T1f 44) 1)) (= (h_T1f 45) (h_T1f 44)))))
+(assert
+ (let (($x337 (t_T1f 45)))
+ (ite $x337 (= (h_T1f 46) (+ (h_T1f 45) 1)) (= (h_T1f 46) (h_T1f 45)))))
+(assert
+ (let (($x344 (t_T1f 46)))
+ (ite $x344 (= (h_T1f 47) (+ (h_T1f 46) 1)) (= (h_T1f 47) (h_T1f 46)))))
+(assert
+ (let (($x351 (t_T1f 47)))
+ (ite $x351 (= (h_T1f 48) (+ (h_T1f 47) 1)) (= (h_T1f 48) (h_T1f 47)))))
+(assert
+ (let (($x358 (t_T1f 48)))
+ (ite $x358 (= (h_T1f 49) (+ (h_T1f 48) 1)) (= (h_T1f 49) (h_T1f 48)))))
+(assert
+ (let (($x365 (t_T1f 49)))
+ (ite $x365 (= (h_T1f 50) (+ (h_T1f 49) 1)) (= (h_T1f 50) (h_T1f 49)))))
+(assert
+ (let (($x371 (t_T1f 50)))
+ (ite $x371 (= (h_T1f 51) (+ (h_T1f 50) 1)) (= (h_T1f 51) (h_T1f 50)))))
+(assert
+ (let ((?x379 (h_msec 1)))
+ (= 0 ?x379)))
+(assert
+ (ite (t_msec 1) (= (h_msec 2) (+ (h_msec 1) 1)) (= (h_msec 2) (h_msec 1))))
+(assert
+ (ite (t_msec 2) (= (h_msec 3) (+ (h_msec 2) 1)) (= (h_msec 3) (h_msec 2))))
+(assert
+ (ite (t_msec 3) (= (h_msec 4) (+ (h_msec 3) 1)) (= (h_msec 4) (h_msec 3))))
+(assert
+ (let (($x399 (t_msec 4)))
+ (ite $x399 (= (h_msec 5) (+ (h_msec 4) 1)) (= (h_msec 5) (h_msec 4)))))
+(assert
+ (let (($x405 (t_msec 5)))
+ (ite $x405 (= (h_msec 6) (+ (h_msec 5) 1)) (= (h_msec 6) (h_msec 5)))))
+(assert
+ (let (($x411 (t_msec 6)))
+ (ite $x411 (= (h_msec 7) (+ (h_msec 6) 1)) (= (h_msec 7) (h_msec 6)))))
+(assert
+ (let (($x417 (t_msec 7)))
+ (ite $x417 (= (h_msec 8) (+ (h_msec 7) 1)) (= (h_msec 8) (h_msec 7)))))
+(assert
+ (let (($x423 (t_msec 8)))
+ (ite $x423 (= (h_msec 9) (+ (h_msec 8) 1)) (= (h_msec 9) (h_msec 8)))))
+(assert
+ (let (($x429 (t_msec 9)))
+ (ite $x429 (= (h_msec 10) (+ (h_msec 9) 1)) (= (h_msec 10) (h_msec 9)))))
+(assert
+ (let (($x435 (t_msec 10)))
+ (ite $x435 (= (h_msec 11) (+ (h_msec 10) 1)) (= (h_msec 11) (h_msec 10)))))
+(assert
+ (let (($x441 (t_msec 11)))
+ (ite $x441 (= (h_msec 12) (+ (h_msec 11) 1)) (= (h_msec 12) (h_msec 11)))))
+(assert
+ (let (($x447 (t_msec 12)))
+ (ite $x447 (= (h_msec 13) (+ (h_msec 12) 1)) (= (h_msec 13) (h_msec 12)))))
+(assert
+ (let (($x453 (t_msec 13)))
+ (ite $x453 (= (h_msec 14) (+ (h_msec 13) 1)) (= (h_msec 14) (h_msec 13)))))
+(assert
+ (let (($x459 (t_msec 14)))
+ (ite $x459 (= (h_msec 15) (+ (h_msec 14) 1)) (= (h_msec 15) (h_msec 14)))))
+(assert
+ (let (($x465 (t_msec 15)))
+ (ite $x465 (= (h_msec 16) (+ (h_msec 15) 1)) (= (h_msec 16) (h_msec 15)))))
+(assert
+ (let (($x471 (t_msec 16)))
+ (ite $x471 (= (h_msec 17) (+ (h_msec 16) 1)) (= (h_msec 17) (h_msec 16)))))
+(assert
+ (let (($x477 (t_msec 17)))
+ (ite $x477 (= (h_msec 18) (+ (h_msec 17) 1)) (= (h_msec 18) (h_msec 17)))))
+(assert
+ (let (($x483 (t_msec 18)))
+ (ite $x483 (= (h_msec 19) (+ (h_msec 18) 1)) (= (h_msec 19) (h_msec 18)))))
+(assert
+ (let (($x489 (t_msec 19)))
+ (ite $x489 (= (h_msec 20) (+ (h_msec 19) 1)) (= (h_msec 20) (h_msec 19)))))
+(assert
+ (let (($x495 (t_msec 20)))
+ (ite $x495 (= (h_msec 21) (+ (h_msec 20) 1)) (= (h_msec 21) (h_msec 20)))))
+(assert
+ (let (($x501 (t_msec 21)))
+ (ite $x501 (= (h_msec 22) (+ (h_msec 21) 1)) (= (h_msec 22) (h_msec 21)))))
+(assert
+ (let (($x507 (t_msec 22)))
+ (ite $x507 (= (h_msec 23) (+ (h_msec 22) 1)) (= (h_msec 23) (h_msec 22)))))
+(assert
+ (let (($x513 (t_msec 23)))
+ (ite $x513 (= (h_msec 24) (+ (h_msec 23) 1)) (= (h_msec 24) (h_msec 23)))))
+(assert
+ (let (($x519 (t_msec 24)))
+ (ite $x519 (= (h_msec 25) (+ (h_msec 24) 1)) (= (h_msec 25) (h_msec 24)))))
+(assert
+ (let (($x525 (t_msec 25)))
+ (ite $x525 (= (h_msec 26) (+ (h_msec 25) 1)) (= (h_msec 26) (h_msec 25)))))
+(assert
+ (let (($x531 (t_msec 26)))
+ (ite $x531 (= (h_msec 27) (+ (h_msec 26) 1)) (= (h_msec 27) (h_msec 26)))))
+(assert
+ (let (($x537 (t_msec 27)))
+ (ite $x537 (= (h_msec 28) (+ (h_msec 27) 1)) (= (h_msec 28) (h_msec 27)))))
+(assert
+ (let (($x543 (t_msec 28)))
+ (ite $x543 (= (h_msec 29) (+ (h_msec 28) 1)) (= (h_msec 29) (h_msec 28)))))
+(assert
+ (let (($x549 (t_msec 29)))
+ (ite $x549 (= (h_msec 30) (+ (h_msec 29) 1)) (= (h_msec 30) (h_msec 29)))))
+(assert
+ (let (($x555 (t_msec 30)))
+ (ite $x555 (= (h_msec 31) (+ (h_msec 30) 1)) (= (h_msec 31) (h_msec 30)))))
+(assert
+ (let (($x561 (t_msec 31)))
+ (ite $x561 (= (h_msec 32) (+ (h_msec 31) 1)) (= (h_msec 32) (h_msec 31)))))
+(assert
+ (let (($x567 (t_msec 32)))
+ (ite $x567 (= (h_msec 33) (+ (h_msec 32) 1)) (= (h_msec 33) (h_msec 32)))))
+(assert
+ (let (($x573 (t_msec 33)))
+ (ite $x573 (= (h_msec 34) (+ (h_msec 33) 1)) (= (h_msec 34) (h_msec 33)))))
+(assert
+ (let (($x579 (t_msec 34)))
+ (ite $x579 (= (h_msec 35) (+ (h_msec 34) 1)) (= (h_msec 35) (h_msec 34)))))
+(assert
+ (let (($x585 (t_msec 35)))
+ (ite $x585 (= (h_msec 36) (+ (h_msec 35) 1)) (= (h_msec 36) (h_msec 35)))))
+(assert
+ (let (($x591 (t_msec 36)))
+ (ite $x591 (= (h_msec 37) (+ (h_msec 36) 1)) (= (h_msec 37) (h_msec 36)))))
+(assert
+ (let (($x597 (t_msec 37)))
+ (ite $x597 (= (h_msec 38) (+ (h_msec 37) 1)) (= (h_msec 38) (h_msec 37)))))
+(assert
+ (let (($x603 (t_msec 38)))
+ (ite $x603 (= (h_msec 39) (+ (h_msec 38) 1)) (= (h_msec 39) (h_msec 38)))))
+(assert
+ (let (($x609 (t_msec 39)))
+ (ite $x609 (= (h_msec 40) (+ (h_msec 39) 1)) (= (h_msec 40) (h_msec 39)))))
+(assert
+ (let (($x615 (t_msec 40)))
+ (ite $x615 (= (h_msec 41) (+ (h_msec 40) 1)) (= (h_msec 41) (h_msec 40)))))
+(assert
+ (let (($x621 (t_msec 41)))
+ (ite $x621 (= (h_msec 42) (+ (h_msec 41) 1)) (= (h_msec 42) (h_msec 41)))))
+(assert
+ (let (($x627 (t_msec 42)))
+ (ite $x627 (= (h_msec 43) (+ (h_msec 42) 1)) (= (h_msec 43) (h_msec 42)))))
+(assert
+ (let (($x633 (t_msec 43)))
+ (ite $x633 (= (h_msec 44) (+ (h_msec 43) 1)) (= (h_msec 44) (h_msec 43)))))
+(assert
+ (let (($x639 (t_msec 44)))
+ (ite $x639 (= (h_msec 45) (+ (h_msec 44) 1)) (= (h_msec 45) (h_msec 44)))))
+(assert
+ (let (($x645 (t_msec 45)))
+ (ite $x645 (= (h_msec 46) (+ (h_msec 45) 1)) (= (h_msec 46) (h_msec 45)))))
+(assert
+ (let (($x651 (t_msec 46)))
+ (ite $x651 (= (h_msec 47) (+ (h_msec 46) 1)) (= (h_msec 47) (h_msec 46)))))
+(assert
+ (let (($x657 (t_msec 47)))
+ (ite $x657 (= (h_msec 48) (+ (h_msec 47) 1)) (= (h_msec 48) (h_msec 47)))))
+(assert
+ (let (($x663 (t_msec 48)))
+ (ite $x663 (= (h_msec 49) (+ (h_msec 48) 1)) (= (h_msec 49) (h_msec 48)))))
+(assert
+ (let (($x669 (t_msec 49)))
+ (ite $x669 (= (h_msec 50) (+ (h_msec 49) 1)) (= (h_msec 50) (h_msec 49)))))
+(assert
+ (let (($x675 (t_msec 50)))
+ (ite $x675 (= (h_msec 51) (+ (h_msec 50) 1)) (= (h_msec 51) (h_msec 50)))))
+(assert
+ (let ((?x681 (h_T1s 1)))
+ (= 0 ?x681)))
+(assert
+ (let (($x683 (t_T1s 1)))
+ (ite $x683 (= (h_T1s 2) (+ (h_T1s 1) 1)) (= (h_T1s 2) (h_T1s 1)))))
+(assert
+ (let (($x689 (t_T1s 2)))
+ (ite $x689 (= (h_T1s 3) (+ (h_T1s 2) 1)) (= (h_T1s 3) (h_T1s 2)))))
+(assert
+ (let (($x695 (t_T1s 3)))
+ (ite $x695 (= (h_T1s 4) (+ (h_T1s 3) 1)) (= (h_T1s 4) (h_T1s 3)))))
+(assert
+ (let (($x701 (t_T1s 4)))
+ (ite $x701 (= (h_T1s 5) (+ (h_T1s 4) 1)) (= (h_T1s 5) (h_T1s 4)))))
+(assert
+ (let (($x707 (t_T1s 5)))
+ (ite $x707 (= (h_T1s 6) (+ (h_T1s 5) 1)) (= (h_T1s 6) (h_T1s 5)))))
+(assert
+ (let (($x713 (t_T1s 6)))
+ (ite $x713 (= (h_T1s 7) (+ (h_T1s 6) 1)) (= (h_T1s 7) (h_T1s 6)))))
+(assert
+ (let (($x719 (t_T1s 7)))
+ (ite $x719 (= (h_T1s 8) (+ (h_T1s 7) 1)) (= (h_T1s 8) (h_T1s 7)))))
+(assert
+ (let (($x725 (t_T1s 8)))
+ (ite $x725 (= (h_T1s 9) (+ (h_T1s 8) 1)) (= (h_T1s 9) (h_T1s 8)))))
+(assert
+ (let (($x731 (t_T1s 9)))
+ (ite $x731 (= (h_T1s 10) (+ (h_T1s 9) 1)) (= (h_T1s 10) (h_T1s 9)))))
+(assert
+ (let (($x737 (t_T1s 10)))
+ (ite $x737 (= (h_T1s 11) (+ (h_T1s 10) 1)) (= (h_T1s 11) (h_T1s 10)))))
+(assert
+ (let (($x743 (t_T1s 11)))
+ (ite $x743 (= (h_T1s 12) (+ (h_T1s 11) 1)) (= (h_T1s 12) (h_T1s 11)))))
+(assert
+ (let (($x749 (t_T1s 12)))
+ (ite $x749 (= (h_T1s 13) (+ (h_T1s 12) 1)) (= (h_T1s 13) (h_T1s 12)))))
+(assert
+ (let (($x755 (t_T1s 13)))
+ (ite $x755 (= (h_T1s 14) (+ (h_T1s 13) 1)) (= (h_T1s 14) (h_T1s 13)))))
+(assert
+ (let (($x761 (t_T1s 14)))
+ (ite $x761 (= (h_T1s 15) (+ (h_T1s 14) 1)) (= (h_T1s 15) (h_T1s 14)))))
+(assert
+ (let (($x767 (t_T1s 15)))
+ (ite $x767 (= (h_T1s 16) (+ (h_T1s 15) 1)) (= (h_T1s 16) (h_T1s 15)))))
+(assert
+ (let (($x773 (t_T1s 16)))
+ (ite $x773 (= (h_T1s 17) (+ (h_T1s 16) 1)) (= (h_T1s 17) (h_T1s 16)))))
+(assert
+ (let (($x779 (t_T1s 17)))
+ (ite $x779 (= (h_T1s 18) (+ (h_T1s 17) 1)) (= (h_T1s 18) (h_T1s 17)))))
+(assert
+ (let (($x785 (t_T1s 18)))
+ (ite $x785 (= (h_T1s 19) (+ (h_T1s 18) 1)) (= (h_T1s 19) (h_T1s 18)))))
+(assert
+ (let (($x791 (t_T1s 19)))
+ (ite $x791 (= (h_T1s 20) (+ (h_T1s 19) 1)) (= (h_T1s 20) (h_T1s 19)))))
+(assert
+ (let (($x797 (t_T1s 20)))
+ (ite $x797 (= (h_T1s 21) (+ (h_T1s 20) 1)) (= (h_T1s 21) (h_T1s 20)))))
+(assert
+ (let (($x803 (t_T1s 21)))
+ (ite $x803 (= (h_T1s 22) (+ (h_T1s 21) 1)) (= (h_T1s 22) (h_T1s 21)))))
+(assert
+ (let (($x809 (t_T1s 22)))
+ (ite $x809 (= (h_T1s 23) (+ (h_T1s 22) 1)) (= (h_T1s 23) (h_T1s 22)))))
+(assert
+ (let (($x815 (t_T1s 23)))
+ (ite $x815 (= (h_T1s 24) (+ (h_T1s 23) 1)) (= (h_T1s 24) (h_T1s 23)))))
+(assert
+ (let (($x821 (t_T1s 24)))
+ (ite $x821 (= (h_T1s 25) (+ (h_T1s 24) 1)) (= (h_T1s 25) (h_T1s 24)))))
+(assert
+ (let (($x827 (t_T1s 25)))
+ (ite $x827 (= (h_T1s 26) (+ (h_T1s 25) 1)) (= (h_T1s 26) (h_T1s 25)))))
+(assert
+ (let (($x833 (t_T1s 26)))
+ (ite $x833 (= (h_T1s 27) (+ (h_T1s 26) 1)) (= (h_T1s 27) (h_T1s 26)))))
+(assert
+ (let (($x839 (t_T1s 27)))
+ (ite $x839 (= (h_T1s 28) (+ (h_T1s 27) 1)) (= (h_T1s 28) (h_T1s 27)))))
+(assert
+ (let (($x845 (t_T1s 28)))
+ (ite $x845 (= (h_T1s 29) (+ (h_T1s 28) 1)) (= (h_T1s 29) (h_T1s 28)))))
+(assert
+ (let (($x851 (t_T1s 29)))
+ (ite $x851 (= (h_T1s 30) (+ (h_T1s 29) 1)) (= (h_T1s 30) (h_T1s 29)))))
+(assert
+ (let (($x857 (t_T1s 30)))
+ (ite $x857 (= (h_T1s 31) (+ (h_T1s 30) 1)) (= (h_T1s 31) (h_T1s 30)))))
+(assert
+ (let (($x863 (t_T1s 31)))
+ (ite $x863 (= (h_T1s 32) (+ (h_T1s 31) 1)) (= (h_T1s 32) (h_T1s 31)))))
+(assert
+ (let (($x869 (t_T1s 32)))
+ (ite $x869 (= (h_T1s 33) (+ (h_T1s 32) 1)) (= (h_T1s 33) (h_T1s 32)))))
+(assert
+ (let (($x875 (t_T1s 33)))
+ (ite $x875 (= (h_T1s 34) (+ (h_T1s 33) 1)) (= (h_T1s 34) (h_T1s 33)))))
+(assert
+ (let (($x881 (t_T1s 34)))
+ (ite $x881 (= (h_T1s 35) (+ (h_T1s 34) 1)) (= (h_T1s 35) (h_T1s 34)))))
+(assert
+ (let (($x887 (t_T1s 35)))
+ (ite $x887 (= (h_T1s 36) (+ (h_T1s 35) 1)) (= (h_T1s 36) (h_T1s 35)))))
+(assert
+ (let (($x893 (t_T1s 36)))
+ (ite $x893 (= (h_T1s 37) (+ (h_T1s 36) 1)) (= (h_T1s 37) (h_T1s 36)))))
+(assert
+ (let (($x899 (t_T1s 37)))
+ (ite $x899 (= (h_T1s 38) (+ (h_T1s 37) 1)) (= (h_T1s 38) (h_T1s 37)))))
+(assert
+ (let (($x905 (t_T1s 38)))
+ (ite $x905 (= (h_T1s 39) (+ (h_T1s 38) 1)) (= (h_T1s 39) (h_T1s 38)))))
+(assert
+ (let (($x911 (t_T1s 39)))
+ (ite $x911 (= (h_T1s 40) (+ (h_T1s 39) 1)) (= (h_T1s 40) (h_T1s 39)))))
+(assert
+ (let (($x917 (t_T1s 40)))
+ (ite $x917 (= (h_T1s 41) (+ (h_T1s 40) 1)) (= (h_T1s 41) (h_T1s 40)))))
+(assert
+ (let (($x923 (t_T1s 41)))
+ (ite $x923 (= (h_T1s 42) (+ (h_T1s 41) 1)) (= (h_T1s 42) (h_T1s 41)))))
+(assert
+ (let (($x929 (t_T1s 42)))
+ (ite $x929 (= (h_T1s 43) (+ (h_T1s 42) 1)) (= (h_T1s 43) (h_T1s 42)))))
+(assert
+ (let (($x935 (t_T1s 43)))
+ (ite $x935 (= (h_T1s 44) (+ (h_T1s 43) 1)) (= (h_T1s 44) (h_T1s 43)))))
+(assert
+ (let (($x941 (t_T1s 44)))
+ (ite $x941 (= (h_T1s 45) (+ (h_T1s 44) 1)) (= (h_T1s 45) (h_T1s 44)))))
+(assert
+ (let (($x947 (t_T1s 45)))
+ (ite $x947 (= (h_T1s 46) (+ (h_T1s 45) 1)) (= (h_T1s 46) (h_T1s 45)))))
+(assert
+ (let (($x953 (t_T1s 46)))
+ (ite $x953 (= (h_T1s 47) (+ (h_T1s 46) 1)) (= (h_T1s 47) (h_T1s 46)))))
+(assert
+ (let (($x959 (t_T1s 47)))
+ (ite $x959 (= (h_T1s 48) (+ (h_T1s 47) 1)) (= (h_T1s 48) (h_T1s 47)))))
+(assert
+ (ite (t_T1s 48) (= (h_T1s 49) (+ (h_T1s 48) 1)) (= (h_T1s 49) (h_T1s 48))))
+(assert
+ (ite (t_T1s 49) (= (h_T1s 50) (+ (h_T1s 49) 1)) (= (h_T1s 50) (h_T1s 49))))
+(assert
+ (ite (t_T1s 50) (= (h_T1s 51) (+ (h_T1s 50) 1)) (= (h_T1s 51) (h_T1s 50))))
+(assert
+ (forall ((x Int) )(=> (and (>= x 1) (<= x n)) (or (t_T1f x) (t_msec x) (t_T1s x))))
+ )
+(assert
+ (forall ((x Int) (y Int) )(=> (and (>= x 1) (<= x n) (> y x) (<= y n)) (= (d_msec x y) (- (h_msec y) (h_msec x)))))
+ )
+(assert
+ (not (t_T1f 1)))
+(assert
+ (not (t_T1f 2)))
+(assert
+ (let (($x43 (t_T1f 3)))
+ (let (($x990 (or (and (t_T1s 1) (= (d_msec 1 3) 2) (t_msec 3)))))
+ (ite $x990 $x43 (not $x43)))))
+(assert
+ (let (($x990 (or (and (t_T1s 1) (= (d_msec 1 3) 2) (t_msec 3)))))
+ (let (($x43 (t_T1f 3)))
+ (ite $x43 $x990 (not $x990)))))
+(assert
+ (let (($x50 (t_T1f 4)))
+ (let (($x1023 (or (and (t_T1s 1) (= (d_msec 1 4) 2) (t_msec 4)) (and (t_T1s 2) (= (d_msec 2 4) 2) (t_msec 4)))))
+ (ite $x1023 $x50 (not $x50)))))
+(assert
+ (let (($x1023 (or (and (t_T1s 1) (= (d_msec 1 4) 2) (t_msec 4)) (and (t_T1s 2) (= (d_msec 2 4) 2) (t_msec 4)))))
+ (let (($x50 (t_T1f 4)))
+ (ite $x50 $x1023 (not $x1023)))))
+(assert
+ (let (($x57 (t_T1f 5)))
+ (let (($x1037 (or (and (t_T1s 1) (= (d_msec 1 5) 2) (t_msec 5)) (and (t_T1s 2) (= (d_msec 2 5) 2) (t_msec 5)) (and (t_T1s 3) (= (d_msec 3 5) 2) (t_msec 5)))))
+ (ite $x1037 $x57 (not $x57)))))
+(assert
+ (let (($x1037 (or (and (t_T1s 1) (= (d_msec 1 5) 2) (t_msec 5)) (and (t_T1s 2) (= (d_msec 2 5) 2) (t_msec 5)) (and (t_T1s 3) (= (d_msec 3 5) 2) (t_msec 5)))))
+ (let (($x57 (t_T1f 5)))
+ (ite $x57 $x1037 (not $x1037)))))
+(assert
+ (let (($x64 (t_T1f 6)))
+ (let (($x1054 (or (and (t_T1s 1) (= (d_msec 1 6) 2) (t_msec 6)) (and (t_T1s 2) (= (d_msec 2 6) 2) (t_msec 6)) (and (t_T1s 3) (= (d_msec 3 6) 2) (t_msec 6)) (and (t_T1s 4) (= (d_msec 4 6) 2) (t_msec 6)))))
+ (ite $x1054 $x64 (not $x64)))))
+(assert
+ (let (($x1054 (or (and (t_T1s 1) (= (d_msec 1 6) 2) (t_msec 6)) (and (t_T1s 2) (= (d_msec 2 6) 2) (t_msec 6)) (and (t_T1s 3) (= (d_msec 3 6) 2) (t_msec 6)) (and (t_T1s 4) (= (d_msec 4 6) 2) (t_msec 6)))))
+ (let (($x64 (t_T1f 6)))
+ (ite $x64 $x1054 (not $x1054)))))
+(assert
+ (let (($x71 (t_T1f 7)))
+ (let (($x1074 (or (and (t_T1s 1) (= (d_msec 1 7) 2) (t_msec 7)) (and (t_T1s 2) (= (d_msec 2 7) 2) (t_msec 7)) (and (t_T1s 3) (= (d_msec 3 7) 2) (t_msec 7)) (and (t_T1s 4) (= (d_msec 4 7) 2) (t_msec 7)) (and (t_T1s 5) (= (d_msec 5 7) 2) (t_msec 7)))))
+ (ite $x1074 $x71 (not $x71)))))
+(assert
+ (let (($x1074 (or (and (t_T1s 1) (= (d_msec 1 7) 2) (t_msec 7)) (and (t_T1s 2) (= (d_msec 2 7) 2) (t_msec 7)) (and (t_T1s 3) (= (d_msec 3 7) 2) (t_msec 7)) (and (t_T1s 4) (= (d_msec 4 7) 2) (t_msec 7)) (and (t_T1s 5) (= (d_msec 5 7) 2) (t_msec 7)))))
+ (let (($x71 (t_T1f 7)))
+ (ite $x71 $x1074 (not $x1074)))))
+(assert
+ (let (($x78 (t_T1f 8)))
+ (let (($x1097 (or (and (t_T1s 1) (= (d_msec 1 8) 2) (t_msec 8)) (and (t_T1s 2) (= (d_msec 2 8) 2) (t_msec 8)) (and (t_T1s 3) (= (d_msec 3 8) 2) (t_msec 8)) (and (t_T1s 4) (= (d_msec 4 8) 2) (t_msec 8)) (and (t_T1s 5) (= (d_msec 5 8) 2) (t_msec 8)) (and (t_T1s 6) (= (d_msec 6 8) 2) (t_msec 8)))))
+ (ite $x1097 $x78 (not $x78)))))
+(assert
+ (let (($x1097 (or (and (t_T1s 1) (= (d_msec 1 8) 2) (t_msec 8)) (and (t_T1s 2) (= (d_msec 2 8) 2) (t_msec 8)) (and (t_T1s 3) (= (d_msec 3 8) 2) (t_msec 8)) (and (t_T1s 4) (= (d_msec 4 8) 2) (t_msec 8)) (and (t_T1s 5) (= (d_msec 5 8) 2) (t_msec 8)) (and (t_T1s 6) (= (d_msec 6 8) 2) (t_msec 8)))))
+ (let (($x78 (t_T1f 8)))
+ (ite $x78 $x1097 (not $x1097)))))
+(assert
+ (let (($x85 (t_T1f 9)))
+ (let (($x1123 (or (and (t_T1s 1) (= (d_msec 1 9) 2) (t_msec 9)) (and (t_T1s 2) (= (d_msec 2 9) 2) (t_msec 9)) (and (t_T1s 3) (= (d_msec 3 9) 2) (t_msec 9)) (and (t_T1s 4) (= (d_msec 4 9) 2) (t_msec 9)) (and (t_T1s 5) (= (d_msec 5 9) 2) (t_msec 9)) (and (t_T1s 6) (= (d_msec 6 9) 2) (t_msec 9)) (and (t_T1s 7) (= (d_msec 7 9) 2) (t_msec 9)))))
+ (ite $x1123 $x85 (not $x85)))))
+(assert
+ (let (($x1123 (or (and (t_T1s 1) (= (d_msec 1 9) 2) (t_msec 9)) (and (t_T1s 2) (= (d_msec 2 9) 2) (t_msec 9)) (and (t_T1s 3) (= (d_msec 3 9) 2) (t_msec 9)) (and (t_T1s 4) (= (d_msec 4 9) 2) (t_msec 9)) (and (t_T1s 5) (= (d_msec 5 9) 2) (t_msec 9)) (and (t_T1s 6) (= (d_msec 6 9) 2) (t_msec 9)) (and (t_T1s 7) (= (d_msec 7 9) 2) (t_msec 9)))))
+ (let (($x85 (t_T1f 9)))
+ (ite $x85 $x1123 (not $x1123)))))
+(assert
+ (let (($x92 (t_T1f 10)))
+ (let (($x1152 (or (and (t_T1s 1) (= (d_msec 1 10) 2) (t_msec 10)) (and (t_T1s 2) (= (d_msec 2 10) 2) (t_msec 10)) (and (t_T1s 3) (= (d_msec 3 10) 2) (t_msec 10)) (and (t_T1s 4) (= (d_msec 4 10) 2) (t_msec 10)) (and (t_T1s 5) (= (d_msec 5 10) 2) (t_msec 10)) (and (t_T1s 6) (= (d_msec 6 10) 2) (t_msec 10)) (and (t_T1s 7) (= (d_msec 7 10) 2) (t_msec 10)) (and (t_T1s 8) (= (d_msec 8 10) 2) (t_msec 10)))))
+ (ite $x1152 $x92 (not $x92)))))
+(assert
+ (let (($x1152 (or (and (t_T1s 1) (= (d_msec 1 10) 2) (t_msec 10)) (and (t_T1s 2) (= (d_msec 2 10) 2) (t_msec 10)) (and (t_T1s 3) (= (d_msec 3 10) 2) (t_msec 10)) (and (t_T1s 4) (= (d_msec 4 10) 2) (t_msec 10)) (and (t_T1s 5) (= (d_msec 5 10) 2) (t_msec 10)) (and (t_T1s 6) (= (d_msec 6 10) 2) (t_msec 10)) (and (t_T1s 7) (= (d_msec 7 10) 2) (t_msec 10)) (and (t_T1s 8) (= (d_msec 8 10) 2) (t_msec 10)))))
+ (let (($x92 (t_T1f 10)))
+ (ite $x92 $x1152 (not $x1152)))))
+(assert
+ (let (($x99 (t_T1f 11)))
+ (let (($x1184 (or (and (t_T1s 1) (= (d_msec 1 11) 2) (t_msec 11)) (and (t_T1s 2) (= (d_msec 2 11) 2) (t_msec 11)) (and (t_T1s 3) (= (d_msec 3 11) 2) (t_msec 11)) (and (t_T1s 4) (= (d_msec 4 11) 2) (t_msec 11)) (and (t_T1s 5) (= (d_msec 5 11) 2) (t_msec 11)) (and (t_T1s 6) (= (d_msec 6 11) 2) (t_msec 11)) (and (t_T1s 7) (= (d_msec 7 11) 2) (t_msec 11)) (and (t_T1s 8) (= (d_msec 8 11) 2) (t_msec 11)) (and (t_T1s 9) (= (d_msec 9 11) 2) (t_msec 11)))))
+ (ite $x1184 $x99 (not $x99)))))
+(assert
+ (let (($x1184 (or (and (t_T1s 1) (= (d_msec 1 11) 2) (t_msec 11)) (and (t_T1s 2) (= (d_msec 2 11) 2) (t_msec 11)) (and (t_T1s 3) (= (d_msec 3 11) 2) (t_msec 11)) (and (t_T1s 4) (= (d_msec 4 11) 2) (t_msec 11)) (and (t_T1s 5) (= (d_msec 5 11) 2) (t_msec 11)) (and (t_T1s 6) (= (d_msec 6 11) 2) (t_msec 11)) (and (t_T1s 7) (= (d_msec 7 11) 2) (t_msec 11)) (and (t_T1s 8) (= (d_msec 8 11) 2) (t_msec 11)) (and (t_T1s 9) (= (d_msec 9 11) 2) (t_msec 11)))))
+ (let (($x99 (t_T1f 11)))
+ (ite $x99 $x1184 (not $x1184)))))
+(assert
+ (let (($x106 (t_T1f 12)))
+ (let (($x1219 (or (and (t_T1s 1) (= (d_msec 1 12) 2) (t_msec 12)) (and (t_T1s 2) (= (d_msec 2 12) 2) (t_msec 12)) (and (t_T1s 3) (= (d_msec 3 12) 2) (t_msec 12)) (and (t_T1s 4) (= (d_msec 4 12) 2) (t_msec 12)) (and (t_T1s 5) (= (d_msec 5 12) 2) (t_msec 12)) (and (t_T1s 6) (= (d_msec 6 12) 2) (t_msec 12)) (and (t_T1s 7) (= (d_msec 7 12) 2) (t_msec 12)) (and (t_T1s 8) (= (d_msec 8 12) 2) (t_msec 12)) (and (t_T1s 9) (= (d_msec 9 12) 2) (t_msec 12)) (and (t_T1s 10) (= (d_msec 10 12) 2) (t_msec 12)))))
+ (ite $x1219 $x106 (not $x106)))))
+(assert
+ (let (($x1219 (or (and (t_T1s 1) (= (d_msec 1 12) 2) (t_msec 12)) (and (t_T1s 2) (= (d_msec 2 12) 2) (t_msec 12)) (and (t_T1s 3) (= (d_msec 3 12) 2) (t_msec 12)) (and (t_T1s 4) (= (d_msec 4 12) 2) (t_msec 12)) (and (t_T1s 5) (= (d_msec 5 12) 2) (t_msec 12)) (and (t_T1s 6) (= (d_msec 6 12) 2) (t_msec 12)) (and (t_T1s 7) (= (d_msec 7 12) 2) (t_msec 12)) (and (t_T1s 8) (= (d_msec 8 12) 2) (t_msec 12)) (and (t_T1s 9) (= (d_msec 9 12) 2) (t_msec 12)) (and (t_T1s 10) (= (d_msec 10 12) 2) (t_msec 12)))))
+ (let (($x106 (t_T1f 12)))
+ (ite $x106 $x1219 (not $x1219)))))
+(assert
+ (let (($x113 (t_T1f 13)))
+ (let (($x1257 (or (and (t_T1s 1) (= (d_msec 1 13) 2) (t_msec 13)) (and (t_T1s 2) (= (d_msec 2 13) 2) (t_msec 13)) (and (t_T1s 3) (= (d_msec 3 13) 2) (t_msec 13)) (and (t_T1s 4) (= (d_msec 4 13) 2) (t_msec 13)) (and (t_T1s 5) (= (d_msec 5 13) 2) (t_msec 13)) (and (t_T1s 6) (= (d_msec 6 13) 2) (t_msec 13)) (and (t_T1s 7) (= (d_msec 7 13) 2) (t_msec 13)) (and (t_T1s 8) (= (d_msec 8 13) 2) (t_msec 13)) (and (t_T1s 9) (= (d_msec 9 13) 2) (t_msec 13)) (and (t_T1s 10) (= (d_msec 10 13) 2) (t_msec 13)) (and (t_T1s 11) (= (d_msec 11 13) 2) (t_msec 13)))))
+ (ite $x1257 $x113 (not $x113)))))
+(assert
+ (let (($x1257 (or (and (t_T1s 1) (= (d_msec 1 13) 2) (t_msec 13)) (and (t_T1s 2) (= (d_msec 2 13) 2) (t_msec 13)) (and (t_T1s 3) (= (d_msec 3 13) 2) (t_msec 13)) (and (t_T1s 4) (= (d_msec 4 13) 2) (t_msec 13)) (and (t_T1s 5) (= (d_msec 5 13) 2) (t_msec 13)) (and (t_T1s 6) (= (d_msec 6 13) 2) (t_msec 13)) (and (t_T1s 7) (= (d_msec 7 13) 2) (t_msec 13)) (and (t_T1s 8) (= (d_msec 8 13) 2) (t_msec 13)) (and (t_T1s 9) (= (d_msec 9 13) 2) (t_msec 13)) (and (t_T1s 10) (= (d_msec 10 13) 2) (t_msec 13)) (and (t_T1s 11) (= (d_msec 11 13) 2) (t_msec 13)))))
+ (let (($x113 (t_T1f 13)))
+ (ite $x113 $x1257 (not $x1257)))))
+(assert
+ (let (($x120 (t_T1f 14)))
+ (let (($x1298 (or (and (t_T1s 1) (= (d_msec 1 14) 2) (t_msec 14)) (and (t_T1s 2) (= (d_msec 2 14) 2) (t_msec 14)) (and (t_T1s 3) (= (d_msec 3 14) 2) (t_msec 14)) (and (t_T1s 4) (= (d_msec 4 14) 2) (t_msec 14)) (and (t_T1s 5) (= (d_msec 5 14) 2) (t_msec 14)) (and (t_T1s 6) (= (d_msec 6 14) 2) (t_msec 14)) (and (t_T1s 7) (= (d_msec 7 14) 2) (t_msec 14)) (and (t_T1s 8) (= (d_msec 8 14) 2) (t_msec 14)) (and (t_T1s 9) (= (d_msec 9 14) 2) (t_msec 14)) (and (t_T1s 10) (= (d_msec 10 14) 2) (t_msec 14)) (and (t_T1s 11) (= (d_msec 11 14) 2) (t_msec 14)) (and (t_T1s 12) (= (d_msec 12 14) 2) (t_msec 14)))))
+ (ite $x1298 $x120 (not $x120)))))
+(assert
+ (let (($x1298 (or (and (t_T1s 1) (= (d_msec 1 14) 2) (t_msec 14)) (and (t_T1s 2) (= (d_msec 2 14) 2) (t_msec 14)) (and (t_T1s 3) (= (d_msec 3 14) 2) (t_msec 14)) (and (t_T1s 4) (= (d_msec 4 14) 2) (t_msec 14)) (and (t_T1s 5) (= (d_msec 5 14) 2) (t_msec 14)) (and (t_T1s 6) (= (d_msec 6 14) 2) (t_msec 14)) (and (t_T1s 7) (= (d_msec 7 14) 2) (t_msec 14)) (and (t_T1s 8) (= (d_msec 8 14) 2) (t_msec 14)) (and (t_T1s 9) (= (d_msec 9 14) 2) (t_msec 14)) (and (t_T1s 10) (= (d_msec 10 14) 2) (t_msec 14)) (and (t_T1s 11) (= (d_msec 11 14) 2) (t_msec 14)) (and (t_T1s 12) (= (d_msec 12 14) 2) (t_msec 14)))))
+ (let (($x120 (t_T1f 14)))
+ (ite $x120 $x1298 (not $x1298)))))
+(assert
+ (let (($x127 (t_T1f 15)))
+ (let (($x1342 (or (and (t_T1s 1) (= (d_msec 1 15) 2) (t_msec 15)) (and (t_T1s 2) (= (d_msec 2 15) 2) (t_msec 15)) (and (t_T1s 3) (= (d_msec 3 15) 2) (t_msec 15)) (and (t_T1s 4) (= (d_msec 4 15) 2) (t_msec 15)) (and (t_T1s 5) (= (d_msec 5 15) 2) (t_msec 15)) (and (t_T1s 6) (= (d_msec 6 15) 2) (t_msec 15)) (and (t_T1s 7) (= (d_msec 7 15) 2) (t_msec 15)) (and (t_T1s 8) (= (d_msec 8 15) 2) (t_msec 15)) (and (t_T1s 9) (= (d_msec 9 15) 2) (t_msec 15)) (and (t_T1s 10) (= (d_msec 10 15) 2) (t_msec 15)) (and (t_T1s 11) (= (d_msec 11 15) 2) (t_msec 15)) (and (t_T1s 12) (= (d_msec 12 15) 2) (t_msec 15)) (and (t_T1s 13) (= (d_msec 13 15) 2) (t_msec 15)))))
+ (ite $x1342 $x127 (not $x127)))))
+(assert
+ (let (($x1342 (or (and (t_T1s 1) (= (d_msec 1 15) 2) (t_msec 15)) (and (t_T1s 2) (= (d_msec 2 15) 2) (t_msec 15)) (and (t_T1s 3) (= (d_msec 3 15) 2) (t_msec 15)) (and (t_T1s 4) (= (d_msec 4 15) 2) (t_msec 15)) (and (t_T1s 5) (= (d_msec 5 15) 2) (t_msec 15)) (and (t_T1s 6) (= (d_msec 6 15) 2) (t_msec 15)) (and (t_T1s 7) (= (d_msec 7 15) 2) (t_msec 15)) (and (t_T1s 8) (= (d_msec 8 15) 2) (t_msec 15)) (and (t_T1s 9) (= (d_msec 9 15) 2) (t_msec 15)) (and (t_T1s 10) (= (d_msec 10 15) 2) (t_msec 15)) (and (t_T1s 11) (= (d_msec 11 15) 2) (t_msec 15)) (and (t_T1s 12) (= (d_msec 12 15) 2) (t_msec 15)) (and (t_T1s 13) (= (d_msec 13 15) 2) (t_msec 15)))))
+ (let (($x127 (t_T1f 15)))
+ (ite $x127 $x1342 (not $x1342)))))
+(assert
+ (let (($x134 (t_T1f 16)))
+ (let (($x1389 (or (and (t_T1s 1) (= (d_msec 1 16) 2) (t_msec 16)) (and (t_T1s 2) (= (d_msec 2 16) 2) (t_msec 16)) (and (t_T1s 3) (= (d_msec 3 16) 2) (t_msec 16)) (and (t_T1s 4) (= (d_msec 4 16) 2) (t_msec 16)) (and (t_T1s 5) (= (d_msec 5 16) 2) (t_msec 16)) (and (t_T1s 6) (= (d_msec 6 16) 2) (t_msec 16)) (and (t_T1s 7) (= (d_msec 7 16) 2) (t_msec 16)) (and (t_T1s 8) (= (d_msec 8 16) 2) (t_msec 16)) (and (t_T1s 9) (= (d_msec 9 16) 2) (t_msec 16)) (and (t_T1s 10) (= (d_msec 10 16) 2) (t_msec 16)) (and (t_T1s 11) (= (d_msec 11 16) 2) (t_msec 16)) (and (t_T1s 12) (= (d_msec 12 16) 2) (t_msec 16)) (and (t_T1s 13) (= (d_msec 13 16) 2) (t_msec 16)) (and (t_T1s 14) (= (d_msec 14 16) 2) (t_msec 16)))))
+ (ite $x1389 $x134 (not $x134)))))
+(assert
+ (let (($x1389 (or (and (t_T1s 1) (= (d_msec 1 16) 2) (t_msec 16)) (and (t_T1s 2) (= (d_msec 2 16) 2) (t_msec 16)) (and (t_T1s 3) (= (d_msec 3 16) 2) (t_msec 16)) (and (t_T1s 4) (= (d_msec 4 16) 2) (t_msec 16)) (and (t_T1s 5) (= (d_msec 5 16) 2) (t_msec 16)) (and (t_T1s 6) (= (d_msec 6 16) 2) (t_msec 16)) (and (t_T1s 7) (= (d_msec 7 16) 2) (t_msec 16)) (and (t_T1s 8) (= (d_msec 8 16) 2) (t_msec 16)) (and (t_T1s 9) (= (d_msec 9 16) 2) (t_msec 16)) (and (t_T1s 10) (= (d_msec 10 16) 2) (t_msec 16)) (and (t_T1s 11) (= (d_msec 11 16) 2) (t_msec 16)) (and (t_T1s 12) (= (d_msec 12 16) 2) (t_msec 16)) (and (t_T1s 13) (= (d_msec 13 16) 2) (t_msec 16)) (and (t_T1s 14) (= (d_msec 14 16) 2) (t_msec 16)))))
+ (let (($x134 (t_T1f 16)))
+ (ite $x134 $x1389 (not $x1389)))))
+(assert
+ (let (($x141 (t_T1f 17)))
+ (let (($x1439 (or (and (t_T1s 1) (= (d_msec 1 17) 2) (t_msec 17)) (and (t_T1s 2) (= (d_msec 2 17) 2) (t_msec 17)) (and (t_T1s 3) (= (d_msec 3 17) 2) (t_msec 17)) (and (t_T1s 4) (= (d_msec 4 17) 2) (t_msec 17)) (and (t_T1s 5) (= (d_msec 5 17) 2) (t_msec 17)) (and (t_T1s 6) (= (d_msec 6 17) 2) (t_msec 17)) (and (t_T1s 7) (= (d_msec 7 17) 2) (t_msec 17)) (and (t_T1s 8) (= (d_msec 8 17) 2) (t_msec 17)) (and (t_T1s 9) (= (d_msec 9 17) 2) (t_msec 17)) (and (t_T1s 10) (= (d_msec 10 17) 2) (t_msec 17)) (and (t_T1s 11) (= (d_msec 11 17) 2) (t_msec 17)) (and (t_T1s 12) (= (d_msec 12 17) 2) (t_msec 17)) (and (t_T1s 13) (= (d_msec 13 17) 2) (t_msec 17)) (and (t_T1s 14) (= (d_msec 14 17) 2) (t_msec 17)) (and (t_T1s 15) (= (d_msec 15 17) 2) (t_msec 17)))))
+ (ite $x1439 $x141 (not $x141)))))
+(assert
+ (let (($x1439 (or (and (t_T1s 1) (= (d_msec 1 17) 2) (t_msec 17)) (and (t_T1s 2) (= (d_msec 2 17) 2) (t_msec 17)) (and (t_T1s 3) (= (d_msec 3 17) 2) (t_msec 17)) (and (t_T1s 4) (= (d_msec 4 17) 2) (t_msec 17)) (and (t_T1s 5) (= (d_msec 5 17) 2) (t_msec 17)) (and (t_T1s 6) (= (d_msec 6 17) 2) (t_msec 17)) (and (t_T1s 7) (= (d_msec 7 17) 2) (t_msec 17)) (and (t_T1s 8) (= (d_msec 8 17) 2) (t_msec 17)) (and (t_T1s 9) (= (d_msec 9 17) 2) (t_msec 17)) (and (t_T1s 10) (= (d_msec 10 17) 2) (t_msec 17)) (and (t_T1s 11) (= (d_msec 11 17) 2) (t_msec 17)) (and (t_T1s 12) (= (d_msec 12 17) 2) (t_msec 17)) (and (t_T1s 13) (= (d_msec 13 17) 2) (t_msec 17)) (and (t_T1s 14) (= (d_msec 14 17) 2) (t_msec 17)) (and (t_T1s 15) (= (d_msec 15 17) 2) (t_msec 17)))))
+ (let (($x141 (t_T1f 17)))
+ (ite $x141 $x1439 (not $x1439)))))
+(assert
+ (let (($x148 (t_T1f 18)))
+ (let (($x1492 (or (and (t_T1s 1) (= (d_msec 1 18) 2) (t_msec 18)) (and (t_T1s 2) (= (d_msec 2 18) 2) (t_msec 18)) (and (t_T1s 3) (= (d_msec 3 18) 2) (t_msec 18)) (and (t_T1s 4) (= (d_msec 4 18) 2) (t_msec 18)) (and (t_T1s 5) (= (d_msec 5 18) 2) (t_msec 18)) (and (t_T1s 6) (= (d_msec 6 18) 2) (t_msec 18)) (and (t_T1s 7) (= (d_msec 7 18) 2) (t_msec 18)) (and (t_T1s 8) (= (d_msec 8 18) 2) (t_msec 18)) (and (t_T1s 9) (= (d_msec 9 18) 2) (t_msec 18)) (and (t_T1s 10) (= (d_msec 10 18) 2) (t_msec 18)) (and (t_T1s 11) (= (d_msec 11 18) 2) (t_msec 18)) (and (t_T1s 12) (= (d_msec 12 18) 2) (t_msec 18)) (and (t_T1s 13) (= (d_msec 13 18) 2) (t_msec 18)) (and (t_T1s 14) (= (d_msec 14 18) 2) (t_msec 18)) (and (t_T1s 15) (= (d_msec 15 18) 2) (t_msec 18)) (and (t_T1s 16) (= (d_msec 16 18) 2) (t_msec 18)))))
+ (ite $x1492 $x148 (not $x148)))))
+(assert
+ (let (($x1492 (or (and (t_T1s 1) (= (d_msec 1 18) 2) (t_msec 18)) (and (t_T1s 2) (= (d_msec 2 18) 2) (t_msec 18)) (and (t_T1s 3) (= (d_msec 3 18) 2) (t_msec 18)) (and (t_T1s 4) (= (d_msec 4 18) 2) (t_msec 18)) (and (t_T1s 5) (= (d_msec 5 18) 2) (t_msec 18)) (and (t_T1s 6) (= (d_msec 6 18) 2) (t_msec 18)) (and (t_T1s 7) (= (d_msec 7 18) 2) (t_msec 18)) (and (t_T1s 8) (= (d_msec 8 18) 2) (t_msec 18)) (and (t_T1s 9) (= (d_msec 9 18) 2) (t_msec 18)) (and (t_T1s 10) (= (d_msec 10 18) 2) (t_msec 18)) (and (t_T1s 11) (= (d_msec 11 18) 2) (t_msec 18)) (and (t_T1s 12) (= (d_msec 12 18) 2) (t_msec 18)) (and (t_T1s 13) (= (d_msec 13 18) 2) (t_msec 18)) (and (t_T1s 14) (= (d_msec 14 18) 2) (t_msec 18)) (and (t_T1s 15) (= (d_msec 15 18) 2) (t_msec 18)) (and (t_T1s 16) (= (d_msec 16 18) 2) (t_msec 18)))))
+ (let (($x148 (t_T1f 18)))
+ (ite $x148 $x1492 (not $x1492)))))
+(assert
+ (let (($x155 (t_T1f 19)))
+ (let (($x1548 (or (and (t_T1s 1) (= (d_msec 1 19) 2) (t_msec 19)) (and (t_T1s 2) (= (d_msec 2 19) 2) (t_msec 19)) (and (t_T1s 3) (= (d_msec 3 19) 2) (t_msec 19)) (and (t_T1s 4) (= (d_msec 4 19) 2) (t_msec 19)) (and (t_T1s 5) (= (d_msec 5 19) 2) (t_msec 19)) (and (t_T1s 6) (= (d_msec 6 19) 2) (t_msec 19)) (and (t_T1s 7) (= (d_msec 7 19) 2) (t_msec 19)) (and (t_T1s 8) (= (d_msec 8 19) 2) (t_msec 19)) (and (t_T1s 9) (= (d_msec 9 19) 2) (t_msec 19)) (and (t_T1s 10) (= (d_msec 10 19) 2) (t_msec 19)) (and (t_T1s 11) (= (d_msec 11 19) 2) (t_msec 19)) (and (t_T1s 12) (= (d_msec 12 19) 2) (t_msec 19)) (and (t_T1s 13) (= (d_msec 13 19) 2) (t_msec 19)) (and (t_T1s 14) (= (d_msec 14 19) 2) (t_msec 19)) (and (t_T1s 15) (= (d_msec 15 19) 2) (t_msec 19)) (and (t_T1s 16) (= (d_msec 16 19) 2) (t_msec 19)) (and (t_T1s 17) (= (d_msec 17 19) 2) (t_msec 19)))))
+ (ite $x1548 $x155 (not $x155)))))
+(assert
+ (let (($x1548 (or (and (t_T1s 1) (= (d_msec 1 19) 2) (t_msec 19)) (and (t_T1s 2) (= (d_msec 2 19) 2) (t_msec 19)) (and (t_T1s 3) (= (d_msec 3 19) 2) (t_msec 19)) (and (t_T1s 4) (= (d_msec 4 19) 2) (t_msec 19)) (and (t_T1s 5) (= (d_msec 5 19) 2) (t_msec 19)) (and (t_T1s 6) (= (d_msec 6 19) 2) (t_msec 19)) (and (t_T1s 7) (= (d_msec 7 19) 2) (t_msec 19)) (and (t_T1s 8) (= (d_msec 8 19) 2) (t_msec 19)) (and (t_T1s 9) (= (d_msec 9 19) 2) (t_msec 19)) (and (t_T1s 10) (= (d_msec 10 19) 2) (t_msec 19)) (and (t_T1s 11) (= (d_msec 11 19) 2) (t_msec 19)) (and (t_T1s 12) (= (d_msec 12 19) 2) (t_msec 19)) (and (t_T1s 13) (= (d_msec 13 19) 2) (t_msec 19)) (and (t_T1s 14) (= (d_msec 14 19) 2) (t_msec 19)) (and (t_T1s 15) (= (d_msec 15 19) 2) (t_msec 19)) (and (t_T1s 16) (= (d_msec 16 19) 2) (t_msec 19)) (and (t_T1s 17) (= (d_msec 17 19) 2) (t_msec 19)))))
+ (let (($x155 (t_T1f 19)))
+ (ite $x155 $x1548 (not $x1548)))))
+(assert
+ (let (($x162 (t_T1f 20)))
+ (let (($x1607 (or (and (t_T1s 1) (= (d_msec 1 20) 2) (t_msec 20)) (and (t_T1s 2) (= (d_msec 2 20) 2) (t_msec 20)) (and (t_T1s 3) (= (d_msec 3 20) 2) (t_msec 20)) (and (t_T1s 4) (= (d_msec 4 20) 2) (t_msec 20)) (and (t_T1s 5) (= (d_msec 5 20) 2) (t_msec 20)) (and (t_T1s 6) (= (d_msec 6 20) 2) (t_msec 20)) (and (t_T1s 7) (= (d_msec 7 20) 2) (t_msec 20)) (and (t_T1s 8) (= (d_msec 8 20) 2) (t_msec 20)) (and (t_T1s 9) (= (d_msec 9 20) 2) (t_msec 20)) (and (t_T1s 10) (= (d_msec 10 20) 2) (t_msec 20)) (and (t_T1s 11) (= (d_msec 11 20) 2) (t_msec 20)) (and (t_T1s 12) (= (d_msec 12 20) 2) (t_msec 20)) (and (t_T1s 13) (= (d_msec 13 20) 2) (t_msec 20)) (and (t_T1s 14) (= (d_msec 14 20) 2) (t_msec 20)) (and (t_T1s 15) (= (d_msec 15 20) 2) (t_msec 20)) (and (t_T1s 16) (= (d_msec 16 20) 2) (t_msec 20)) (and (t_T1s 17) (= (d_msec 17 20) 2) (t_msec 20)) (and (t_T1s 18) (= (d_msec 18 20) 2) (t_msec 20)))))
+ (ite $x1607 $x162 (not $x162)))))
+(assert
+ (let (($x1607 (or (and (t_T1s 1) (= (d_msec 1 20) 2) (t_msec 20)) (and (t_T1s 2) (= (d_msec 2 20) 2) (t_msec 20)) (and (t_T1s 3) (= (d_msec 3 20) 2) (t_msec 20)) (and (t_T1s 4) (= (d_msec 4 20) 2) (t_msec 20)) (and (t_T1s 5) (= (d_msec 5 20) 2) (t_msec 20)) (and (t_T1s 6) (= (d_msec 6 20) 2) (t_msec 20)) (and (t_T1s 7) (= (d_msec 7 20) 2) (t_msec 20)) (and (t_T1s 8) (= (d_msec 8 20) 2) (t_msec 20)) (and (t_T1s 9) (= (d_msec 9 20) 2) (t_msec 20)) (and (t_T1s 10) (= (d_msec 10 20) 2) (t_msec 20)) (and (t_T1s 11) (= (d_msec 11 20) 2) (t_msec 20)) (and (t_T1s 12) (= (d_msec 12 20) 2) (t_msec 20)) (and (t_T1s 13) (= (d_msec 13 20) 2) (t_msec 20)) (and (t_T1s 14) (= (d_msec 14 20) 2) (t_msec 20)) (and (t_T1s 15) (= (d_msec 15 20) 2) (t_msec 20)) (and (t_T1s 16) (= (d_msec 16 20) 2) (t_msec 20)) (and (t_T1s 17) (= (d_msec 17 20) 2) (t_msec 20)) (and (t_T1s 18) (= (d_msec 18 20) 2) (t_msec 20)))))
+ (let (($x162 (t_T1f 20)))
+ (ite $x162 $x1607 (not $x1607)))))
+(assert
+ (let (($x169 (t_T1f 21)))
+ (let (($x1669 (or (and (t_T1s 1) (= (d_msec 1 21) 2) (t_msec 21)) (and (t_T1s 2) (= (d_msec 2 21) 2) (t_msec 21)) (and (t_T1s 3) (= (d_msec 3 21) 2) (t_msec 21)) (and (t_T1s 4) (= (d_msec 4 21) 2) (t_msec 21)) (and (t_T1s 5) (= (d_msec 5 21) 2) (t_msec 21)) (and (t_T1s 6) (= (d_msec 6 21) 2) (t_msec 21)) (and (t_T1s 7) (= (d_msec 7 21) 2) (t_msec 21)) (and (t_T1s 8) (= (d_msec 8 21) 2) (t_msec 21)) (and (t_T1s 9) (= (d_msec 9 21) 2) (t_msec 21)) (and (t_T1s 10) (= (d_msec 10 21) 2) (t_msec 21)) (and (t_T1s 11) (= (d_msec 11 21) 2) (t_msec 21)) (and (t_T1s 12) (= (d_msec 12 21) 2) (t_msec 21)) (and (t_T1s 13) (= (d_msec 13 21) 2) (t_msec 21)) (and (t_T1s 14) (= (d_msec 14 21) 2) (t_msec 21)) (and (t_T1s 15) (= (d_msec 15 21) 2) (t_msec 21)) (and (t_T1s 16) (= (d_msec 16 21) 2) (t_msec 21)) (and (t_T1s 17) (= (d_msec 17 21) 2) (t_msec 21)) (and (t_T1s 18) (= (d_msec 18 21) 2) (t_msec 21)) (and (t_T1s 19) (= (d_msec 19 21) 2) (t_msec 21)))))
+ (ite $x1669 $x169 (not $x169)))))
+(assert
+ (let (($x1669 (or (and (t_T1s 1) (= (d_msec 1 21) 2) (t_msec 21)) (and (t_T1s 2) (= (d_msec 2 21) 2) (t_msec 21)) (and (t_T1s 3) (= (d_msec 3 21) 2) (t_msec 21)) (and (t_T1s 4) (= (d_msec 4 21) 2) (t_msec 21)) (and (t_T1s 5) (= (d_msec 5 21) 2) (t_msec 21)) (and (t_T1s 6) (= (d_msec 6 21) 2) (t_msec 21)) (and (t_T1s 7) (= (d_msec 7 21) 2) (t_msec 21)) (and (t_T1s 8) (= (d_msec 8 21) 2) (t_msec 21)) (and (t_T1s 9) (= (d_msec 9 21) 2) (t_msec 21)) (and (t_T1s 10) (= (d_msec 10 21) 2) (t_msec 21)) (and (t_T1s 11) (= (d_msec 11 21) 2) (t_msec 21)) (and (t_T1s 12) (= (d_msec 12 21) 2) (t_msec 21)) (and (t_T1s 13) (= (d_msec 13 21) 2) (t_msec 21)) (and (t_T1s 14) (= (d_msec 14 21) 2) (t_msec 21)) (and (t_T1s 15) (= (d_msec 15 21) 2) (t_msec 21)) (and (t_T1s 16) (= (d_msec 16 21) 2) (t_msec 21)) (and (t_T1s 17) (= (d_msec 17 21) 2) (t_msec 21)) (and (t_T1s 18) (= (d_msec 18 21) 2) (t_msec 21)) (and (t_T1s 19) (= (d_msec 19 21) 2) (t_msec 21)))))
+ (let (($x169 (t_T1f 21)))
+ (ite $x169 $x1669 (not $x1669)))))
+(assert
+ (let (($x176 (t_T1f 22)))
+ (let (($x1734 (or (and (t_T1s 1) (= (d_msec 1 22) 2) (t_msec 22)) (and (t_T1s 2) (= (d_msec 2 22) 2) (t_msec 22)) (and (t_T1s 3) (= (d_msec 3 22) 2) (t_msec 22)) (and (t_T1s 4) (= (d_msec 4 22) 2) (t_msec 22)) (and (t_T1s 5) (= (d_msec 5 22) 2) (t_msec 22)) (and (t_T1s 6) (= (d_msec 6 22) 2) (t_msec 22)) (and (t_T1s 7) (= (d_msec 7 22) 2) (t_msec 22)) (and (t_T1s 8) (= (d_msec 8 22) 2) (t_msec 22)) (and (t_T1s 9) (= (d_msec 9 22) 2) (t_msec 22)) (and (t_T1s 10) (= (d_msec 10 22) 2) (t_msec 22)) (and (t_T1s 11) (= (d_msec 11 22) 2) (t_msec 22)) (and (t_T1s 12) (= (d_msec 12 22) 2) (t_msec 22)) (and (t_T1s 13) (= (d_msec 13 22) 2) (t_msec 22)) (and (t_T1s 14) (= (d_msec 14 22) 2) (t_msec 22)) (and (t_T1s 15) (= (d_msec 15 22) 2) (t_msec 22)) (and (t_T1s 16) (= (d_msec 16 22) 2) (t_msec 22)) (and (t_T1s 17) (= (d_msec 17 22) 2) (t_msec 22)) (and (t_T1s 18) (= (d_msec 18 22) 2) (t_msec 22)) (and (t_T1s 19) (= (d_msec 19 22) 2) (t_msec 22)) (and (t_T1s 20) (= (d_msec 20 22) 2) (t_msec 22)))))
+ (ite $x1734 $x176 (not $x176)))))
+(assert
+ (let (($x1734 (or (and (t_T1s 1) (= (d_msec 1 22) 2) (t_msec 22)) (and (t_T1s 2) (= (d_msec 2 22) 2) (t_msec 22)) (and (t_T1s 3) (= (d_msec 3 22) 2) (t_msec 22)) (and (t_T1s 4) (= (d_msec 4 22) 2) (t_msec 22)) (and (t_T1s 5) (= (d_msec 5 22) 2) (t_msec 22)) (and (t_T1s 6) (= (d_msec 6 22) 2) (t_msec 22)) (and (t_T1s 7) (= (d_msec 7 22) 2) (t_msec 22)) (and (t_T1s 8) (= (d_msec 8 22) 2) (t_msec 22)) (and (t_T1s 9) (= (d_msec 9 22) 2) (t_msec 22)) (and (t_T1s 10) (= (d_msec 10 22) 2) (t_msec 22)) (and (t_T1s 11) (= (d_msec 11 22) 2) (t_msec 22)) (and (t_T1s 12) (= (d_msec 12 22) 2) (t_msec 22)) (and (t_T1s 13) (= (d_msec 13 22) 2) (t_msec 22)) (and (t_T1s 14) (= (d_msec 14 22) 2) (t_msec 22)) (and (t_T1s 15) (= (d_msec 15 22) 2) (t_msec 22)) (and (t_T1s 16) (= (d_msec 16 22) 2) (t_msec 22)) (and (t_T1s 17) (= (d_msec 17 22) 2) (t_msec 22)) (and (t_T1s 18) (= (d_msec 18 22) 2) (t_msec 22)) (and (t_T1s 19) (= (d_msec 19 22) 2) (t_msec 22)) (and (t_T1s 20) (= (d_msec 20 22) 2) (t_msec 22)))))
+ (let (($x176 (t_T1f 22)))
+ (ite $x176 $x1734 (not $x1734)))))
+(assert
+ (let (($x183 (t_T1f 23)))
+ (let (($x1802 (or (and (t_T1s 1) (= (d_msec 1 23) 2) (t_msec 23)) (and (t_T1s 2) (= (d_msec 2 23) 2) (t_msec 23)) (and (t_T1s 3) (= (d_msec 3 23) 2) (t_msec 23)) (and (t_T1s 4) (= (d_msec 4 23) 2) (t_msec 23)) (and (t_T1s 5) (= (d_msec 5 23) 2) (t_msec 23)) (and (t_T1s 6) (= (d_msec 6 23) 2) (t_msec 23)) (and (t_T1s 7) (= (d_msec 7 23) 2) (t_msec 23)) (and (t_T1s 8) (= (d_msec 8 23) 2) (t_msec 23)) (and (t_T1s 9) (= (d_msec 9 23) 2) (t_msec 23)) (and (t_T1s 10) (= (d_msec 10 23) 2) (t_msec 23)) (and (t_T1s 11) (= (d_msec 11 23) 2) (t_msec 23)) (and (t_T1s 12) (= (d_msec 12 23) 2) (t_msec 23)) (and (t_T1s 13) (= (d_msec 13 23) 2) (t_msec 23)) (and (t_T1s 14) (= (d_msec 14 23) 2) (t_msec 23)) (and (t_T1s 15) (= (d_msec 15 23) 2) (t_msec 23)) (and (t_T1s 16) (= (d_msec 16 23) 2) (t_msec 23)) (and (t_T1s 17) (= (d_msec 17 23) 2) (t_msec 23)) (and (t_T1s 18) (= (d_msec 18 23) 2) (t_msec 23)) (and (t_T1s 19) (= (d_msec 19 23) 2) (t_msec 23)) (and (t_T1s 20) (= (d_msec 20 23) 2) (t_msec 23)) (and (t_T1s 21) (= (d_msec 21 23) 2) (t_msec 23)))))
+ (ite $x1802 $x183 (not $x183)))))
+(assert
+ (let (($x1802 (or (and (t_T1s 1) (= (d_msec 1 23) 2) (t_msec 23)) (and (t_T1s 2) (= (d_msec 2 23) 2) (t_msec 23)) (and (t_T1s 3) (= (d_msec 3 23) 2) (t_msec 23)) (and (t_T1s 4) (= (d_msec 4 23) 2) (t_msec 23)) (and (t_T1s 5) (= (d_msec 5 23) 2) (t_msec 23)) (and (t_T1s 6) (= (d_msec 6 23) 2) (t_msec 23)) (and (t_T1s 7) (= (d_msec 7 23) 2) (t_msec 23)) (and (t_T1s 8) (= (d_msec 8 23) 2) (t_msec 23)) (and (t_T1s 9) (= (d_msec 9 23) 2) (t_msec 23)) (and (t_T1s 10) (= (d_msec 10 23) 2) (t_msec 23)) (and (t_T1s 11) (= (d_msec 11 23) 2) (t_msec 23)) (and (t_T1s 12) (= (d_msec 12 23) 2) (t_msec 23)) (and (t_T1s 13) (= (d_msec 13 23) 2) (t_msec 23)) (and (t_T1s 14) (= (d_msec 14 23) 2) (t_msec 23)) (and (t_T1s 15) (= (d_msec 15 23) 2) (t_msec 23)) (and (t_T1s 16) (= (d_msec 16 23) 2) (t_msec 23)) (and (t_T1s 17) (= (d_msec 17 23) 2) (t_msec 23)) (and (t_T1s 18) (= (d_msec 18 23) 2) (t_msec 23)) (and (t_T1s 19) (= (d_msec 19 23) 2) (t_msec 23)) (and (t_T1s 20) (= (d_msec 20 23) 2) (t_msec 23)) (and (t_T1s 21) (= (d_msec 21 23) 2) (t_msec 23)))))
+ (let (($x183 (t_T1f 23)))
+ (ite $x183 $x1802 (not $x1802)))))
+(assert
+ (let (($x190 (t_T1f 24)))
+ (let (($x1873 (or (and (t_T1s 1) (= (d_msec 1 24) 2) (t_msec 24)) (and (t_T1s 2) (= (d_msec 2 24) 2) (t_msec 24)) (and (t_T1s 3) (= (d_msec 3 24) 2) (t_msec 24)) (and (t_T1s 4) (= (d_msec 4 24) 2) (t_msec 24)) (and (t_T1s 5) (= (d_msec 5 24) 2) (t_msec 24)) (and (t_T1s 6) (= (d_msec 6 24) 2) (t_msec 24)) (and (t_T1s 7) (= (d_msec 7 24) 2) (t_msec 24)) (and (t_T1s 8) (= (d_msec 8 24) 2) (t_msec 24)) (and (t_T1s 9) (= (d_msec 9 24) 2) (t_msec 24)) (and (t_T1s 10) (= (d_msec 10 24) 2) (t_msec 24)) (and (t_T1s 11) (= (d_msec 11 24) 2) (t_msec 24)) (and (t_T1s 12) (= (d_msec 12 24) 2) (t_msec 24)) (and (t_T1s 13) (= (d_msec 13 24) 2) (t_msec 24)) (and (t_T1s 14) (= (d_msec 14 24) 2) (t_msec 24)) (and (t_T1s 15) (= (d_msec 15 24) 2) (t_msec 24)) (and (t_T1s 16) (= (d_msec 16 24) 2) (t_msec 24)) (and (t_T1s 17) (= (d_msec 17 24) 2) (t_msec 24)) (and (t_T1s 18) (= (d_msec 18 24) 2) (t_msec 24)) (and (t_T1s 19) (= (d_msec 19 24) 2) (t_msec 24)) (and (t_T1s 20) (= (d_msec 20 24) 2) (t_msec 24)) (and (t_T1s 21) (= (d_msec 21 24) 2) (t_msec 24)) (and (t_T1s 22) (= (d_msec 22 24) 2) (t_msec 24)))))
+ (ite $x1873 $x190 (not $x190)))))
+(assert
+ (let (($x1873 (or (and (t_T1s 1) (= (d_msec 1 24) 2) (t_msec 24)) (and (t_T1s 2) (= (d_msec 2 24) 2) (t_msec 24)) (and (t_T1s 3) (= (d_msec 3 24) 2) (t_msec 24)) (and (t_T1s 4) (= (d_msec 4 24) 2) (t_msec 24)) (and (t_T1s 5) (= (d_msec 5 24) 2) (t_msec 24)) (and (t_T1s 6) (= (d_msec 6 24) 2) (t_msec 24)) (and (t_T1s 7) (= (d_msec 7 24) 2) (t_msec 24)) (and (t_T1s 8) (= (d_msec 8 24) 2) (t_msec 24)) (and (t_T1s 9) (= (d_msec 9 24) 2) (t_msec 24)) (and (t_T1s 10) (= (d_msec 10 24) 2) (t_msec 24)) (and (t_T1s 11) (= (d_msec 11 24) 2) (t_msec 24)) (and (t_T1s 12) (= (d_msec 12 24) 2) (t_msec 24)) (and (t_T1s 13) (= (d_msec 13 24) 2) (t_msec 24)) (and (t_T1s 14) (= (d_msec 14 24) 2) (t_msec 24)) (and (t_T1s 15) (= (d_msec 15 24) 2) (t_msec 24)) (and (t_T1s 16) (= (d_msec 16 24) 2) (t_msec 24)) (and (t_T1s 17) (= (d_msec 17 24) 2) (t_msec 24)) (and (t_T1s 18) (= (d_msec 18 24) 2) (t_msec 24)) (and (t_T1s 19) (= (d_msec 19 24) 2) (t_msec 24)) (and (t_T1s 20) (= (d_msec 20 24) 2) (t_msec 24)) (and (t_T1s 21) (= (d_msec 21 24) 2) (t_msec 24)) (and (t_T1s 22) (= (d_msec 22 24) 2) (t_msec 24)))))
+ (let (($x190 (t_T1f 24)))
+ (ite $x190 $x1873 (not $x1873)))))
+(assert
+ (let (($x197 (t_T1f 25)))
+ (let (($x1947 (or (and (t_T1s 1) (= (d_msec 1 25) 2) (t_msec 25)) (and (t_T1s 2) (= (d_msec 2 25) 2) (t_msec 25)) (and (t_T1s 3) (= (d_msec 3 25) 2) (t_msec 25)) (and (t_T1s 4) (= (d_msec 4 25) 2) (t_msec 25)) (and (t_T1s 5) (= (d_msec 5 25) 2) (t_msec 25)) (and (t_T1s 6) (= (d_msec 6 25) 2) (t_msec 25)) (and (t_T1s 7) (= (d_msec 7 25) 2) (t_msec 25)) (and (t_T1s 8) (= (d_msec 8 25) 2) (t_msec 25)) (and (t_T1s 9) (= (d_msec 9 25) 2) (t_msec 25)) (and (t_T1s 10) (= (d_msec 10 25) 2) (t_msec 25)) (and (t_T1s 11) (= (d_msec 11 25) 2) (t_msec 25)) (and (t_T1s 12) (= (d_msec 12 25) 2) (t_msec 25)) (and (t_T1s 13) (= (d_msec 13 25) 2) (t_msec 25)) (and (t_T1s 14) (= (d_msec 14 25) 2) (t_msec 25)) (and (t_T1s 15) (= (d_msec 15 25) 2) (t_msec 25)) (and (t_T1s 16) (= (d_msec 16 25) 2) (t_msec 25)) (and (t_T1s 17) (= (d_msec 17 25) 2) (t_msec 25)) (and (t_T1s 18) (= (d_msec 18 25) 2) (t_msec 25)) (and (t_T1s 19) (= (d_msec 19 25) 2) (t_msec 25)) (and (t_T1s 20) (= (d_msec 20 25) 2) (t_msec 25)) (and (t_T1s 21) (= (d_msec 21 25) 2) (t_msec 25)) (and (t_T1s 22) (= (d_msec 22 25) 2) (t_msec 25)) (and (t_T1s 23) (= (d_msec 23 25) 2) (t_msec 25)))))
+ (ite $x1947 $x197 (not $x197)))))
+(assert
+ (let (($x1947 (or (and (t_T1s 1) (= (d_msec 1 25) 2) (t_msec 25)) (and (t_T1s 2) (= (d_msec 2 25) 2) (t_msec 25)) (and (t_T1s 3) (= (d_msec 3 25) 2) (t_msec 25)) (and (t_T1s 4) (= (d_msec 4 25) 2) (t_msec 25)) (and (t_T1s 5) (= (d_msec 5 25) 2) (t_msec 25)) (and (t_T1s 6) (= (d_msec 6 25) 2) (t_msec 25)) (and (t_T1s 7) (= (d_msec 7 25) 2) (t_msec 25)) (and (t_T1s 8) (= (d_msec 8 25) 2) (t_msec 25)) (and (t_T1s 9) (= (d_msec 9 25) 2) (t_msec 25)) (and (t_T1s 10) (= (d_msec 10 25) 2) (t_msec 25)) (and (t_T1s 11) (= (d_msec 11 25) 2) (t_msec 25)) (and (t_T1s 12) (= (d_msec 12 25) 2) (t_msec 25)) (and (t_T1s 13) (= (d_msec 13 25) 2) (t_msec 25)) (and (t_T1s 14) (= (d_msec 14 25) 2) (t_msec 25)) (and (t_T1s 15) (= (d_msec 15 25) 2) (t_msec 25)) (and (t_T1s 16) (= (d_msec 16 25) 2) (t_msec 25)) (and (t_T1s 17) (= (d_msec 17 25) 2) (t_msec 25)) (and (t_T1s 18) (= (d_msec 18 25) 2) (t_msec 25)) (and (t_T1s 19) (= (d_msec 19 25) 2) (t_msec 25)) (and (t_T1s 20) (= (d_msec 20 25) 2) (t_msec 25)) (and (t_T1s 21) (= (d_msec 21 25) 2) (t_msec 25)) (and (t_T1s 22) (= (d_msec 22 25) 2) (t_msec 25)) (and (t_T1s 23) (= (d_msec 23 25) 2) (t_msec 25)))))
+ (let (($x197 (t_T1f 25)))
+ (ite $x197 $x1947 (not $x1947)))))
+(assert
+ (let (($x204 (t_T1f 26)))
+ (let (($x2024 (or (and (t_T1s 1) (= (d_msec 1 26) 2) (t_msec 26)) (and (t_T1s 2) (= (d_msec 2 26) 2) (t_msec 26)) (and (t_T1s 3) (= (d_msec 3 26) 2) (t_msec 26)) (and (t_T1s 4) (= (d_msec 4 26) 2) (t_msec 26)) (and (t_T1s 5) (= (d_msec 5 26) 2) (t_msec 26)) (and (t_T1s 6) (= (d_msec 6 26) 2) (t_msec 26)) (and (t_T1s 7) (= (d_msec 7 26) 2) (t_msec 26)) (and (t_T1s 8) (= (d_msec 8 26) 2) (t_msec 26)) (and (t_T1s 9) (= (d_msec 9 26) 2) (t_msec 26)) (and (t_T1s 10) (= (d_msec 10 26) 2) (t_msec 26)) (and (t_T1s 11) (= (d_msec 11 26) 2) (t_msec 26)) (and (t_T1s 12) (= (d_msec 12 26) 2) (t_msec 26)) (and (t_T1s 13) (= (d_msec 13 26) 2) (t_msec 26)) (and (t_T1s 14) (= (d_msec 14 26) 2) (t_msec 26)) (and (t_T1s 15) (= (d_msec 15 26) 2) (t_msec 26)) (and (t_T1s 16) (= (d_msec 16 26) 2) (t_msec 26)) (and (t_T1s 17) (= (d_msec 17 26) 2) (t_msec 26)) (and (t_T1s 18) (= (d_msec 18 26) 2) (t_msec 26)) (and (t_T1s 19) (= (d_msec 19 26) 2) (t_msec 26)) (and (t_T1s 20) (= (d_msec 20 26) 2) (t_msec 26)) (and (t_T1s 21) (= (d_msec 21 26) 2) (t_msec 26)) (and (t_T1s 22) (= (d_msec 22 26) 2) (t_msec 26)) (and (t_T1s 23) (= (d_msec 23 26) 2) (t_msec 26)) (and (t_T1s 24) (= (d_msec 24 26) 2) (t_msec 26)))))
+ (ite $x2024 $x204 (not $x204)))))
+(assert
+ (let (($x2024 (or (and (t_T1s 1) (= (d_msec 1 26) 2) (t_msec 26)) (and (t_T1s 2) (= (d_msec 2 26) 2) (t_msec 26)) (and (t_T1s 3) (= (d_msec 3 26) 2) (t_msec 26)) (and (t_T1s 4) (= (d_msec 4 26) 2) (t_msec 26)) (and (t_T1s 5) (= (d_msec 5 26) 2) (t_msec 26)) (and (t_T1s 6) (= (d_msec 6 26) 2) (t_msec 26)) (and (t_T1s 7) (= (d_msec 7 26) 2) (t_msec 26)) (and (t_T1s 8) (= (d_msec 8 26) 2) (t_msec 26)) (and (t_T1s 9) (= (d_msec 9 26) 2) (t_msec 26)) (and (t_T1s 10) (= (d_msec 10 26) 2) (t_msec 26)) (and (t_T1s 11) (= (d_msec 11 26) 2) (t_msec 26)) (and (t_T1s 12) (= (d_msec 12 26) 2) (t_msec 26)) (and (t_T1s 13) (= (d_msec 13 26) 2) (t_msec 26)) (and (t_T1s 14) (= (d_msec 14 26) 2) (t_msec 26)) (and (t_T1s 15) (= (d_msec 15 26) 2) (t_msec 26)) (and (t_T1s 16) (= (d_msec 16 26) 2) (t_msec 26)) (and (t_T1s 17) (= (d_msec 17 26) 2) (t_msec 26)) (and (t_T1s 18) (= (d_msec 18 26) 2) (t_msec 26)) (and (t_T1s 19) (= (d_msec 19 26) 2) (t_msec 26)) (and (t_T1s 20) (= (d_msec 20 26) 2) (t_msec 26)) (and (t_T1s 21) (= (d_msec 21 26) 2) (t_msec 26)) (and (t_T1s 22) (= (d_msec 22 26) 2) (t_msec 26)) (and (t_T1s 23) (= (d_msec 23 26) 2) (t_msec 26)) (and (t_T1s 24) (= (d_msec 24 26) 2) (t_msec 26)))))
+ (let (($x204 (t_T1f 26)))
+ (ite $x204 $x2024 (not $x2024)))))
+(assert
+ (let (($x211 (t_T1f 27)))
+ (let (($x2104 (or (and (t_T1s 1) (= (d_msec 1 27) 2) (t_msec 27)) (and (t_T1s 2) (= (d_msec 2 27) 2) (t_msec 27)) (and (t_T1s 3) (= (d_msec 3 27) 2) (t_msec 27)) (and (t_T1s 4) (= (d_msec 4 27) 2) (t_msec 27)) (and (t_T1s 5) (= (d_msec 5 27) 2) (t_msec 27)) (and (t_T1s 6) (= (d_msec 6 27) 2) (t_msec 27)) (and (t_T1s 7) (= (d_msec 7 27) 2) (t_msec 27)) (and (t_T1s 8) (= (d_msec 8 27) 2) (t_msec 27)) (and (t_T1s 9) (= (d_msec 9 27) 2) (t_msec 27)) (and (t_T1s 10) (= (d_msec 10 27) 2) (t_msec 27)) (and (t_T1s 11) (= (d_msec 11 27) 2) (t_msec 27)) (and (t_T1s 12) (= (d_msec 12 27) 2) (t_msec 27)) (and (t_T1s 13) (= (d_msec 13 27) 2) (t_msec 27)) (and (t_T1s 14) (= (d_msec 14 27) 2) (t_msec 27)) (and (t_T1s 15) (= (d_msec 15 27) 2) (t_msec 27)) (and (t_T1s 16) (= (d_msec 16 27) 2) (t_msec 27)) (and (t_T1s 17) (= (d_msec 17 27) 2) (t_msec 27)) (and (t_T1s 18) (= (d_msec 18 27) 2) (t_msec 27)) (and (t_T1s 19) (= (d_msec 19 27) 2) (t_msec 27)) (and (t_T1s 20) (= (d_msec 20 27) 2) (t_msec 27)) (and (t_T1s 21) (= (d_msec 21 27) 2) (t_msec 27)) (and (t_T1s 22) (= (d_msec 22 27) 2) (t_msec 27)) (and (t_T1s 23) (= (d_msec 23 27) 2) (t_msec 27)) (and (t_T1s 24) (= (d_msec 24 27) 2) (t_msec 27)) (and (t_T1s 25) (= (d_msec 25 27) 2) (t_msec 27)))))
+ (ite $x2104 $x211 (not $x211)))))
+(assert
+ (let (($x2104 (or (and (t_T1s 1) (= (d_msec 1 27) 2) (t_msec 27)) (and (t_T1s 2) (= (d_msec 2 27) 2) (t_msec 27)) (and (t_T1s 3) (= (d_msec 3 27) 2) (t_msec 27)) (and (t_T1s 4) (= (d_msec 4 27) 2) (t_msec 27)) (and (t_T1s 5) (= (d_msec 5 27) 2) (t_msec 27)) (and (t_T1s 6) (= (d_msec 6 27) 2) (t_msec 27)) (and (t_T1s 7) (= (d_msec 7 27) 2) (t_msec 27)) (and (t_T1s 8) (= (d_msec 8 27) 2) (t_msec 27)) (and (t_T1s 9) (= (d_msec 9 27) 2) (t_msec 27)) (and (t_T1s 10) (= (d_msec 10 27) 2) (t_msec 27)) (and (t_T1s 11) (= (d_msec 11 27) 2) (t_msec 27)) (and (t_T1s 12) (= (d_msec 12 27) 2) (t_msec 27)) (and (t_T1s 13) (= (d_msec 13 27) 2) (t_msec 27)) (and (t_T1s 14) (= (d_msec 14 27) 2) (t_msec 27)) (and (t_T1s 15) (= (d_msec 15 27) 2) (t_msec 27)) (and (t_T1s 16) (= (d_msec 16 27) 2) (t_msec 27)) (and (t_T1s 17) (= (d_msec 17 27) 2) (t_msec 27)) (and (t_T1s 18) (= (d_msec 18 27) 2) (t_msec 27)) (and (t_T1s 19) (= (d_msec 19 27) 2) (t_msec 27)) (and (t_T1s 20) (= (d_msec 20 27) 2) (t_msec 27)) (and (t_T1s 21) (= (d_msec 21 27) 2) (t_msec 27)) (and (t_T1s 22) (= (d_msec 22 27) 2) (t_msec 27)) (and (t_T1s 23) (= (d_msec 23 27) 2) (t_msec 27)) (and (t_T1s 24) (= (d_msec 24 27) 2) (t_msec 27)) (and (t_T1s 25) (= (d_msec 25 27) 2) (t_msec 27)))))
+ (let (($x211 (t_T1f 27)))
+ (ite $x211 $x2104 (not $x2104)))))
+(assert
+ (let (($x218 (t_T1f 28)))
+ (let (($x2187 (or (and (t_T1s 1) (= (d_msec 1 28) 2) (t_msec 28)) (and (t_T1s 2) (= (d_msec 2 28) 2) (t_msec 28)) (and (t_T1s 3) (= (d_msec 3 28) 2) (t_msec 28)) (and (t_T1s 4) (= (d_msec 4 28) 2) (t_msec 28)) (and (t_T1s 5) (= (d_msec 5 28) 2) (t_msec 28)) (and (t_T1s 6) (= (d_msec 6 28) 2) (t_msec 28)) (and (t_T1s 7) (= (d_msec 7 28) 2) (t_msec 28)) (and (t_T1s 8) (= (d_msec 8 28) 2) (t_msec 28)) (and (t_T1s 9) (= (d_msec 9 28) 2) (t_msec 28)) (and (t_T1s 10) (= (d_msec 10 28) 2) (t_msec 28)) (and (t_T1s 11) (= (d_msec 11 28) 2) (t_msec 28)) (and (t_T1s 12) (= (d_msec 12 28) 2) (t_msec 28)) (and (t_T1s 13) (= (d_msec 13 28) 2) (t_msec 28)) (and (t_T1s 14) (= (d_msec 14 28) 2) (t_msec 28)) (and (t_T1s 15) (= (d_msec 15 28) 2) (t_msec 28)) (and (t_T1s 16) (= (d_msec 16 28) 2) (t_msec 28)) (and (t_T1s 17) (= (d_msec 17 28) 2) (t_msec 28)) (and (t_T1s 18) (= (d_msec 18 28) 2) (t_msec 28)) (and (t_T1s 19) (= (d_msec 19 28) 2) (t_msec 28)) (and (t_T1s 20) (= (d_msec 20 28) 2) (t_msec 28)) (and (t_T1s 21) (= (d_msec 21 28) 2) (t_msec 28)) (and (t_T1s 22) (= (d_msec 22 28) 2) (t_msec 28)) (and (t_T1s 23) (= (d_msec 23 28) 2) (t_msec 28)) (and (t_T1s 24) (= (d_msec 24 28) 2) (t_msec 28)) (and (t_T1s 25) (= (d_msec 25 28) 2) (t_msec 28)) (and (t_T1s 26) (= (d_msec 26 28) 2) (t_msec 28)))))
+ (ite $x2187 $x218 (not $x218)))))
+(assert
+ (let (($x2187 (or (and (t_T1s 1) (= (d_msec 1 28) 2) (t_msec 28)) (and (t_T1s 2) (= (d_msec 2 28) 2) (t_msec 28)) (and (t_T1s 3) (= (d_msec 3 28) 2) (t_msec 28)) (and (t_T1s 4) (= (d_msec 4 28) 2) (t_msec 28)) (and (t_T1s 5) (= (d_msec 5 28) 2) (t_msec 28)) (and (t_T1s 6) (= (d_msec 6 28) 2) (t_msec 28)) (and (t_T1s 7) (= (d_msec 7 28) 2) (t_msec 28)) (and (t_T1s 8) (= (d_msec 8 28) 2) (t_msec 28)) (and (t_T1s 9) (= (d_msec 9 28) 2) (t_msec 28)) (and (t_T1s 10) (= (d_msec 10 28) 2) (t_msec 28)) (and (t_T1s 11) (= (d_msec 11 28) 2) (t_msec 28)) (and (t_T1s 12) (= (d_msec 12 28) 2) (t_msec 28)) (and (t_T1s 13) (= (d_msec 13 28) 2) (t_msec 28)) (and (t_T1s 14) (= (d_msec 14 28) 2) (t_msec 28)) (and (t_T1s 15) (= (d_msec 15 28) 2) (t_msec 28)) (and (t_T1s 16) (= (d_msec 16 28) 2) (t_msec 28)) (and (t_T1s 17) (= (d_msec 17 28) 2) (t_msec 28)) (and (t_T1s 18) (= (d_msec 18 28) 2) (t_msec 28)) (and (t_T1s 19) (= (d_msec 19 28) 2) (t_msec 28)) (and (t_T1s 20) (= (d_msec 20 28) 2) (t_msec 28)) (and (t_T1s 21) (= (d_msec 21 28) 2) (t_msec 28)) (and (t_T1s 22) (= (d_msec 22 28) 2) (t_msec 28)) (and (t_T1s 23) (= (d_msec 23 28) 2) (t_msec 28)) (and (t_T1s 24) (= (d_msec 24 28) 2) (t_msec 28)) (and (t_T1s 25) (= (d_msec 25 28) 2) (t_msec 28)) (and (t_T1s 26) (= (d_msec 26 28) 2) (t_msec 28)))))
+ (let (($x218 (t_T1f 28)))
+ (ite $x218 $x2187 (not $x2187)))))
+(assert
+ (let (($x225 (t_T1f 29)))
+ (let (($x2273 (or (and (t_T1s 1) (= (d_msec 1 29) 2) (t_msec 29)) (and (t_T1s 2) (= (d_msec 2 29) 2) (t_msec 29)) (and (t_T1s 3) (= (d_msec 3 29) 2) (t_msec 29)) (and (t_T1s 4) (= (d_msec 4 29) 2) (t_msec 29)) (and (t_T1s 5) (= (d_msec 5 29) 2) (t_msec 29)) (and (t_T1s 6) (= (d_msec 6 29) 2) (t_msec 29)) (and (t_T1s 7) (= (d_msec 7 29) 2) (t_msec 29)) (and (t_T1s 8) (= (d_msec 8 29) 2) (t_msec 29)) (and (t_T1s 9) (= (d_msec 9 29) 2) (t_msec 29)) (and (t_T1s 10) (= (d_msec 10 29) 2) (t_msec 29)) (and (t_T1s 11) (= (d_msec 11 29) 2) (t_msec 29)) (and (t_T1s 12) (= (d_msec 12 29) 2) (t_msec 29)) (and (t_T1s 13) (= (d_msec 13 29) 2) (t_msec 29)) (and (t_T1s 14) (= (d_msec 14 29) 2) (t_msec 29)) (and (t_T1s 15) (= (d_msec 15 29) 2) (t_msec 29)) (and (t_T1s 16) (= (d_msec 16 29) 2) (t_msec 29)) (and (t_T1s 17) (= (d_msec 17 29) 2) (t_msec 29)) (and (t_T1s 18) (= (d_msec 18 29) 2) (t_msec 29)) (and (t_T1s 19) (= (d_msec 19 29) 2) (t_msec 29)) (and (t_T1s 20) (= (d_msec 20 29) 2) (t_msec 29)) (and (t_T1s 21) (= (d_msec 21 29) 2) (t_msec 29)) (and (t_T1s 22) (= (d_msec 22 29) 2) (t_msec 29)) (and (t_T1s 23) (= (d_msec 23 29) 2) (t_msec 29)) (and (t_T1s 24) (= (d_msec 24 29) 2) (t_msec 29)) (and (t_T1s 25) (= (d_msec 25 29) 2) (t_msec 29)) (and (t_T1s 26) (= (d_msec 26 29) 2) (t_msec 29)) (and (t_T1s 27) (= (d_msec 27 29) 2) (t_msec 29)))))
+ (ite $x2273 $x225 (not $x225)))))
+(assert
+ (let (($x2273 (or (and (t_T1s 1) (= (d_msec 1 29) 2) (t_msec 29)) (and (t_T1s 2) (= (d_msec 2 29) 2) (t_msec 29)) (and (t_T1s 3) (= (d_msec 3 29) 2) (t_msec 29)) (and (t_T1s 4) (= (d_msec 4 29) 2) (t_msec 29)) (and (t_T1s 5) (= (d_msec 5 29) 2) (t_msec 29)) (and (t_T1s 6) (= (d_msec 6 29) 2) (t_msec 29)) (and (t_T1s 7) (= (d_msec 7 29) 2) (t_msec 29)) (and (t_T1s 8) (= (d_msec 8 29) 2) (t_msec 29)) (and (t_T1s 9) (= (d_msec 9 29) 2) (t_msec 29)) (and (t_T1s 10) (= (d_msec 10 29) 2) (t_msec 29)) (and (t_T1s 11) (= (d_msec 11 29) 2) (t_msec 29)) (and (t_T1s 12) (= (d_msec 12 29) 2) (t_msec 29)) (and (t_T1s 13) (= (d_msec 13 29) 2) (t_msec 29)) (and (t_T1s 14) (= (d_msec 14 29) 2) (t_msec 29)) (and (t_T1s 15) (= (d_msec 15 29) 2) (t_msec 29)) (and (t_T1s 16) (= (d_msec 16 29) 2) (t_msec 29)) (and (t_T1s 17) (= (d_msec 17 29) 2) (t_msec 29)) (and (t_T1s 18) (= (d_msec 18 29) 2) (t_msec 29)) (and (t_T1s 19) (= (d_msec 19 29) 2) (t_msec 29)) (and (t_T1s 20) (= (d_msec 20 29) 2) (t_msec 29)) (and (t_T1s 21) (= (d_msec 21 29) 2) (t_msec 29)) (and (t_T1s 22) (= (d_msec 22 29) 2) (t_msec 29)) (and (t_T1s 23) (= (d_msec 23 29) 2) (t_msec 29)) (and (t_T1s 24) (= (d_msec 24 29) 2) (t_msec 29)) (and (t_T1s 25) (= (d_msec 25 29) 2) (t_msec 29)) (and (t_T1s 26) (= (d_msec 26 29) 2) (t_msec 29)) (and (t_T1s 27) (= (d_msec 27 29) 2) (t_msec 29)))))
+ (let (($x225 (t_T1f 29)))
+ (ite $x225 $x2273 (not $x2273)))))
+(assert
+ (let (($x232 (t_T1f 30)))
+ (let (($x2362 (or (and (t_T1s 1) (= (d_msec 1 30) 2) (t_msec 30)) (and (t_T1s 2) (= (d_msec 2 30) 2) (t_msec 30)) (and (t_T1s 3) (= (d_msec 3 30) 2) (t_msec 30)) (and (t_T1s 4) (= (d_msec 4 30) 2) (t_msec 30)) (and (t_T1s 5) (= (d_msec 5 30) 2) (t_msec 30)) (and (t_T1s 6) (= (d_msec 6 30) 2) (t_msec 30)) (and (t_T1s 7) (= (d_msec 7 30) 2) (t_msec 30)) (and (t_T1s 8) (= (d_msec 8 30) 2) (t_msec 30)) (and (t_T1s 9) (= (d_msec 9 30) 2) (t_msec 30)) (and (t_T1s 10) (= (d_msec 10 30) 2) (t_msec 30)) (and (t_T1s 11) (= (d_msec 11 30) 2) (t_msec 30)) (and (t_T1s 12) (= (d_msec 12 30) 2) (t_msec 30)) (and (t_T1s 13) (= (d_msec 13 30) 2) (t_msec 30)) (and (t_T1s 14) (= (d_msec 14 30) 2) (t_msec 30)) (and (t_T1s 15) (= (d_msec 15 30) 2) (t_msec 30)) (and (t_T1s 16) (= (d_msec 16 30) 2) (t_msec 30)) (and (t_T1s 17) (= (d_msec 17 30) 2) (t_msec 30)) (and (t_T1s 18) (= (d_msec 18 30) 2) (t_msec 30)) (and (t_T1s 19) (= (d_msec 19 30) 2) (t_msec 30)) (and (t_T1s 20) (= (d_msec 20 30) 2) (t_msec 30)) (and (t_T1s 21) (= (d_msec 21 30) 2) (t_msec 30)) (and (t_T1s 22) (= (d_msec 22 30) 2) (t_msec 30)) (and (t_T1s 23) (= (d_msec 23 30) 2) (t_msec 30)) (and (t_T1s 24) (= (d_msec 24 30) 2) (t_msec 30)) (and (t_T1s 25) (= (d_msec 25 30) 2) (t_msec 30)) (and (t_T1s 26) (= (d_msec 26 30) 2) (t_msec 30)) (and (t_T1s 27) (= (d_msec 27 30) 2) (t_msec 30)) (and (t_T1s 28) (= (d_msec 28 30) 2) (t_msec 30)))))
+ (ite $x2362 $x232 (not $x232)))))
+(assert
+ (let (($x2362 (or (and (t_T1s 1) (= (d_msec 1 30) 2) (t_msec 30)) (and (t_T1s 2) (= (d_msec 2 30) 2) (t_msec 30)) (and (t_T1s 3) (= (d_msec 3 30) 2) (t_msec 30)) (and (t_T1s 4) (= (d_msec 4 30) 2) (t_msec 30)) (and (t_T1s 5) (= (d_msec 5 30) 2) (t_msec 30)) (and (t_T1s 6) (= (d_msec 6 30) 2) (t_msec 30)) (and (t_T1s 7) (= (d_msec 7 30) 2) (t_msec 30)) (and (t_T1s 8) (= (d_msec 8 30) 2) (t_msec 30)) (and (t_T1s 9) (= (d_msec 9 30) 2) (t_msec 30)) (and (t_T1s 10) (= (d_msec 10 30) 2) (t_msec 30)) (and (t_T1s 11) (= (d_msec 11 30) 2) (t_msec 30)) (and (t_T1s 12) (= (d_msec 12 30) 2) (t_msec 30)) (and (t_T1s 13) (= (d_msec 13 30) 2) (t_msec 30)) (and (t_T1s 14) (= (d_msec 14 30) 2) (t_msec 30)) (and (t_T1s 15) (= (d_msec 15 30) 2) (t_msec 30)) (and (t_T1s 16) (= (d_msec 16 30) 2) (t_msec 30)) (and (t_T1s 17) (= (d_msec 17 30) 2) (t_msec 30)) (and (t_T1s 18) (= (d_msec 18 30) 2) (t_msec 30)) (and (t_T1s 19) (= (d_msec 19 30) 2) (t_msec 30)) (and (t_T1s 20) (= (d_msec 20 30) 2) (t_msec 30)) (and (t_T1s 21) (= (d_msec 21 30) 2) (t_msec 30)) (and (t_T1s 22) (= (d_msec 22 30) 2) (t_msec 30)) (and (t_T1s 23) (= (d_msec 23 30) 2) (t_msec 30)) (and (t_T1s 24) (= (d_msec 24 30) 2) (t_msec 30)) (and (t_T1s 25) (= (d_msec 25 30) 2) (t_msec 30)) (and (t_T1s 26) (= (d_msec 26 30) 2) (t_msec 30)) (and (t_T1s 27) (= (d_msec 27 30) 2) (t_msec 30)) (and (t_T1s 28) (= (d_msec 28 30) 2) (t_msec 30)))))
+ (let (($x232 (t_T1f 30)))
+ (ite $x232 $x2362 (not $x2362)))))
+(assert
+ (let (($x239 (t_T1f 31)))
+ (let (($x2454 (or (and (t_T1s 1) (= (d_msec 1 31) 2) (t_msec 31)) (and (t_T1s 2) (= (d_msec 2 31) 2) (t_msec 31)) (and (t_T1s 3) (= (d_msec 3 31) 2) (t_msec 31)) (and (t_T1s 4) (= (d_msec 4 31) 2) (t_msec 31)) (and (t_T1s 5) (= (d_msec 5 31) 2) (t_msec 31)) (and (t_T1s 6) (= (d_msec 6 31) 2) (t_msec 31)) (and (t_T1s 7) (= (d_msec 7 31) 2) (t_msec 31)) (and (t_T1s 8) (= (d_msec 8 31) 2) (t_msec 31)) (and (t_T1s 9) (= (d_msec 9 31) 2) (t_msec 31)) (and (t_T1s 10) (= (d_msec 10 31) 2) (t_msec 31)) (and (t_T1s 11) (= (d_msec 11 31) 2) (t_msec 31)) (and (t_T1s 12) (= (d_msec 12 31) 2) (t_msec 31)) (and (t_T1s 13) (= (d_msec 13 31) 2) (t_msec 31)) (and (t_T1s 14) (= (d_msec 14 31) 2) (t_msec 31)) (and (t_T1s 15) (= (d_msec 15 31) 2) (t_msec 31)) (and (t_T1s 16) (= (d_msec 16 31) 2) (t_msec 31)) (and (t_T1s 17) (= (d_msec 17 31) 2) (t_msec 31)) (and (t_T1s 18) (= (d_msec 18 31) 2) (t_msec 31)) (and (t_T1s 19) (= (d_msec 19 31) 2) (t_msec 31)) (and (t_T1s 20) (= (d_msec 20 31) 2) (t_msec 31)) (and (t_T1s 21) (= (d_msec 21 31) 2) (t_msec 31)) (and (t_T1s 22) (= (d_msec 22 31) 2) (t_msec 31)) (and (t_T1s 23) (= (d_msec 23 31) 2) (t_msec 31)) (and (t_T1s 24) (= (d_msec 24 31) 2) (t_msec 31)) (and (t_T1s 25) (= (d_msec 25 31) 2) (t_msec 31)) (and (t_T1s 26) (= (d_msec 26 31) 2) (t_msec 31)) (and (t_T1s 27) (= (d_msec 27 31) 2) (t_msec 31)) (and (t_T1s 28) (= (d_msec 28 31) 2) (t_msec 31)) (and (t_T1s 29) (= (d_msec 29 31) 2) (t_msec 31)))))
+ (ite $x2454 $x239 (not $x239)))))
+(assert
+ (let (($x2454 (or (and (t_T1s 1) (= (d_msec 1 31) 2) (t_msec 31)) (and (t_T1s 2) (= (d_msec 2 31) 2) (t_msec 31)) (and (t_T1s 3) (= (d_msec 3 31) 2) (t_msec 31)) (and (t_T1s 4) (= (d_msec 4 31) 2) (t_msec 31)) (and (t_T1s 5) (= (d_msec 5 31) 2) (t_msec 31)) (and (t_T1s 6) (= (d_msec 6 31) 2) (t_msec 31)) (and (t_T1s 7) (= (d_msec 7 31) 2) (t_msec 31)) (and (t_T1s 8) (= (d_msec 8 31) 2) (t_msec 31)) (and (t_T1s 9) (= (d_msec 9 31) 2) (t_msec 31)) (and (t_T1s 10) (= (d_msec 10 31) 2) (t_msec 31)) (and (t_T1s 11) (= (d_msec 11 31) 2) (t_msec 31)) (and (t_T1s 12) (= (d_msec 12 31) 2) (t_msec 31)) (and (t_T1s 13) (= (d_msec 13 31) 2) (t_msec 31)) (and (t_T1s 14) (= (d_msec 14 31) 2) (t_msec 31)) (and (t_T1s 15) (= (d_msec 15 31) 2) (t_msec 31)) (and (t_T1s 16) (= (d_msec 16 31) 2) (t_msec 31)) (and (t_T1s 17) (= (d_msec 17 31) 2) (t_msec 31)) (and (t_T1s 18) (= (d_msec 18 31) 2) (t_msec 31)) (and (t_T1s 19) (= (d_msec 19 31) 2) (t_msec 31)) (and (t_T1s 20) (= (d_msec 20 31) 2) (t_msec 31)) (and (t_T1s 21) (= (d_msec 21 31) 2) (t_msec 31)) (and (t_T1s 22) (= (d_msec 22 31) 2) (t_msec 31)) (and (t_T1s 23) (= (d_msec 23 31) 2) (t_msec 31)) (and (t_T1s 24) (= (d_msec 24 31) 2) (t_msec 31)) (and (t_T1s 25) (= (d_msec 25 31) 2) (t_msec 31)) (and (t_T1s 26) (= (d_msec 26 31) 2) (t_msec 31)) (and (t_T1s 27) (= (d_msec 27 31) 2) (t_msec 31)) (and (t_T1s 28) (= (d_msec 28 31) 2) (t_msec 31)) (and (t_T1s 29) (= (d_msec 29 31) 2) (t_msec 31)))))
+ (let (($x239 (t_T1f 31)))
+ (ite $x239 $x2454 (not $x2454)))))
+(assert
+ (let (($x246 (t_T1f 32)))
+ (let (($x2549 (or (and (t_T1s 1) (= (d_msec 1 32) 2) (t_msec 32)) (and (t_T1s 2) (= (d_msec 2 32) 2) (t_msec 32)) (and (t_T1s 3) (= (d_msec 3 32) 2) (t_msec 32)) (and (t_T1s 4) (= (d_msec 4 32) 2) (t_msec 32)) (and (t_T1s 5) (= (d_msec 5 32) 2) (t_msec 32)) (and (t_T1s 6) (= (d_msec 6 32) 2) (t_msec 32)) (and (t_T1s 7) (= (d_msec 7 32) 2) (t_msec 32)) (and (t_T1s 8) (= (d_msec 8 32) 2) (t_msec 32)) (and (t_T1s 9) (= (d_msec 9 32) 2) (t_msec 32)) (and (t_T1s 10) (= (d_msec 10 32) 2) (t_msec 32)) (and (t_T1s 11) (= (d_msec 11 32) 2) (t_msec 32)) (and (t_T1s 12) (= (d_msec 12 32) 2) (t_msec 32)) (and (t_T1s 13) (= (d_msec 13 32) 2) (t_msec 32)) (and (t_T1s 14) (= (d_msec 14 32) 2) (t_msec 32)) (and (t_T1s 15) (= (d_msec 15 32) 2) (t_msec 32)) (and (t_T1s 16) (= (d_msec 16 32) 2) (t_msec 32)) (and (t_T1s 17) (= (d_msec 17 32) 2) (t_msec 32)) (and (t_T1s 18) (= (d_msec 18 32) 2) (t_msec 32)) (and (t_T1s 19) (= (d_msec 19 32) 2) (t_msec 32)) (and (t_T1s 20) (= (d_msec 20 32) 2) (t_msec 32)) (and (t_T1s 21) (= (d_msec 21 32) 2) (t_msec 32)) (and (t_T1s 22) (= (d_msec 22 32) 2) (t_msec 32)) (and (t_T1s 23) (= (d_msec 23 32) 2) (t_msec 32)) (and (t_T1s 24) (= (d_msec 24 32) 2) (t_msec 32)) (and (t_T1s 25) (= (d_msec 25 32) 2) (t_msec 32)) (and (t_T1s 26) (= (d_msec 26 32) 2) (t_msec 32)) (and (t_T1s 27) (= (d_msec 27 32) 2) (t_msec 32)) (and (t_T1s 28) (= (d_msec 28 32) 2) (t_msec 32)) (and (t_T1s 29) (= (d_msec 29 32) 2) (t_msec 32)) (and (t_T1s 30) (= (d_msec 30 32) 2) (t_msec 32)))))
+ (ite $x2549 $x246 (not $x246)))))
+(assert
+ (let (($x2549 (or (and (t_T1s 1) (= (d_msec 1 32) 2) (t_msec 32)) (and (t_T1s 2) (= (d_msec 2 32) 2) (t_msec 32)) (and (t_T1s 3) (= (d_msec 3 32) 2) (t_msec 32)) (and (t_T1s 4) (= (d_msec 4 32) 2) (t_msec 32)) (and (t_T1s 5) (= (d_msec 5 32) 2) (t_msec 32)) (and (t_T1s 6) (= (d_msec 6 32) 2) (t_msec 32)) (and (t_T1s 7) (= (d_msec 7 32) 2) (t_msec 32)) (and (t_T1s 8) (= (d_msec 8 32) 2) (t_msec 32)) (and (t_T1s 9) (= (d_msec 9 32) 2) (t_msec 32)) (and (t_T1s 10) (= (d_msec 10 32) 2) (t_msec 32)) (and (t_T1s 11) (= (d_msec 11 32) 2) (t_msec 32)) (and (t_T1s 12) (= (d_msec 12 32) 2) (t_msec 32)) (and (t_T1s 13) (= (d_msec 13 32) 2) (t_msec 32)) (and (t_T1s 14) (= (d_msec 14 32) 2) (t_msec 32)) (and (t_T1s 15) (= (d_msec 15 32) 2) (t_msec 32)) (and (t_T1s 16) (= (d_msec 16 32) 2) (t_msec 32)) (and (t_T1s 17) (= (d_msec 17 32) 2) (t_msec 32)) (and (t_T1s 18) (= (d_msec 18 32) 2) (t_msec 32)) (and (t_T1s 19) (= (d_msec 19 32) 2) (t_msec 32)) (and (t_T1s 20) (= (d_msec 20 32) 2) (t_msec 32)) (and (t_T1s 21) (= (d_msec 21 32) 2) (t_msec 32)) (and (t_T1s 22) (= (d_msec 22 32) 2) (t_msec 32)) (and (t_T1s 23) (= (d_msec 23 32) 2) (t_msec 32)) (and (t_T1s 24) (= (d_msec 24 32) 2) (t_msec 32)) (and (t_T1s 25) (= (d_msec 25 32) 2) (t_msec 32)) (and (t_T1s 26) (= (d_msec 26 32) 2) (t_msec 32)) (and (t_T1s 27) (= (d_msec 27 32) 2) (t_msec 32)) (and (t_T1s 28) (= (d_msec 28 32) 2) (t_msec 32)) (and (t_T1s 29) (= (d_msec 29 32) 2) (t_msec 32)) (and (t_T1s 30) (= (d_msec 30 32) 2) (t_msec 32)))))
+ (let (($x246 (t_T1f 32)))
+ (ite $x246 $x2549 (not $x2549)))))
+(assert
+ (let (($x253 (t_T1f 33)))
+ (let (($x2647 (or (and (t_T1s 1) (= (d_msec 1 33) 2) (t_msec 33)) (and (t_T1s 2) (= (d_msec 2 33) 2) (t_msec 33)) (and (t_T1s 3) (= (d_msec 3 33) 2) (t_msec 33)) (and (t_T1s 4) (= (d_msec 4 33) 2) (t_msec 33)) (and (t_T1s 5) (= (d_msec 5 33) 2) (t_msec 33)) (and (t_T1s 6) (= (d_msec 6 33) 2) (t_msec 33)) (and (t_T1s 7) (= (d_msec 7 33) 2) (t_msec 33)) (and (t_T1s 8) (= (d_msec 8 33) 2) (t_msec 33)) (and (t_T1s 9) (= (d_msec 9 33) 2) (t_msec 33)) (and (t_T1s 10) (= (d_msec 10 33) 2) (t_msec 33)) (and (t_T1s 11) (= (d_msec 11 33) 2) (t_msec 33)) (and (t_T1s 12) (= (d_msec 12 33) 2) (t_msec 33)) (and (t_T1s 13) (= (d_msec 13 33) 2) (t_msec 33)) (and (t_T1s 14) (= (d_msec 14 33) 2) (t_msec 33)) (and (t_T1s 15) (= (d_msec 15 33) 2) (t_msec 33)) (and (t_T1s 16) (= (d_msec 16 33) 2) (t_msec 33)) (and (t_T1s 17) (= (d_msec 17 33) 2) (t_msec 33)) (and (t_T1s 18) (= (d_msec 18 33) 2) (t_msec 33)) (and (t_T1s 19) (= (d_msec 19 33) 2) (t_msec 33)) (and (t_T1s 20) (= (d_msec 20 33) 2) (t_msec 33)) (and (t_T1s 21) (= (d_msec 21 33) 2) (t_msec 33)) (and (t_T1s 22) (= (d_msec 22 33) 2) (t_msec 33)) (and (t_T1s 23) (= (d_msec 23 33) 2) (t_msec 33)) (and (t_T1s 24) (= (d_msec 24 33) 2) (t_msec 33)) (and (t_T1s 25) (= (d_msec 25 33) 2) (t_msec 33)) (and (t_T1s 26) (= (d_msec 26 33) 2) (t_msec 33)) (and (t_T1s 27) (= (d_msec 27 33) 2) (t_msec 33)) (and (t_T1s 28) (= (d_msec 28 33) 2) (t_msec 33)) (and (t_T1s 29) (= (d_msec 29 33) 2) (t_msec 33)) (and (t_T1s 30) (= (d_msec 30 33) 2) (t_msec 33)) (and (t_T1s 31) (= (d_msec 31 33) 2) (t_msec 33)))))
+ (ite $x2647 $x253 (not $x253)))))
+(assert
+ (let (($x2647 (or (and (t_T1s 1) (= (d_msec 1 33) 2) (t_msec 33)) (and (t_T1s 2) (= (d_msec 2 33) 2) (t_msec 33)) (and (t_T1s 3) (= (d_msec 3 33) 2) (t_msec 33)) (and (t_T1s 4) (= (d_msec 4 33) 2) (t_msec 33)) (and (t_T1s 5) (= (d_msec 5 33) 2) (t_msec 33)) (and (t_T1s 6) (= (d_msec 6 33) 2) (t_msec 33)) (and (t_T1s 7) (= (d_msec 7 33) 2) (t_msec 33)) (and (t_T1s 8) (= (d_msec 8 33) 2) (t_msec 33)) (and (t_T1s 9) (= (d_msec 9 33) 2) (t_msec 33)) (and (t_T1s 10) (= (d_msec 10 33) 2) (t_msec 33)) (and (t_T1s 11) (= (d_msec 11 33) 2) (t_msec 33)) (and (t_T1s 12) (= (d_msec 12 33) 2) (t_msec 33)) (and (t_T1s 13) (= (d_msec 13 33) 2) (t_msec 33)) (and (t_T1s 14) (= (d_msec 14 33) 2) (t_msec 33)) (and (t_T1s 15) (= (d_msec 15 33) 2) (t_msec 33)) (and (t_T1s 16) (= (d_msec 16 33) 2) (t_msec 33)) (and (t_T1s 17) (= (d_msec 17 33) 2) (t_msec 33)) (and (t_T1s 18) (= (d_msec 18 33) 2) (t_msec 33)) (and (t_T1s 19) (= (d_msec 19 33) 2) (t_msec 33)) (and (t_T1s 20) (= (d_msec 20 33) 2) (t_msec 33)) (and (t_T1s 21) (= (d_msec 21 33) 2) (t_msec 33)) (and (t_T1s 22) (= (d_msec 22 33) 2) (t_msec 33)) (and (t_T1s 23) (= (d_msec 23 33) 2) (t_msec 33)) (and (t_T1s 24) (= (d_msec 24 33) 2) (t_msec 33)) (and (t_T1s 25) (= (d_msec 25 33) 2) (t_msec 33)) (and (t_T1s 26) (= (d_msec 26 33) 2) (t_msec 33)) (and (t_T1s 27) (= (d_msec 27 33) 2) (t_msec 33)) (and (t_T1s 28) (= (d_msec 28 33) 2) (t_msec 33)) (and (t_T1s 29) (= (d_msec 29 33) 2) (t_msec 33)) (and (t_T1s 30) (= (d_msec 30 33) 2) (t_msec 33)) (and (t_T1s 31) (= (d_msec 31 33) 2) (t_msec 33)))))
+ (let (($x253 (t_T1f 33)))
+ (ite $x253 $x2647 (not $x2647)))))
+(assert
+ (let (($x260 (t_T1f 34)))
+ (let (($x2748 (or (and (t_T1s 1) (= (d_msec 1 34) 2) (t_msec 34)) (and (t_T1s 2) (= (d_msec 2 34) 2) (t_msec 34)) (and (t_T1s 3) (= (d_msec 3 34) 2) (t_msec 34)) (and (t_T1s 4) (= (d_msec 4 34) 2) (t_msec 34)) (and (t_T1s 5) (= (d_msec 5 34) 2) (t_msec 34)) (and (t_T1s 6) (= (d_msec 6 34) 2) (t_msec 34)) (and (t_T1s 7) (= (d_msec 7 34) 2) (t_msec 34)) (and (t_T1s 8) (= (d_msec 8 34) 2) (t_msec 34)) (and (t_T1s 9) (= (d_msec 9 34) 2) (t_msec 34)) (and (t_T1s 10) (= (d_msec 10 34) 2) (t_msec 34)) (and (t_T1s 11) (= (d_msec 11 34) 2) (t_msec 34)) (and (t_T1s 12) (= (d_msec 12 34) 2) (t_msec 34)) (and (t_T1s 13) (= (d_msec 13 34) 2) (t_msec 34)) (and (t_T1s 14) (= (d_msec 14 34) 2) (t_msec 34)) (and (t_T1s 15) (= (d_msec 15 34) 2) (t_msec 34)) (and (t_T1s 16) (= (d_msec 16 34) 2) (t_msec 34)) (and (t_T1s 17) (= (d_msec 17 34) 2) (t_msec 34)) (and (t_T1s 18) (= (d_msec 18 34) 2) (t_msec 34)) (and (t_T1s 19) (= (d_msec 19 34) 2) (t_msec 34)) (and (t_T1s 20) (= (d_msec 20 34) 2) (t_msec 34)) (and (t_T1s 21) (= (d_msec 21 34) 2) (t_msec 34)) (and (t_T1s 22) (= (d_msec 22 34) 2) (t_msec 34)) (and (t_T1s 23) (= (d_msec 23 34) 2) (t_msec 34)) (and (t_T1s 24) (= (d_msec 24 34) 2) (t_msec 34)) (and (t_T1s 25) (= (d_msec 25 34) 2) (t_msec 34)) (and (t_T1s 26) (= (d_msec 26 34) 2) (t_msec 34)) (and (t_T1s 27) (= (d_msec 27 34) 2) (t_msec 34)) (and (t_T1s 28) (= (d_msec 28 34) 2) (t_msec 34)) (and (t_T1s 29) (= (d_msec 29 34) 2) (t_msec 34)) (and (t_T1s 30) (= (d_msec 30 34) 2) (t_msec 34)) (and (t_T1s 31) (= (d_msec 31 34) 2) (t_msec 34)) (and (t_T1s 32) (= (d_msec 32 34) 2) (t_msec 34)))))
+ (ite $x2748 $x260 (not $x260)))))
+(assert
+ (let (($x2748 (or (and (t_T1s 1) (= (d_msec 1 34) 2) (t_msec 34)) (and (t_T1s 2) (= (d_msec 2 34) 2) (t_msec 34)) (and (t_T1s 3) (= (d_msec 3 34) 2) (t_msec 34)) (and (t_T1s 4) (= (d_msec 4 34) 2) (t_msec 34)) (and (t_T1s 5) (= (d_msec 5 34) 2) (t_msec 34)) (and (t_T1s 6) (= (d_msec 6 34) 2) (t_msec 34)) (and (t_T1s 7) (= (d_msec 7 34) 2) (t_msec 34)) (and (t_T1s 8) (= (d_msec 8 34) 2) (t_msec 34)) (and (t_T1s 9) (= (d_msec 9 34) 2) (t_msec 34)) (and (t_T1s 10) (= (d_msec 10 34) 2) (t_msec 34)) (and (t_T1s 11) (= (d_msec 11 34) 2) (t_msec 34)) (and (t_T1s 12) (= (d_msec 12 34) 2) (t_msec 34)) (and (t_T1s 13) (= (d_msec 13 34) 2) (t_msec 34)) (and (t_T1s 14) (= (d_msec 14 34) 2) (t_msec 34)) (and (t_T1s 15) (= (d_msec 15 34) 2) (t_msec 34)) (and (t_T1s 16) (= (d_msec 16 34) 2) (t_msec 34)) (and (t_T1s 17) (= (d_msec 17 34) 2) (t_msec 34)) (and (t_T1s 18) (= (d_msec 18 34) 2) (t_msec 34)) (and (t_T1s 19) (= (d_msec 19 34) 2) (t_msec 34)) (and (t_T1s 20) (= (d_msec 20 34) 2) (t_msec 34)) (and (t_T1s 21) (= (d_msec 21 34) 2) (t_msec 34)) (and (t_T1s 22) (= (d_msec 22 34) 2) (t_msec 34)) (and (t_T1s 23) (= (d_msec 23 34) 2) (t_msec 34)) (and (t_T1s 24) (= (d_msec 24 34) 2) (t_msec 34)) (and (t_T1s 25) (= (d_msec 25 34) 2) (t_msec 34)) (and (t_T1s 26) (= (d_msec 26 34) 2) (t_msec 34)) (and (t_T1s 27) (= (d_msec 27 34) 2) (t_msec 34)) (and (t_T1s 28) (= (d_msec 28 34) 2) (t_msec 34)) (and (t_T1s 29) (= (d_msec 29 34) 2) (t_msec 34)) (and (t_T1s 30) (= (d_msec 30 34) 2) (t_msec 34)) (and (t_T1s 31) (= (d_msec 31 34) 2) (t_msec 34)) (and (t_T1s 32) (= (d_msec 32 34) 2) (t_msec 34)))))
+ (let (($x260 (t_T1f 34)))
+ (ite $x260 $x2748 (not $x2748)))))
+(assert
+ (let (($x267 (t_T1f 35)))
+ (let (($x2852 (or (and (t_T1s 1) (= (d_msec 1 35) 2) (t_msec 35)) (and (t_T1s 2) (= (d_msec 2 35) 2) (t_msec 35)) (and (t_T1s 3) (= (d_msec 3 35) 2) (t_msec 35)) (and (t_T1s 4) (= (d_msec 4 35) 2) (t_msec 35)) (and (t_T1s 5) (= (d_msec 5 35) 2) (t_msec 35)) (and (t_T1s 6) (= (d_msec 6 35) 2) (t_msec 35)) (and (t_T1s 7) (= (d_msec 7 35) 2) (t_msec 35)) (and (t_T1s 8) (= (d_msec 8 35) 2) (t_msec 35)) (and (t_T1s 9) (= (d_msec 9 35) 2) (t_msec 35)) (and (t_T1s 10) (= (d_msec 10 35) 2) (t_msec 35)) (and (t_T1s 11) (= (d_msec 11 35) 2) (t_msec 35)) (and (t_T1s 12) (= (d_msec 12 35) 2) (t_msec 35)) (and (t_T1s 13) (= (d_msec 13 35) 2) (t_msec 35)) (and (t_T1s 14) (= (d_msec 14 35) 2) (t_msec 35)) (and (t_T1s 15) (= (d_msec 15 35) 2) (t_msec 35)) (and (t_T1s 16) (= (d_msec 16 35) 2) (t_msec 35)) (and (t_T1s 17) (= (d_msec 17 35) 2) (t_msec 35)) (and (t_T1s 18) (= (d_msec 18 35) 2) (t_msec 35)) (and (t_T1s 19) (= (d_msec 19 35) 2) (t_msec 35)) (and (t_T1s 20) (= (d_msec 20 35) 2) (t_msec 35)) (and (t_T1s 21) (= (d_msec 21 35) 2) (t_msec 35)) (and (t_T1s 22) (= (d_msec 22 35) 2) (t_msec 35)) (and (t_T1s 23) (= (d_msec 23 35) 2) (t_msec 35)) (and (t_T1s 24) (= (d_msec 24 35) 2) (t_msec 35)) (and (t_T1s 25) (= (d_msec 25 35) 2) (t_msec 35)) (and (t_T1s 26) (= (d_msec 26 35) 2) (t_msec 35)) (and (t_T1s 27) (= (d_msec 27 35) 2) (t_msec 35)) (and (t_T1s 28) (= (d_msec 28 35) 2) (t_msec 35)) (and (t_T1s 29) (= (d_msec 29 35) 2) (t_msec 35)) (and (t_T1s 30) (= (d_msec 30 35) 2) (t_msec 35)) (and (t_T1s 31) (= (d_msec 31 35) 2) (t_msec 35)) (and (t_T1s 32) (= (d_msec 32 35) 2) (t_msec 35)) (and (t_T1s 33) (= (d_msec 33 35) 2) (t_msec 35)))))
+ (ite $x2852 $x267 (not $x267)))))
+(assert
+ (let (($x2852 (or (and (t_T1s 1) (= (d_msec 1 35) 2) (t_msec 35)) (and (t_T1s 2) (= (d_msec 2 35) 2) (t_msec 35)) (and (t_T1s 3) (= (d_msec 3 35) 2) (t_msec 35)) (and (t_T1s 4) (= (d_msec 4 35) 2) (t_msec 35)) (and (t_T1s 5) (= (d_msec 5 35) 2) (t_msec 35)) (and (t_T1s 6) (= (d_msec 6 35) 2) (t_msec 35)) (and (t_T1s 7) (= (d_msec 7 35) 2) (t_msec 35)) (and (t_T1s 8) (= (d_msec 8 35) 2) (t_msec 35)) (and (t_T1s 9) (= (d_msec 9 35) 2) (t_msec 35)) (and (t_T1s 10) (= (d_msec 10 35) 2) (t_msec 35)) (and (t_T1s 11) (= (d_msec 11 35) 2) (t_msec 35)) (and (t_T1s 12) (= (d_msec 12 35) 2) (t_msec 35)) (and (t_T1s 13) (= (d_msec 13 35) 2) (t_msec 35)) (and (t_T1s 14) (= (d_msec 14 35) 2) (t_msec 35)) (and (t_T1s 15) (= (d_msec 15 35) 2) (t_msec 35)) (and (t_T1s 16) (= (d_msec 16 35) 2) (t_msec 35)) (and (t_T1s 17) (= (d_msec 17 35) 2) (t_msec 35)) (and (t_T1s 18) (= (d_msec 18 35) 2) (t_msec 35)) (and (t_T1s 19) (= (d_msec 19 35) 2) (t_msec 35)) (and (t_T1s 20) (= (d_msec 20 35) 2) (t_msec 35)) (and (t_T1s 21) (= (d_msec 21 35) 2) (t_msec 35)) (and (t_T1s 22) (= (d_msec 22 35) 2) (t_msec 35)) (and (t_T1s 23) (= (d_msec 23 35) 2) (t_msec 35)) (and (t_T1s 24) (= (d_msec 24 35) 2) (t_msec 35)) (and (t_T1s 25) (= (d_msec 25 35) 2) (t_msec 35)) (and (t_T1s 26) (= (d_msec 26 35) 2) (t_msec 35)) (and (t_T1s 27) (= (d_msec 27 35) 2) (t_msec 35)) (and (t_T1s 28) (= (d_msec 28 35) 2) (t_msec 35)) (and (t_T1s 29) (= (d_msec 29 35) 2) (t_msec 35)) (and (t_T1s 30) (= (d_msec 30 35) 2) (t_msec 35)) (and (t_T1s 31) (= (d_msec 31 35) 2) (t_msec 35)) (and (t_T1s 32) (= (d_msec 32 35) 2) (t_msec 35)) (and (t_T1s 33) (= (d_msec 33 35) 2) (t_msec 35)))))
+ (let (($x267 (t_T1f 35)))
+ (ite $x267 $x2852 (not $x2852)))))
+(assert
+ (let (($x274 (t_T1f 36)))
+ (let (($x2959 (or (and (t_T1s 1) (= (d_msec 1 36) 2) (t_msec 36)) (and (t_T1s 2) (= (d_msec 2 36) 2) (t_msec 36)) (and (t_T1s 3) (= (d_msec 3 36) 2) (t_msec 36)) (and (t_T1s 4) (= (d_msec 4 36) 2) (t_msec 36)) (and (t_T1s 5) (= (d_msec 5 36) 2) (t_msec 36)) (and (t_T1s 6) (= (d_msec 6 36) 2) (t_msec 36)) (and (t_T1s 7) (= (d_msec 7 36) 2) (t_msec 36)) (and (t_T1s 8) (= (d_msec 8 36) 2) (t_msec 36)) (and (t_T1s 9) (= (d_msec 9 36) 2) (t_msec 36)) (and (t_T1s 10) (= (d_msec 10 36) 2) (t_msec 36)) (and (t_T1s 11) (= (d_msec 11 36) 2) (t_msec 36)) (and (t_T1s 12) (= (d_msec 12 36) 2) (t_msec 36)) (and (t_T1s 13) (= (d_msec 13 36) 2) (t_msec 36)) (and (t_T1s 14) (= (d_msec 14 36) 2) (t_msec 36)) (and (t_T1s 15) (= (d_msec 15 36) 2) (t_msec 36)) (and (t_T1s 16) (= (d_msec 16 36) 2) (t_msec 36)) (and (t_T1s 17) (= (d_msec 17 36) 2) (t_msec 36)) (and (t_T1s 18) (= (d_msec 18 36) 2) (t_msec 36)) (and (t_T1s 19) (= (d_msec 19 36) 2) (t_msec 36)) (and (t_T1s 20) (= (d_msec 20 36) 2) (t_msec 36)) (and (t_T1s 21) (= (d_msec 21 36) 2) (t_msec 36)) (and (t_T1s 22) (= (d_msec 22 36) 2) (t_msec 36)) (and (t_T1s 23) (= (d_msec 23 36) 2) (t_msec 36)) (and (t_T1s 24) (= (d_msec 24 36) 2) (t_msec 36)) (and (t_T1s 25) (= (d_msec 25 36) 2) (t_msec 36)) (and (t_T1s 26) (= (d_msec 26 36) 2) (t_msec 36)) (and (t_T1s 27) (= (d_msec 27 36) 2) (t_msec 36)) (and (t_T1s 28) (= (d_msec 28 36) 2) (t_msec 36)) (and (t_T1s 29) (= (d_msec 29 36) 2) (t_msec 36)) (and (t_T1s 30) (= (d_msec 30 36) 2) (t_msec 36)) (and (t_T1s 31) (= (d_msec 31 36) 2) (t_msec 36)) (and (t_T1s 32) (= (d_msec 32 36) 2) (t_msec 36)) (and (t_T1s 33) (= (d_msec 33 36) 2) (t_msec 36)) (and (t_T1s 34) (= (d_msec 34 36) 2) (t_msec 36)))))
+ (ite $x2959 $x274 (not $x274)))))
+(assert
+ (let (($x2959 (or (and (t_T1s 1) (= (d_msec 1 36) 2) (t_msec 36)) (and (t_T1s 2) (= (d_msec 2 36) 2) (t_msec 36)) (and (t_T1s 3) (= (d_msec 3 36) 2) (t_msec 36)) (and (t_T1s 4) (= (d_msec 4 36) 2) (t_msec 36)) (and (t_T1s 5) (= (d_msec 5 36) 2) (t_msec 36)) (and (t_T1s 6) (= (d_msec 6 36) 2) (t_msec 36)) (and (t_T1s 7) (= (d_msec 7 36) 2) (t_msec 36)) (and (t_T1s 8) (= (d_msec 8 36) 2) (t_msec 36)) (and (t_T1s 9) (= (d_msec 9 36) 2) (t_msec 36)) (and (t_T1s 10) (= (d_msec 10 36) 2) (t_msec 36)) (and (t_T1s 11) (= (d_msec 11 36) 2) (t_msec 36)) (and (t_T1s 12) (= (d_msec 12 36) 2) (t_msec 36)) (and (t_T1s 13) (= (d_msec 13 36) 2) (t_msec 36)) (and (t_T1s 14) (= (d_msec 14 36) 2) (t_msec 36)) (and (t_T1s 15) (= (d_msec 15 36) 2) (t_msec 36)) (and (t_T1s 16) (= (d_msec 16 36) 2) (t_msec 36)) (and (t_T1s 17) (= (d_msec 17 36) 2) (t_msec 36)) (and (t_T1s 18) (= (d_msec 18 36) 2) (t_msec 36)) (and (t_T1s 19) (= (d_msec 19 36) 2) (t_msec 36)) (and (t_T1s 20) (= (d_msec 20 36) 2) (t_msec 36)) (and (t_T1s 21) (= (d_msec 21 36) 2) (t_msec 36)) (and (t_T1s 22) (= (d_msec 22 36) 2) (t_msec 36)) (and (t_T1s 23) (= (d_msec 23 36) 2) (t_msec 36)) (and (t_T1s 24) (= (d_msec 24 36) 2) (t_msec 36)) (and (t_T1s 25) (= (d_msec 25 36) 2) (t_msec 36)) (and (t_T1s 26) (= (d_msec 26 36) 2) (t_msec 36)) (and (t_T1s 27) (= (d_msec 27 36) 2) (t_msec 36)) (and (t_T1s 28) (= (d_msec 28 36) 2) (t_msec 36)) (and (t_T1s 29) (= (d_msec 29 36) 2) (t_msec 36)) (and (t_T1s 30) (= (d_msec 30 36) 2) (t_msec 36)) (and (t_T1s 31) (= (d_msec 31 36) 2) (t_msec 36)) (and (t_T1s 32) (= (d_msec 32 36) 2) (t_msec 36)) (and (t_T1s 33) (= (d_msec 33 36) 2) (t_msec 36)) (and (t_T1s 34) (= (d_msec 34 36) 2) (t_msec 36)))))
+ (let (($x274 (t_T1f 36)))
+ (ite $x274 $x2959 (not $x2959)))))
+(assert
+ (let (($x281 (t_T1f 37)))
+ (let (($x3069 (or (and (t_T1s 1) (= (d_msec 1 37) 2) (t_msec 37)) (and (t_T1s 2) (= (d_msec 2 37) 2) (t_msec 37)) (and (t_T1s 3) (= (d_msec 3 37) 2) (t_msec 37)) (and (t_T1s 4) (= (d_msec 4 37) 2) (t_msec 37)) (and (t_T1s 5) (= (d_msec 5 37) 2) (t_msec 37)) (and (t_T1s 6) (= (d_msec 6 37) 2) (t_msec 37)) (and (t_T1s 7) (= (d_msec 7 37) 2) (t_msec 37)) (and (t_T1s 8) (= (d_msec 8 37) 2) (t_msec 37)) (and (t_T1s 9) (= (d_msec 9 37) 2) (t_msec 37)) (and (t_T1s 10) (= (d_msec 10 37) 2) (t_msec 37)) (and (t_T1s 11) (= (d_msec 11 37) 2) (t_msec 37)) (and (t_T1s 12) (= (d_msec 12 37) 2) (t_msec 37)) (and (t_T1s 13) (= (d_msec 13 37) 2) (t_msec 37)) (and (t_T1s 14) (= (d_msec 14 37) 2) (t_msec 37)) (and (t_T1s 15) (= (d_msec 15 37) 2) (t_msec 37)) (and (t_T1s 16) (= (d_msec 16 37) 2) (t_msec 37)) (and (t_T1s 17) (= (d_msec 17 37) 2) (t_msec 37)) (and (t_T1s 18) (= (d_msec 18 37) 2) (t_msec 37)) (and (t_T1s 19) (= (d_msec 19 37) 2) (t_msec 37)) (and (t_T1s 20) (= (d_msec 20 37) 2) (t_msec 37)) (and (t_T1s 21) (= (d_msec 21 37) 2) (t_msec 37)) (and (t_T1s 22) (= (d_msec 22 37) 2) (t_msec 37)) (and (t_T1s 23) (= (d_msec 23 37) 2) (t_msec 37)) (and (t_T1s 24) (= (d_msec 24 37) 2) (t_msec 37)) (and (t_T1s 25) (= (d_msec 25 37) 2) (t_msec 37)) (and (t_T1s 26) (= (d_msec 26 37) 2) (t_msec 37)) (and (t_T1s 27) (= (d_msec 27 37) 2) (t_msec 37)) (and (t_T1s 28) (= (d_msec 28 37) 2) (t_msec 37)) (and (t_T1s 29) (= (d_msec 29 37) 2) (t_msec 37)) (and (t_T1s 30) (= (d_msec 30 37) 2) (t_msec 37)) (and (t_T1s 31) (= (d_msec 31 37) 2) (t_msec 37)) (and (t_T1s 32) (= (d_msec 32 37) 2) (t_msec 37)) (and (t_T1s 33) (= (d_msec 33 37) 2) (t_msec 37)) (and (t_T1s 34) (= (d_msec 34 37) 2) (t_msec 37)) (and (t_T1s 35) (= (d_msec 35 37) 2) (t_msec 37)))))
+ (ite $x3069 $x281 (not $x281)))))
+(assert
+ (let (($x3069 (or (and (t_T1s 1) (= (d_msec 1 37) 2) (t_msec 37)) (and (t_T1s 2) (= (d_msec 2 37) 2) (t_msec 37)) (and (t_T1s 3) (= (d_msec 3 37) 2) (t_msec 37)) (and (t_T1s 4) (= (d_msec 4 37) 2) (t_msec 37)) (and (t_T1s 5) (= (d_msec 5 37) 2) (t_msec 37)) (and (t_T1s 6) (= (d_msec 6 37) 2) (t_msec 37)) (and (t_T1s 7) (= (d_msec 7 37) 2) (t_msec 37)) (and (t_T1s 8) (= (d_msec 8 37) 2) (t_msec 37)) (and (t_T1s 9) (= (d_msec 9 37) 2) (t_msec 37)) (and (t_T1s 10) (= (d_msec 10 37) 2) (t_msec 37)) (and (t_T1s 11) (= (d_msec 11 37) 2) (t_msec 37)) (and (t_T1s 12) (= (d_msec 12 37) 2) (t_msec 37)) (and (t_T1s 13) (= (d_msec 13 37) 2) (t_msec 37)) (and (t_T1s 14) (= (d_msec 14 37) 2) (t_msec 37)) (and (t_T1s 15) (= (d_msec 15 37) 2) (t_msec 37)) (and (t_T1s 16) (= (d_msec 16 37) 2) (t_msec 37)) (and (t_T1s 17) (= (d_msec 17 37) 2) (t_msec 37)) (and (t_T1s 18) (= (d_msec 18 37) 2) (t_msec 37)) (and (t_T1s 19) (= (d_msec 19 37) 2) (t_msec 37)) (and (t_T1s 20) (= (d_msec 20 37) 2) (t_msec 37)) (and (t_T1s 21) (= (d_msec 21 37) 2) (t_msec 37)) (and (t_T1s 22) (= (d_msec 22 37) 2) (t_msec 37)) (and (t_T1s 23) (= (d_msec 23 37) 2) (t_msec 37)) (and (t_T1s 24) (= (d_msec 24 37) 2) (t_msec 37)) (and (t_T1s 25) (= (d_msec 25 37) 2) (t_msec 37)) (and (t_T1s 26) (= (d_msec 26 37) 2) (t_msec 37)) (and (t_T1s 27) (= (d_msec 27 37) 2) (t_msec 37)) (and (t_T1s 28) (= (d_msec 28 37) 2) (t_msec 37)) (and (t_T1s 29) (= (d_msec 29 37) 2) (t_msec 37)) (and (t_T1s 30) (= (d_msec 30 37) 2) (t_msec 37)) (and (t_T1s 31) (= (d_msec 31 37) 2) (t_msec 37)) (and (t_T1s 32) (= (d_msec 32 37) 2) (t_msec 37)) (and (t_T1s 33) (= (d_msec 33 37) 2) (t_msec 37)) (and (t_T1s 34) (= (d_msec 34 37) 2) (t_msec 37)) (and (t_T1s 35) (= (d_msec 35 37) 2) (t_msec 37)))))
+ (let (($x281 (t_T1f 37)))
+ (ite $x281 $x3069 (not $x3069)))))
+(assert
+ (let (($x288 (t_T1f 38)))
+ (let (($x3182 (or (and (t_T1s 1) (= (d_msec 1 38) 2) (t_msec 38)) (and (t_T1s 2) (= (d_msec 2 38) 2) (t_msec 38)) (and (t_T1s 3) (= (d_msec 3 38) 2) (t_msec 38)) (and (t_T1s 4) (= (d_msec 4 38) 2) (t_msec 38)) (and (t_T1s 5) (= (d_msec 5 38) 2) (t_msec 38)) (and (t_T1s 6) (= (d_msec 6 38) 2) (t_msec 38)) (and (t_T1s 7) (= (d_msec 7 38) 2) (t_msec 38)) (and (t_T1s 8) (= (d_msec 8 38) 2) (t_msec 38)) (and (t_T1s 9) (= (d_msec 9 38) 2) (t_msec 38)) (and (t_T1s 10) (= (d_msec 10 38) 2) (t_msec 38)) (and (t_T1s 11) (= (d_msec 11 38) 2) (t_msec 38)) (and (t_T1s 12) (= (d_msec 12 38) 2) (t_msec 38)) (and (t_T1s 13) (= (d_msec 13 38) 2) (t_msec 38)) (and (t_T1s 14) (= (d_msec 14 38) 2) (t_msec 38)) (and (t_T1s 15) (= (d_msec 15 38) 2) (t_msec 38)) (and (t_T1s 16) (= (d_msec 16 38) 2) (t_msec 38)) (and (t_T1s 17) (= (d_msec 17 38) 2) (t_msec 38)) (and (t_T1s 18) (= (d_msec 18 38) 2) (t_msec 38)) (and (t_T1s 19) (= (d_msec 19 38) 2) (t_msec 38)) (and (t_T1s 20) (= (d_msec 20 38) 2) (t_msec 38)) (and (t_T1s 21) (= (d_msec 21 38) 2) (t_msec 38)) (and (t_T1s 22) (= (d_msec 22 38) 2) (t_msec 38)) (and (t_T1s 23) (= (d_msec 23 38) 2) (t_msec 38)) (and (t_T1s 24) (= (d_msec 24 38) 2) (t_msec 38)) (and (t_T1s 25) (= (d_msec 25 38) 2) (t_msec 38)) (and (t_T1s 26) (= (d_msec 26 38) 2) (t_msec 38)) (and (t_T1s 27) (= (d_msec 27 38) 2) (t_msec 38)) (and (t_T1s 28) (= (d_msec 28 38) 2) (t_msec 38)) (and (t_T1s 29) (= (d_msec 29 38) 2) (t_msec 38)) (and (t_T1s 30) (= (d_msec 30 38) 2) (t_msec 38)) (and (t_T1s 31) (= (d_msec 31 38) 2) (t_msec 38)) (and (t_T1s 32) (= (d_msec 32 38) 2) (t_msec 38)) (and (t_T1s 33) (= (d_msec 33 38) 2) (t_msec 38)) (and (t_T1s 34) (= (d_msec 34 38) 2) (t_msec 38)) (and (t_T1s 35) (= (d_msec 35 38) 2) (t_msec 38)) (and (t_T1s 36) (= (d_msec 36 38) 2) (t_msec 38)))))
+ (ite $x3182 $x288 (not $x288)))))
+(assert
+ (let (($x3182 (or (and (t_T1s 1) (= (d_msec 1 38) 2) (t_msec 38)) (and (t_T1s 2) (= (d_msec 2 38) 2) (t_msec 38)) (and (t_T1s 3) (= (d_msec 3 38) 2) (t_msec 38)) (and (t_T1s 4) (= (d_msec 4 38) 2) (t_msec 38)) (and (t_T1s 5) (= (d_msec 5 38) 2) (t_msec 38)) (and (t_T1s 6) (= (d_msec 6 38) 2) (t_msec 38)) (and (t_T1s 7) (= (d_msec 7 38) 2) (t_msec 38)) (and (t_T1s 8) (= (d_msec 8 38) 2) (t_msec 38)) (and (t_T1s 9) (= (d_msec 9 38) 2) (t_msec 38)) (and (t_T1s 10) (= (d_msec 10 38) 2) (t_msec 38)) (and (t_T1s 11) (= (d_msec 11 38) 2) (t_msec 38)) (and (t_T1s 12) (= (d_msec 12 38) 2) (t_msec 38)) (and (t_T1s 13) (= (d_msec 13 38) 2) (t_msec 38)) (and (t_T1s 14) (= (d_msec 14 38) 2) (t_msec 38)) (and (t_T1s 15) (= (d_msec 15 38) 2) (t_msec 38)) (and (t_T1s 16) (= (d_msec 16 38) 2) (t_msec 38)) (and (t_T1s 17) (= (d_msec 17 38) 2) (t_msec 38)) (and (t_T1s 18) (= (d_msec 18 38) 2) (t_msec 38)) (and (t_T1s 19) (= (d_msec 19 38) 2) (t_msec 38)) (and (t_T1s 20) (= (d_msec 20 38) 2) (t_msec 38)) (and (t_T1s 21) (= (d_msec 21 38) 2) (t_msec 38)) (and (t_T1s 22) (= (d_msec 22 38) 2) (t_msec 38)) (and (t_T1s 23) (= (d_msec 23 38) 2) (t_msec 38)) (and (t_T1s 24) (= (d_msec 24 38) 2) (t_msec 38)) (and (t_T1s 25) (= (d_msec 25 38) 2) (t_msec 38)) (and (t_T1s 26) (= (d_msec 26 38) 2) (t_msec 38)) (and (t_T1s 27) (= (d_msec 27 38) 2) (t_msec 38)) (and (t_T1s 28) (= (d_msec 28 38) 2) (t_msec 38)) (and (t_T1s 29) (= (d_msec 29 38) 2) (t_msec 38)) (and (t_T1s 30) (= (d_msec 30 38) 2) (t_msec 38)) (and (t_T1s 31) (= (d_msec 31 38) 2) (t_msec 38)) (and (t_T1s 32) (= (d_msec 32 38) 2) (t_msec 38)) (and (t_T1s 33) (= (d_msec 33 38) 2) (t_msec 38)) (and (t_T1s 34) (= (d_msec 34 38) 2) (t_msec 38)) (and (t_T1s 35) (= (d_msec 35 38) 2) (t_msec 38)) (and (t_T1s 36) (= (d_msec 36 38) 2) (t_msec 38)))))
+ (let (($x288 (t_T1f 38)))
+ (ite $x288 $x3182 (not $x3182)))))
+(assert
+ (let (($x295 (t_T1f 39)))
+ (let (($x3298 (or (and (t_T1s 1) (= (d_msec 1 39) 2) (t_msec 39)) (and (t_T1s 2) (= (d_msec 2 39) 2) (t_msec 39)) (and (t_T1s 3) (= (d_msec 3 39) 2) (t_msec 39)) (and (t_T1s 4) (= (d_msec 4 39) 2) (t_msec 39)) (and (t_T1s 5) (= (d_msec 5 39) 2) (t_msec 39)) (and (t_T1s 6) (= (d_msec 6 39) 2) (t_msec 39)) (and (t_T1s 7) (= (d_msec 7 39) 2) (t_msec 39)) (and (t_T1s 8) (= (d_msec 8 39) 2) (t_msec 39)) (and (t_T1s 9) (= (d_msec 9 39) 2) (t_msec 39)) (and (t_T1s 10) (= (d_msec 10 39) 2) (t_msec 39)) (and (t_T1s 11) (= (d_msec 11 39) 2) (t_msec 39)) (and (t_T1s 12) (= (d_msec 12 39) 2) (t_msec 39)) (and (t_T1s 13) (= (d_msec 13 39) 2) (t_msec 39)) (and (t_T1s 14) (= (d_msec 14 39) 2) (t_msec 39)) (and (t_T1s 15) (= (d_msec 15 39) 2) (t_msec 39)) (and (t_T1s 16) (= (d_msec 16 39) 2) (t_msec 39)) (and (t_T1s 17) (= (d_msec 17 39) 2) (t_msec 39)) (and (t_T1s 18) (= (d_msec 18 39) 2) (t_msec 39)) (and (t_T1s 19) (= (d_msec 19 39) 2) (t_msec 39)) (and (t_T1s 20) (= (d_msec 20 39) 2) (t_msec 39)) (and (t_T1s 21) (= (d_msec 21 39) 2) (t_msec 39)) (and (t_T1s 22) (= (d_msec 22 39) 2) (t_msec 39)) (and (t_T1s 23) (= (d_msec 23 39) 2) (t_msec 39)) (and (t_T1s 24) (= (d_msec 24 39) 2) (t_msec 39)) (and (t_T1s 25) (= (d_msec 25 39) 2) (t_msec 39)) (and (t_T1s 26) (= (d_msec 26 39) 2) (t_msec 39)) (and (t_T1s 27) (= (d_msec 27 39) 2) (t_msec 39)) (and (t_T1s 28) (= (d_msec 28 39) 2) (t_msec 39)) (and (t_T1s 29) (= (d_msec 29 39) 2) (t_msec 39)) (and (t_T1s 30) (= (d_msec 30 39) 2) (t_msec 39)) (and (t_T1s 31) (= (d_msec 31 39) 2) (t_msec 39)) (and (t_T1s 32) (= (d_msec 32 39) 2) (t_msec 39)) (and (t_T1s 33) (= (d_msec 33 39) 2) (t_msec 39)) (and (t_T1s 34) (= (d_msec 34 39) 2) (t_msec 39)) (and (t_T1s 35) (= (d_msec 35 39) 2) (t_msec 39)) (and (t_T1s 36) (= (d_msec 36 39) 2) (t_msec 39)) (and (t_T1s 37) (= (d_msec 37 39) 2) (t_msec 39)))))
+ (ite $x3298 $x295 (not $x295)))))
+(assert
+ (let (($x3298 (or (and (t_T1s 1) (= (d_msec 1 39) 2) (t_msec 39)) (and (t_T1s 2) (= (d_msec 2 39) 2) (t_msec 39)) (and (t_T1s 3) (= (d_msec 3 39) 2) (t_msec 39)) (and (t_T1s 4) (= (d_msec 4 39) 2) (t_msec 39)) (and (t_T1s 5) (= (d_msec 5 39) 2) (t_msec 39)) (and (t_T1s 6) (= (d_msec 6 39) 2) (t_msec 39)) (and (t_T1s 7) (= (d_msec 7 39) 2) (t_msec 39)) (and (t_T1s 8) (= (d_msec 8 39) 2) (t_msec 39)) (and (t_T1s 9) (= (d_msec 9 39) 2) (t_msec 39)) (and (t_T1s 10) (= (d_msec 10 39) 2) (t_msec 39)) (and (t_T1s 11) (= (d_msec 11 39) 2) (t_msec 39)) (and (t_T1s 12) (= (d_msec 12 39) 2) (t_msec 39)) (and (t_T1s 13) (= (d_msec 13 39) 2) (t_msec 39)) (and (t_T1s 14) (= (d_msec 14 39) 2) (t_msec 39)) (and (t_T1s 15) (= (d_msec 15 39) 2) (t_msec 39)) (and (t_T1s 16) (= (d_msec 16 39) 2) (t_msec 39)) (and (t_T1s 17) (= (d_msec 17 39) 2) (t_msec 39)) (and (t_T1s 18) (= (d_msec 18 39) 2) (t_msec 39)) (and (t_T1s 19) (= (d_msec 19 39) 2) (t_msec 39)) (and (t_T1s 20) (= (d_msec 20 39) 2) (t_msec 39)) (and (t_T1s 21) (= (d_msec 21 39) 2) (t_msec 39)) (and (t_T1s 22) (= (d_msec 22 39) 2) (t_msec 39)) (and (t_T1s 23) (= (d_msec 23 39) 2) (t_msec 39)) (and (t_T1s 24) (= (d_msec 24 39) 2) (t_msec 39)) (and (t_T1s 25) (= (d_msec 25 39) 2) (t_msec 39)) (and (t_T1s 26) (= (d_msec 26 39) 2) (t_msec 39)) (and (t_T1s 27) (= (d_msec 27 39) 2) (t_msec 39)) (and (t_T1s 28) (= (d_msec 28 39) 2) (t_msec 39)) (and (t_T1s 29) (= (d_msec 29 39) 2) (t_msec 39)) (and (t_T1s 30) (= (d_msec 30 39) 2) (t_msec 39)) (and (t_T1s 31) (= (d_msec 31 39) 2) (t_msec 39)) (and (t_T1s 32) (= (d_msec 32 39) 2) (t_msec 39)) (and (t_T1s 33) (= (d_msec 33 39) 2) (t_msec 39)) (and (t_T1s 34) (= (d_msec 34 39) 2) (t_msec 39)) (and (t_T1s 35) (= (d_msec 35 39) 2) (t_msec 39)) (and (t_T1s 36) (= (d_msec 36 39) 2) (t_msec 39)) (and (t_T1s 37) (= (d_msec 37 39) 2) (t_msec 39)))))
+ (let (($x295 (t_T1f 39)))
+ (ite $x295 $x3298 (not $x3298)))))
+(assert
+ (let (($x302 (t_T1f 40)))
+ (let (($x3417 (or (and (t_T1s 1) (= (d_msec 1 40) 2) (t_msec 40)) (and (t_T1s 2) (= (d_msec 2 40) 2) (t_msec 40)) (and (t_T1s 3) (= (d_msec 3 40) 2) (t_msec 40)) (and (t_T1s 4) (= (d_msec 4 40) 2) (t_msec 40)) (and (t_T1s 5) (= (d_msec 5 40) 2) (t_msec 40)) (and (t_T1s 6) (= (d_msec 6 40) 2) (t_msec 40)) (and (t_T1s 7) (= (d_msec 7 40) 2) (t_msec 40)) (and (t_T1s 8) (= (d_msec 8 40) 2) (t_msec 40)) (and (t_T1s 9) (= (d_msec 9 40) 2) (t_msec 40)) (and (t_T1s 10) (= (d_msec 10 40) 2) (t_msec 40)) (and (t_T1s 11) (= (d_msec 11 40) 2) (t_msec 40)) (and (t_T1s 12) (= (d_msec 12 40) 2) (t_msec 40)) (and (t_T1s 13) (= (d_msec 13 40) 2) (t_msec 40)) (and (t_T1s 14) (= (d_msec 14 40) 2) (t_msec 40)) (and (t_T1s 15) (= (d_msec 15 40) 2) (t_msec 40)) (and (t_T1s 16) (= (d_msec 16 40) 2) (t_msec 40)) (and (t_T1s 17) (= (d_msec 17 40) 2) (t_msec 40)) (and (t_T1s 18) (= (d_msec 18 40) 2) (t_msec 40)) (and (t_T1s 19) (= (d_msec 19 40) 2) (t_msec 40)) (and (t_T1s 20) (= (d_msec 20 40) 2) (t_msec 40)) (and (t_T1s 21) (= (d_msec 21 40) 2) (t_msec 40)) (and (t_T1s 22) (= (d_msec 22 40) 2) (t_msec 40)) (and (t_T1s 23) (= (d_msec 23 40) 2) (t_msec 40)) (and (t_T1s 24) (= (d_msec 24 40) 2) (t_msec 40)) (and (t_T1s 25) (= (d_msec 25 40) 2) (t_msec 40)) (and (t_T1s 26) (= (d_msec 26 40) 2) (t_msec 40)) (and (t_T1s 27) (= (d_msec 27 40) 2) (t_msec 40)) (and (t_T1s 28) (= (d_msec 28 40) 2) (t_msec 40)) (and (t_T1s 29) (= (d_msec 29 40) 2) (t_msec 40)) (and (t_T1s 30) (= (d_msec 30 40) 2) (t_msec 40)) (and (t_T1s 31) (= (d_msec 31 40) 2) (t_msec 40)) (and (t_T1s 32) (= (d_msec 32 40) 2) (t_msec 40)) (and (t_T1s 33) (= (d_msec 33 40) 2) (t_msec 40)) (and (t_T1s 34) (= (d_msec 34 40) 2) (t_msec 40)) (and (t_T1s 35) (= (d_msec 35 40) 2) (t_msec 40)) (and (t_T1s 36) (= (d_msec 36 40) 2) (t_msec 40)) (and (t_T1s 37) (= (d_msec 37 40) 2) (t_msec 40)) (and (t_T1s 38) (= (d_msec 38 40) 2) (t_msec 40)))))
+ (ite $x3417 $x302 (not $x302)))))
+(assert
+ (let (($x3417 (or (and (t_T1s 1) (= (d_msec 1 40) 2) (t_msec 40)) (and (t_T1s 2) (= (d_msec 2 40) 2) (t_msec 40)) (and (t_T1s 3) (= (d_msec 3 40) 2) (t_msec 40)) (and (t_T1s 4) (= (d_msec 4 40) 2) (t_msec 40)) (and (t_T1s 5) (= (d_msec 5 40) 2) (t_msec 40)) (and (t_T1s 6) (= (d_msec 6 40) 2) (t_msec 40)) (and (t_T1s 7) (= (d_msec 7 40) 2) (t_msec 40)) (and (t_T1s 8) (= (d_msec 8 40) 2) (t_msec 40)) (and (t_T1s 9) (= (d_msec 9 40) 2) (t_msec 40)) (and (t_T1s 10) (= (d_msec 10 40) 2) (t_msec 40)) (and (t_T1s 11) (= (d_msec 11 40) 2) (t_msec 40)) (and (t_T1s 12) (= (d_msec 12 40) 2) (t_msec 40)) (and (t_T1s 13) (= (d_msec 13 40) 2) (t_msec 40)) (and (t_T1s 14) (= (d_msec 14 40) 2) (t_msec 40)) (and (t_T1s 15) (= (d_msec 15 40) 2) (t_msec 40)) (and (t_T1s 16) (= (d_msec 16 40) 2) (t_msec 40)) (and (t_T1s 17) (= (d_msec 17 40) 2) (t_msec 40)) (and (t_T1s 18) (= (d_msec 18 40) 2) (t_msec 40)) (and (t_T1s 19) (= (d_msec 19 40) 2) (t_msec 40)) (and (t_T1s 20) (= (d_msec 20 40) 2) (t_msec 40)) (and (t_T1s 21) (= (d_msec 21 40) 2) (t_msec 40)) (and (t_T1s 22) (= (d_msec 22 40) 2) (t_msec 40)) (and (t_T1s 23) (= (d_msec 23 40) 2) (t_msec 40)) (and (t_T1s 24) (= (d_msec 24 40) 2) (t_msec 40)) (and (t_T1s 25) (= (d_msec 25 40) 2) (t_msec 40)) (and (t_T1s 26) (= (d_msec 26 40) 2) (t_msec 40)) (and (t_T1s 27) (= (d_msec 27 40) 2) (t_msec 40)) (and (t_T1s 28) (= (d_msec 28 40) 2) (t_msec 40)) (and (t_T1s 29) (= (d_msec 29 40) 2) (t_msec 40)) (and (t_T1s 30) (= (d_msec 30 40) 2) (t_msec 40)) (and (t_T1s 31) (= (d_msec 31 40) 2) (t_msec 40)) (and (t_T1s 32) (= (d_msec 32 40) 2) (t_msec 40)) (and (t_T1s 33) (= (d_msec 33 40) 2) (t_msec 40)) (and (t_T1s 34) (= (d_msec 34 40) 2) (t_msec 40)) (and (t_T1s 35) (= (d_msec 35 40) 2) (t_msec 40)) (and (t_T1s 36) (= (d_msec 36 40) 2) (t_msec 40)) (and (t_T1s 37) (= (d_msec 37 40) 2) (t_msec 40)) (and (t_T1s 38) (= (d_msec 38 40) 2) (t_msec 40)))))
+ (let (($x302 (t_T1f 40)))
+ (ite $x302 $x3417 (not $x3417)))))
+(assert
+ (let (($x309 (t_T1f 41)))
+ (let (($x3539 (or (and (t_T1s 1) (= (d_msec 1 41) 2) (t_msec 41)) (and (t_T1s 2) (= (d_msec 2 41) 2) (t_msec 41)) (and (t_T1s 3) (= (d_msec 3 41) 2) (t_msec 41)) (and (t_T1s 4) (= (d_msec 4 41) 2) (t_msec 41)) (and (t_T1s 5) (= (d_msec 5 41) 2) (t_msec 41)) (and (t_T1s 6) (= (d_msec 6 41) 2) (t_msec 41)) (and (t_T1s 7) (= (d_msec 7 41) 2) (t_msec 41)) (and (t_T1s 8) (= (d_msec 8 41) 2) (t_msec 41)) (and (t_T1s 9) (= (d_msec 9 41) 2) (t_msec 41)) (and (t_T1s 10) (= (d_msec 10 41) 2) (t_msec 41)) (and (t_T1s 11) (= (d_msec 11 41) 2) (t_msec 41)) (and (t_T1s 12) (= (d_msec 12 41) 2) (t_msec 41)) (and (t_T1s 13) (= (d_msec 13 41) 2) (t_msec 41)) (and (t_T1s 14) (= (d_msec 14 41) 2) (t_msec 41)) (and (t_T1s 15) (= (d_msec 15 41) 2) (t_msec 41)) (and (t_T1s 16) (= (d_msec 16 41) 2) (t_msec 41)) (and (t_T1s 17) (= (d_msec 17 41) 2) (t_msec 41)) (and (t_T1s 18) (= (d_msec 18 41) 2) (t_msec 41)) (and (t_T1s 19) (= (d_msec 19 41) 2) (t_msec 41)) (and (t_T1s 20) (= (d_msec 20 41) 2) (t_msec 41)) (and (t_T1s 21) (= (d_msec 21 41) 2) (t_msec 41)) (and (t_T1s 22) (= (d_msec 22 41) 2) (t_msec 41)) (and (t_T1s 23) (= (d_msec 23 41) 2) (t_msec 41)) (and (t_T1s 24) (= (d_msec 24 41) 2) (t_msec 41)) (and (t_T1s 25) (= (d_msec 25 41) 2) (t_msec 41)) (and (t_T1s 26) (= (d_msec 26 41) 2) (t_msec 41)) (and (t_T1s 27) (= (d_msec 27 41) 2) (t_msec 41)) (and (t_T1s 28) (= (d_msec 28 41) 2) (t_msec 41)) (and (t_T1s 29) (= (d_msec 29 41) 2) (t_msec 41)) (and (t_T1s 30) (= (d_msec 30 41) 2) (t_msec 41)) (and (t_T1s 31) (= (d_msec 31 41) 2) (t_msec 41)) (and (t_T1s 32) (= (d_msec 32 41) 2) (t_msec 41)) (and (t_T1s 33) (= (d_msec 33 41) 2) (t_msec 41)) (and (t_T1s 34) (= (d_msec 34 41) 2) (t_msec 41)) (and (t_T1s 35) (= (d_msec 35 41) 2) (t_msec 41)) (and (t_T1s 36) (= (d_msec 36 41) 2) (t_msec 41)) (and (t_T1s 37) (= (d_msec 37 41) 2) (t_msec 41)) (and (t_T1s 38) (= (d_msec 38 41) 2) (t_msec 41)) (and (t_T1s 39) (= (d_msec 39 41) 2) (t_msec 41)))))
+ (ite $x3539 $x309 (not $x309)))))
+(assert
+ (let (($x3539 (or (and (t_T1s 1) (= (d_msec 1 41) 2) (t_msec 41)) (and (t_T1s 2) (= (d_msec 2 41) 2) (t_msec 41)) (and (t_T1s 3) (= (d_msec 3 41) 2) (t_msec 41)) (and (t_T1s 4) (= (d_msec 4 41) 2) (t_msec 41)) (and (t_T1s 5) (= (d_msec 5 41) 2) (t_msec 41)) (and (t_T1s 6) (= (d_msec 6 41) 2) (t_msec 41)) (and (t_T1s 7) (= (d_msec 7 41) 2) (t_msec 41)) (and (t_T1s 8) (= (d_msec 8 41) 2) (t_msec 41)) (and (t_T1s 9) (= (d_msec 9 41) 2) (t_msec 41)) (and (t_T1s 10) (= (d_msec 10 41) 2) (t_msec 41)) (and (t_T1s 11) (= (d_msec 11 41) 2) (t_msec 41)) (and (t_T1s 12) (= (d_msec 12 41) 2) (t_msec 41)) (and (t_T1s 13) (= (d_msec 13 41) 2) (t_msec 41)) (and (t_T1s 14) (= (d_msec 14 41) 2) (t_msec 41)) (and (t_T1s 15) (= (d_msec 15 41) 2) (t_msec 41)) (and (t_T1s 16) (= (d_msec 16 41) 2) (t_msec 41)) (and (t_T1s 17) (= (d_msec 17 41) 2) (t_msec 41)) (and (t_T1s 18) (= (d_msec 18 41) 2) (t_msec 41)) (and (t_T1s 19) (= (d_msec 19 41) 2) (t_msec 41)) (and (t_T1s 20) (= (d_msec 20 41) 2) (t_msec 41)) (and (t_T1s 21) (= (d_msec 21 41) 2) (t_msec 41)) (and (t_T1s 22) (= (d_msec 22 41) 2) (t_msec 41)) (and (t_T1s 23) (= (d_msec 23 41) 2) (t_msec 41)) (and (t_T1s 24) (= (d_msec 24 41) 2) (t_msec 41)) (and (t_T1s 25) (= (d_msec 25 41) 2) (t_msec 41)) (and (t_T1s 26) (= (d_msec 26 41) 2) (t_msec 41)) (and (t_T1s 27) (= (d_msec 27 41) 2) (t_msec 41)) (and (t_T1s 28) (= (d_msec 28 41) 2) (t_msec 41)) (and (t_T1s 29) (= (d_msec 29 41) 2) (t_msec 41)) (and (t_T1s 30) (= (d_msec 30 41) 2) (t_msec 41)) (and (t_T1s 31) (= (d_msec 31 41) 2) (t_msec 41)) (and (t_T1s 32) (= (d_msec 32 41) 2) (t_msec 41)) (and (t_T1s 33) (= (d_msec 33 41) 2) (t_msec 41)) (and (t_T1s 34) (= (d_msec 34 41) 2) (t_msec 41)) (and (t_T1s 35) (= (d_msec 35 41) 2) (t_msec 41)) (and (t_T1s 36) (= (d_msec 36 41) 2) (t_msec 41)) (and (t_T1s 37) (= (d_msec 37 41) 2) (t_msec 41)) (and (t_T1s 38) (= (d_msec 38 41) 2) (t_msec 41)) (and (t_T1s 39) (= (d_msec 39 41) 2) (t_msec 41)))))
+ (let (($x309 (t_T1f 41)))
+ (ite $x309 $x3539 (not $x3539)))))
+(assert
+ (let (($x316 (t_T1f 42)))
+ (let (($x3664 (or (and (t_T1s 1) (= (d_msec 1 42) 2) (t_msec 42)) (and (t_T1s 2) (= (d_msec 2 42) 2) (t_msec 42)) (and (t_T1s 3) (= (d_msec 3 42) 2) (t_msec 42)) (and (t_T1s 4) (= (d_msec 4 42) 2) (t_msec 42)) (and (t_T1s 5) (= (d_msec 5 42) 2) (t_msec 42)) (and (t_T1s 6) (= (d_msec 6 42) 2) (t_msec 42)) (and (t_T1s 7) (= (d_msec 7 42) 2) (t_msec 42)) (and (t_T1s 8) (= (d_msec 8 42) 2) (t_msec 42)) (and (t_T1s 9) (= (d_msec 9 42) 2) (t_msec 42)) (and (t_T1s 10) (= (d_msec 10 42) 2) (t_msec 42)) (and (t_T1s 11) (= (d_msec 11 42) 2) (t_msec 42)) (and (t_T1s 12) (= (d_msec 12 42) 2) (t_msec 42)) (and (t_T1s 13) (= (d_msec 13 42) 2) (t_msec 42)) (and (t_T1s 14) (= (d_msec 14 42) 2) (t_msec 42)) (and (t_T1s 15) (= (d_msec 15 42) 2) (t_msec 42)) (and (t_T1s 16) (= (d_msec 16 42) 2) (t_msec 42)) (and (t_T1s 17) (= (d_msec 17 42) 2) (t_msec 42)) (and (t_T1s 18) (= (d_msec 18 42) 2) (t_msec 42)) (and (t_T1s 19) (= (d_msec 19 42) 2) (t_msec 42)) (and (t_T1s 20) (= (d_msec 20 42) 2) (t_msec 42)) (and (t_T1s 21) (= (d_msec 21 42) 2) (t_msec 42)) (and (t_T1s 22) (= (d_msec 22 42) 2) (t_msec 42)) (and (t_T1s 23) (= (d_msec 23 42) 2) (t_msec 42)) (and (t_T1s 24) (= (d_msec 24 42) 2) (t_msec 42)) (and (t_T1s 25) (= (d_msec 25 42) 2) (t_msec 42)) (and (t_T1s 26) (= (d_msec 26 42) 2) (t_msec 42)) (and (t_T1s 27) (= (d_msec 27 42) 2) (t_msec 42)) (and (t_T1s 28) (= (d_msec 28 42) 2) (t_msec 42)) (and (t_T1s 29) (= (d_msec 29 42) 2) (t_msec 42)) (and (t_T1s 30) (= (d_msec 30 42) 2) (t_msec 42)) (and (t_T1s 31) (= (d_msec 31 42) 2) (t_msec 42)) (and (t_T1s 32) (= (d_msec 32 42) 2) (t_msec 42)) (and (t_T1s 33) (= (d_msec 33 42) 2) (t_msec 42)) (and (t_T1s 34) (= (d_msec 34 42) 2) (t_msec 42)) (and (t_T1s 35) (= (d_msec 35 42) 2) (t_msec 42)) (and (t_T1s 36) (= (d_msec 36 42) 2) (t_msec 42)) (and (t_T1s 37) (= (d_msec 37 42) 2) (t_msec 42)) (and (t_T1s 38) (= (d_msec 38 42) 2) (t_msec 42)) (and (t_T1s 39) (= (d_msec 39 42) 2) (t_msec 42)) (and (t_T1s 40) (= (d_msec 40 42) 2) (t_msec 42)))))
+ (ite $x3664 $x316 (not $x316)))))
+(assert
+ (let (($x3664 (or (and (t_T1s 1) (= (d_msec 1 42) 2) (t_msec 42)) (and (t_T1s 2) (= (d_msec 2 42) 2) (t_msec 42)) (and (t_T1s 3) (= (d_msec 3 42) 2) (t_msec 42)) (and (t_T1s 4) (= (d_msec 4 42) 2) (t_msec 42)) (and (t_T1s 5) (= (d_msec 5 42) 2) (t_msec 42)) (and (t_T1s 6) (= (d_msec 6 42) 2) (t_msec 42)) (and (t_T1s 7) (= (d_msec 7 42) 2) (t_msec 42)) (and (t_T1s 8) (= (d_msec 8 42) 2) (t_msec 42)) (and (t_T1s 9) (= (d_msec 9 42) 2) (t_msec 42)) (and (t_T1s 10) (= (d_msec 10 42) 2) (t_msec 42)) (and (t_T1s 11) (= (d_msec 11 42) 2) (t_msec 42)) (and (t_T1s 12) (= (d_msec 12 42) 2) (t_msec 42)) (and (t_T1s 13) (= (d_msec 13 42) 2) (t_msec 42)) (and (t_T1s 14) (= (d_msec 14 42) 2) (t_msec 42)) (and (t_T1s 15) (= (d_msec 15 42) 2) (t_msec 42)) (and (t_T1s 16) (= (d_msec 16 42) 2) (t_msec 42)) (and (t_T1s 17) (= (d_msec 17 42) 2) (t_msec 42)) (and (t_T1s 18) (= (d_msec 18 42) 2) (t_msec 42)) (and (t_T1s 19) (= (d_msec 19 42) 2) (t_msec 42)) (and (t_T1s 20) (= (d_msec 20 42) 2) (t_msec 42)) (and (t_T1s 21) (= (d_msec 21 42) 2) (t_msec 42)) (and (t_T1s 22) (= (d_msec 22 42) 2) (t_msec 42)) (and (t_T1s 23) (= (d_msec 23 42) 2) (t_msec 42)) (and (t_T1s 24) (= (d_msec 24 42) 2) (t_msec 42)) (and (t_T1s 25) (= (d_msec 25 42) 2) (t_msec 42)) (and (t_T1s 26) (= (d_msec 26 42) 2) (t_msec 42)) (and (t_T1s 27) (= (d_msec 27 42) 2) (t_msec 42)) (and (t_T1s 28) (= (d_msec 28 42) 2) (t_msec 42)) (and (t_T1s 29) (= (d_msec 29 42) 2) (t_msec 42)) (and (t_T1s 30) (= (d_msec 30 42) 2) (t_msec 42)) (and (t_T1s 31) (= (d_msec 31 42) 2) (t_msec 42)) (and (t_T1s 32) (= (d_msec 32 42) 2) (t_msec 42)) (and (t_T1s 33) (= (d_msec 33 42) 2) (t_msec 42)) (and (t_T1s 34) (= (d_msec 34 42) 2) (t_msec 42)) (and (t_T1s 35) (= (d_msec 35 42) 2) (t_msec 42)) (and (t_T1s 36) (= (d_msec 36 42) 2) (t_msec 42)) (and (t_T1s 37) (= (d_msec 37 42) 2) (t_msec 42)) (and (t_T1s 38) (= (d_msec 38 42) 2) (t_msec 42)) (and (t_T1s 39) (= (d_msec 39 42) 2) (t_msec 42)) (and (t_T1s 40) (= (d_msec 40 42) 2) (t_msec 42)))))
+ (let (($x316 (t_T1f 42)))
+ (ite $x316 $x3664 (not $x3664)))))
+(assert
+ (let (($x323 (t_T1f 43)))
+ (let (($x3792 (or (and (t_T1s 1) (= (d_msec 1 43) 2) (t_msec 43)) (and (t_T1s 2) (= (d_msec 2 43) 2) (t_msec 43)) (and (t_T1s 3) (= (d_msec 3 43) 2) (t_msec 43)) (and (t_T1s 4) (= (d_msec 4 43) 2) (t_msec 43)) (and (t_T1s 5) (= (d_msec 5 43) 2) (t_msec 43)) (and (t_T1s 6) (= (d_msec 6 43) 2) (t_msec 43)) (and (t_T1s 7) (= (d_msec 7 43) 2) (t_msec 43)) (and (t_T1s 8) (= (d_msec 8 43) 2) (t_msec 43)) (and (t_T1s 9) (= (d_msec 9 43) 2) (t_msec 43)) (and (t_T1s 10) (= (d_msec 10 43) 2) (t_msec 43)) (and (t_T1s 11) (= (d_msec 11 43) 2) (t_msec 43)) (and (t_T1s 12) (= (d_msec 12 43) 2) (t_msec 43)) (and (t_T1s 13) (= (d_msec 13 43) 2) (t_msec 43)) (and (t_T1s 14) (= (d_msec 14 43) 2) (t_msec 43)) (and (t_T1s 15) (= (d_msec 15 43) 2) (t_msec 43)) (and (t_T1s 16) (= (d_msec 16 43) 2) (t_msec 43)) (and (t_T1s 17) (= (d_msec 17 43) 2) (t_msec 43)) (and (t_T1s 18) (= (d_msec 18 43) 2) (t_msec 43)) (and (t_T1s 19) (= (d_msec 19 43) 2) (t_msec 43)) (and (t_T1s 20) (= (d_msec 20 43) 2) (t_msec 43)) (and (t_T1s 21) (= (d_msec 21 43) 2) (t_msec 43)) (and (t_T1s 22) (= (d_msec 22 43) 2) (t_msec 43)) (and (t_T1s 23) (= (d_msec 23 43) 2) (t_msec 43)) (and (t_T1s 24) (= (d_msec 24 43) 2) (t_msec 43)) (and (t_T1s 25) (= (d_msec 25 43) 2) (t_msec 43)) (and (t_T1s 26) (= (d_msec 26 43) 2) (t_msec 43)) (and (t_T1s 27) (= (d_msec 27 43) 2) (t_msec 43)) (and (t_T1s 28) (= (d_msec 28 43) 2) (t_msec 43)) (and (t_T1s 29) (= (d_msec 29 43) 2) (t_msec 43)) (and (t_T1s 30) (= (d_msec 30 43) 2) (t_msec 43)) (and (t_T1s 31) (= (d_msec 31 43) 2) (t_msec 43)) (and (t_T1s 32) (= (d_msec 32 43) 2) (t_msec 43)) (and (t_T1s 33) (= (d_msec 33 43) 2) (t_msec 43)) (and (t_T1s 34) (= (d_msec 34 43) 2) (t_msec 43)) (and (t_T1s 35) (= (d_msec 35 43) 2) (t_msec 43)) (and (t_T1s 36) (= (d_msec 36 43) 2) (t_msec 43)) (and (t_T1s 37) (= (d_msec 37 43) 2) (t_msec 43)) (and (t_T1s 38) (= (d_msec 38 43) 2) (t_msec 43)) (and (t_T1s 39) (= (d_msec 39 43) 2) (t_msec 43)) (and (t_T1s 40) (= (d_msec 40 43) 2) (t_msec 43)) (and (t_T1s 41) (= (d_msec 41 43) 2) (t_msec 43)))))
+ (ite $x3792 $x323 (not $x323)))))
+(assert
+ (let (($x3792 (or (and (t_T1s 1) (= (d_msec 1 43) 2) (t_msec 43)) (and (t_T1s 2) (= (d_msec 2 43) 2) (t_msec 43)) (and (t_T1s 3) (= (d_msec 3 43) 2) (t_msec 43)) (and (t_T1s 4) (= (d_msec 4 43) 2) (t_msec 43)) (and (t_T1s 5) (= (d_msec 5 43) 2) (t_msec 43)) (and (t_T1s 6) (= (d_msec 6 43) 2) (t_msec 43)) (and (t_T1s 7) (= (d_msec 7 43) 2) (t_msec 43)) (and (t_T1s 8) (= (d_msec 8 43) 2) (t_msec 43)) (and (t_T1s 9) (= (d_msec 9 43) 2) (t_msec 43)) (and (t_T1s 10) (= (d_msec 10 43) 2) (t_msec 43)) (and (t_T1s 11) (= (d_msec 11 43) 2) (t_msec 43)) (and (t_T1s 12) (= (d_msec 12 43) 2) (t_msec 43)) (and (t_T1s 13) (= (d_msec 13 43) 2) (t_msec 43)) (and (t_T1s 14) (= (d_msec 14 43) 2) (t_msec 43)) (and (t_T1s 15) (= (d_msec 15 43) 2) (t_msec 43)) (and (t_T1s 16) (= (d_msec 16 43) 2) (t_msec 43)) (and (t_T1s 17) (= (d_msec 17 43) 2) (t_msec 43)) (and (t_T1s 18) (= (d_msec 18 43) 2) (t_msec 43)) (and (t_T1s 19) (= (d_msec 19 43) 2) (t_msec 43)) (and (t_T1s 20) (= (d_msec 20 43) 2) (t_msec 43)) (and (t_T1s 21) (= (d_msec 21 43) 2) (t_msec 43)) (and (t_T1s 22) (= (d_msec 22 43) 2) (t_msec 43)) (and (t_T1s 23) (= (d_msec 23 43) 2) (t_msec 43)) (and (t_T1s 24) (= (d_msec 24 43) 2) (t_msec 43)) (and (t_T1s 25) (= (d_msec 25 43) 2) (t_msec 43)) (and (t_T1s 26) (= (d_msec 26 43) 2) (t_msec 43)) (and (t_T1s 27) (= (d_msec 27 43) 2) (t_msec 43)) (and (t_T1s 28) (= (d_msec 28 43) 2) (t_msec 43)) (and (t_T1s 29) (= (d_msec 29 43) 2) (t_msec 43)) (and (t_T1s 30) (= (d_msec 30 43) 2) (t_msec 43)) (and (t_T1s 31) (= (d_msec 31 43) 2) (t_msec 43)) (and (t_T1s 32) (= (d_msec 32 43) 2) (t_msec 43)) (and (t_T1s 33) (= (d_msec 33 43) 2) (t_msec 43)) (and (t_T1s 34) (= (d_msec 34 43) 2) (t_msec 43)) (and (t_T1s 35) (= (d_msec 35 43) 2) (t_msec 43)) (and (t_T1s 36) (= (d_msec 36 43) 2) (t_msec 43)) (and (t_T1s 37) (= (d_msec 37 43) 2) (t_msec 43)) (and (t_T1s 38) (= (d_msec 38 43) 2) (t_msec 43)) (and (t_T1s 39) (= (d_msec 39 43) 2) (t_msec 43)) (and (t_T1s 40) (= (d_msec 40 43) 2) (t_msec 43)) (and (t_T1s 41) (= (d_msec 41 43) 2) (t_msec 43)))))
+ (let (($x323 (t_T1f 43)))
+ (ite $x323 $x3792 (not $x3792)))))
+(assert
+ (let (($x330 (t_T1f 44)))
+ (let (($x3923 (or (and (t_T1s 1) (= (d_msec 1 44) 2) (t_msec 44)) (and (t_T1s 2) (= (d_msec 2 44) 2) (t_msec 44)) (and (t_T1s 3) (= (d_msec 3 44) 2) (t_msec 44)) (and (t_T1s 4) (= (d_msec 4 44) 2) (t_msec 44)) (and (t_T1s 5) (= (d_msec 5 44) 2) (t_msec 44)) (and (t_T1s 6) (= (d_msec 6 44) 2) (t_msec 44)) (and (t_T1s 7) (= (d_msec 7 44) 2) (t_msec 44)) (and (t_T1s 8) (= (d_msec 8 44) 2) (t_msec 44)) (and (t_T1s 9) (= (d_msec 9 44) 2) (t_msec 44)) (and (t_T1s 10) (= (d_msec 10 44) 2) (t_msec 44)) (and (t_T1s 11) (= (d_msec 11 44) 2) (t_msec 44)) (and (t_T1s 12) (= (d_msec 12 44) 2) (t_msec 44)) (and (t_T1s 13) (= (d_msec 13 44) 2) (t_msec 44)) (and (t_T1s 14) (= (d_msec 14 44) 2) (t_msec 44)) (and (t_T1s 15) (= (d_msec 15 44) 2) (t_msec 44)) (and (t_T1s 16) (= (d_msec 16 44) 2) (t_msec 44)) (and (t_T1s 17) (= (d_msec 17 44) 2) (t_msec 44)) (and (t_T1s 18) (= (d_msec 18 44) 2) (t_msec 44)) (and (t_T1s 19) (= (d_msec 19 44) 2) (t_msec 44)) (and (t_T1s 20) (= (d_msec 20 44) 2) (t_msec 44)) (and (t_T1s 21) (= (d_msec 21 44) 2) (t_msec 44)) (and (t_T1s 22) (= (d_msec 22 44) 2) (t_msec 44)) (and (t_T1s 23) (= (d_msec 23 44) 2) (t_msec 44)) (and (t_T1s 24) (= (d_msec 24 44) 2) (t_msec 44)) (and (t_T1s 25) (= (d_msec 25 44) 2) (t_msec 44)) (and (t_T1s 26) (= (d_msec 26 44) 2) (t_msec 44)) (and (t_T1s 27) (= (d_msec 27 44) 2) (t_msec 44)) (and (t_T1s 28) (= (d_msec 28 44) 2) (t_msec 44)) (and (t_T1s 29) (= (d_msec 29 44) 2) (t_msec 44)) (and (t_T1s 30) (= (d_msec 30 44) 2) (t_msec 44)) (and (t_T1s 31) (= (d_msec 31 44) 2) (t_msec 44)) (and (t_T1s 32) (= (d_msec 32 44) 2) (t_msec 44)) (and (t_T1s 33) (= (d_msec 33 44) 2) (t_msec 44)) (and (t_T1s 34) (= (d_msec 34 44) 2) (t_msec 44)) (and (t_T1s 35) (= (d_msec 35 44) 2) (t_msec 44)) (and (t_T1s 36) (= (d_msec 36 44) 2) (t_msec 44)) (and (t_T1s 37) (= (d_msec 37 44) 2) (t_msec 44)) (and (t_T1s 38) (= (d_msec 38 44) 2) (t_msec 44)) (and (t_T1s 39) (= (d_msec 39 44) 2) (t_msec 44)) (and (t_T1s 40) (= (d_msec 40 44) 2) (t_msec 44)) (and (t_T1s 41) (= (d_msec 41 44) 2) (t_msec 44)) (and (t_T1s 42) (= (d_msec 42 44) 2) (t_msec 44)))))
+ (ite $x3923 $x330 (not $x330)))))
+(assert
+ (let (($x3923 (or (and (t_T1s 1) (= (d_msec 1 44) 2) (t_msec 44)) (and (t_T1s 2) (= (d_msec 2 44) 2) (t_msec 44)) (and (t_T1s 3) (= (d_msec 3 44) 2) (t_msec 44)) (and (t_T1s 4) (= (d_msec 4 44) 2) (t_msec 44)) (and (t_T1s 5) (= (d_msec 5 44) 2) (t_msec 44)) (and (t_T1s 6) (= (d_msec 6 44) 2) (t_msec 44)) (and (t_T1s 7) (= (d_msec 7 44) 2) (t_msec 44)) (and (t_T1s 8) (= (d_msec 8 44) 2) (t_msec 44)) (and (t_T1s 9) (= (d_msec 9 44) 2) (t_msec 44)) (and (t_T1s 10) (= (d_msec 10 44) 2) (t_msec 44)) (and (t_T1s 11) (= (d_msec 11 44) 2) (t_msec 44)) (and (t_T1s 12) (= (d_msec 12 44) 2) (t_msec 44)) (and (t_T1s 13) (= (d_msec 13 44) 2) (t_msec 44)) (and (t_T1s 14) (= (d_msec 14 44) 2) (t_msec 44)) (and (t_T1s 15) (= (d_msec 15 44) 2) (t_msec 44)) (and (t_T1s 16) (= (d_msec 16 44) 2) (t_msec 44)) (and (t_T1s 17) (= (d_msec 17 44) 2) (t_msec 44)) (and (t_T1s 18) (= (d_msec 18 44) 2) (t_msec 44)) (and (t_T1s 19) (= (d_msec 19 44) 2) (t_msec 44)) (and (t_T1s 20) (= (d_msec 20 44) 2) (t_msec 44)) (and (t_T1s 21) (= (d_msec 21 44) 2) (t_msec 44)) (and (t_T1s 22) (= (d_msec 22 44) 2) (t_msec 44)) (and (t_T1s 23) (= (d_msec 23 44) 2) (t_msec 44)) (and (t_T1s 24) (= (d_msec 24 44) 2) (t_msec 44)) (and (t_T1s 25) (= (d_msec 25 44) 2) (t_msec 44)) (and (t_T1s 26) (= (d_msec 26 44) 2) (t_msec 44)) (and (t_T1s 27) (= (d_msec 27 44) 2) (t_msec 44)) (and (t_T1s 28) (= (d_msec 28 44) 2) (t_msec 44)) (and (t_T1s 29) (= (d_msec 29 44) 2) (t_msec 44)) (and (t_T1s 30) (= (d_msec 30 44) 2) (t_msec 44)) (and (t_T1s 31) (= (d_msec 31 44) 2) (t_msec 44)) (and (t_T1s 32) (= (d_msec 32 44) 2) (t_msec 44)) (and (t_T1s 33) (= (d_msec 33 44) 2) (t_msec 44)) (and (t_T1s 34) (= (d_msec 34 44) 2) (t_msec 44)) (and (t_T1s 35) (= (d_msec 35 44) 2) (t_msec 44)) (and (t_T1s 36) (= (d_msec 36 44) 2) (t_msec 44)) (and (t_T1s 37) (= (d_msec 37 44) 2) (t_msec 44)) (and (t_T1s 38) (= (d_msec 38 44) 2) (t_msec 44)) (and (t_T1s 39) (= (d_msec 39 44) 2) (t_msec 44)) (and (t_T1s 40) (= (d_msec 40 44) 2) (t_msec 44)) (and (t_T1s 41) (= (d_msec 41 44) 2) (t_msec 44)) (and (t_T1s 42) (= (d_msec 42 44) 2) (t_msec 44)))))
+ (let (($x330 (t_T1f 44)))
+ (ite $x330 $x3923 (not $x3923)))))
+(assert
+ (let (($x337 (t_T1f 45)))
+ (let (($x4057 (or (and (t_T1s 1) (= (d_msec 1 45) 2) (t_msec 45)) (and (t_T1s 2) (= (d_msec 2 45) 2) (t_msec 45)) (and (t_T1s 3) (= (d_msec 3 45) 2) (t_msec 45)) (and (t_T1s 4) (= (d_msec 4 45) 2) (t_msec 45)) (and (t_T1s 5) (= (d_msec 5 45) 2) (t_msec 45)) (and (t_T1s 6) (= (d_msec 6 45) 2) (t_msec 45)) (and (t_T1s 7) (= (d_msec 7 45) 2) (t_msec 45)) (and (t_T1s 8) (= (d_msec 8 45) 2) (t_msec 45)) (and (t_T1s 9) (= (d_msec 9 45) 2) (t_msec 45)) (and (t_T1s 10) (= (d_msec 10 45) 2) (t_msec 45)) (and (t_T1s 11) (= (d_msec 11 45) 2) (t_msec 45)) (and (t_T1s 12) (= (d_msec 12 45) 2) (t_msec 45)) (and (t_T1s 13) (= (d_msec 13 45) 2) (t_msec 45)) (and (t_T1s 14) (= (d_msec 14 45) 2) (t_msec 45)) (and (t_T1s 15) (= (d_msec 15 45) 2) (t_msec 45)) (and (t_T1s 16) (= (d_msec 16 45) 2) (t_msec 45)) (and (t_T1s 17) (= (d_msec 17 45) 2) (t_msec 45)) (and (t_T1s 18) (= (d_msec 18 45) 2) (t_msec 45)) (and (t_T1s 19) (= (d_msec 19 45) 2) (t_msec 45)) (and (t_T1s 20) (= (d_msec 20 45) 2) (t_msec 45)) (and (t_T1s 21) (= (d_msec 21 45) 2) (t_msec 45)) (and (t_T1s 22) (= (d_msec 22 45) 2) (t_msec 45)) (and (t_T1s 23) (= (d_msec 23 45) 2) (t_msec 45)) (and (t_T1s 24) (= (d_msec 24 45) 2) (t_msec 45)) (and (t_T1s 25) (= (d_msec 25 45) 2) (t_msec 45)) (and (t_T1s 26) (= (d_msec 26 45) 2) (t_msec 45)) (and (t_T1s 27) (= (d_msec 27 45) 2) (t_msec 45)) (and (t_T1s 28) (= (d_msec 28 45) 2) (t_msec 45)) (and (t_T1s 29) (= (d_msec 29 45) 2) (t_msec 45)) (and (t_T1s 30) (= (d_msec 30 45) 2) (t_msec 45)) (and (t_T1s 31) (= (d_msec 31 45) 2) (t_msec 45)) (and (t_T1s 32) (= (d_msec 32 45) 2) (t_msec 45)) (and (t_T1s 33) (= (d_msec 33 45) 2) (t_msec 45)) (and (t_T1s 34) (= (d_msec 34 45) 2) (t_msec 45)) (and (t_T1s 35) (= (d_msec 35 45) 2) (t_msec 45)) (and (t_T1s 36) (= (d_msec 36 45) 2) (t_msec 45)) (and (t_T1s 37) (= (d_msec 37 45) 2) (t_msec 45)) (and (t_T1s 38) (= (d_msec 38 45) 2) (t_msec 45)) (and (t_T1s 39) (= (d_msec 39 45) 2) (t_msec 45)) (and (t_T1s 40) (= (d_msec 40 45) 2) (t_msec 45)) (and (t_T1s 41) (= (d_msec 41 45) 2) (t_msec 45)) (and (t_T1s 42) (= (d_msec 42 45) 2) (t_msec 45)) (and (t_T1s 43) (= (d_msec 43 45) 2) (t_msec 45)))))
+ (ite $x4057 $x337 (not $x337)))))
+(assert
+ (let (($x4057 (or (and (t_T1s 1) (= (d_msec 1 45) 2) (t_msec 45)) (and (t_T1s 2) (= (d_msec 2 45) 2) (t_msec 45)) (and (t_T1s 3) (= (d_msec 3 45) 2) (t_msec 45)) (and (t_T1s 4) (= (d_msec 4 45) 2) (t_msec 45)) (and (t_T1s 5) (= (d_msec 5 45) 2) (t_msec 45)) (and (t_T1s 6) (= (d_msec 6 45) 2) (t_msec 45)) (and (t_T1s 7) (= (d_msec 7 45) 2) (t_msec 45)) (and (t_T1s 8) (= (d_msec 8 45) 2) (t_msec 45)) (and (t_T1s 9) (= (d_msec 9 45) 2) (t_msec 45)) (and (t_T1s 10) (= (d_msec 10 45) 2) (t_msec 45)) (and (t_T1s 11) (= (d_msec 11 45) 2) (t_msec 45)) (and (t_T1s 12) (= (d_msec 12 45) 2) (t_msec 45)) (and (t_T1s 13) (= (d_msec 13 45) 2) (t_msec 45)) (and (t_T1s 14) (= (d_msec 14 45) 2) (t_msec 45)) (and (t_T1s 15) (= (d_msec 15 45) 2) (t_msec 45)) (and (t_T1s 16) (= (d_msec 16 45) 2) (t_msec 45)) (and (t_T1s 17) (= (d_msec 17 45) 2) (t_msec 45)) (and (t_T1s 18) (= (d_msec 18 45) 2) (t_msec 45)) (and (t_T1s 19) (= (d_msec 19 45) 2) (t_msec 45)) (and (t_T1s 20) (= (d_msec 20 45) 2) (t_msec 45)) (and (t_T1s 21) (= (d_msec 21 45) 2) (t_msec 45)) (and (t_T1s 22) (= (d_msec 22 45) 2) (t_msec 45)) (and (t_T1s 23) (= (d_msec 23 45) 2) (t_msec 45)) (and (t_T1s 24) (= (d_msec 24 45) 2) (t_msec 45)) (and (t_T1s 25) (= (d_msec 25 45) 2) (t_msec 45)) (and (t_T1s 26) (= (d_msec 26 45) 2) (t_msec 45)) (and (t_T1s 27) (= (d_msec 27 45) 2) (t_msec 45)) (and (t_T1s 28) (= (d_msec 28 45) 2) (t_msec 45)) (and (t_T1s 29) (= (d_msec 29 45) 2) (t_msec 45)) (and (t_T1s 30) (= (d_msec 30 45) 2) (t_msec 45)) (and (t_T1s 31) (= (d_msec 31 45) 2) (t_msec 45)) (and (t_T1s 32) (= (d_msec 32 45) 2) (t_msec 45)) (and (t_T1s 33) (= (d_msec 33 45) 2) (t_msec 45)) (and (t_T1s 34) (= (d_msec 34 45) 2) (t_msec 45)) (and (t_T1s 35) (= (d_msec 35 45) 2) (t_msec 45)) (and (t_T1s 36) (= (d_msec 36 45) 2) (t_msec 45)) (and (t_T1s 37) (= (d_msec 37 45) 2) (t_msec 45)) (and (t_T1s 38) (= (d_msec 38 45) 2) (t_msec 45)) (and (t_T1s 39) (= (d_msec 39 45) 2) (t_msec 45)) (and (t_T1s 40) (= (d_msec 40 45) 2) (t_msec 45)) (and (t_T1s 41) (= (d_msec 41 45) 2) (t_msec 45)) (and (t_T1s 42) (= (d_msec 42 45) 2) (t_msec 45)) (and (t_T1s 43) (= (d_msec 43 45) 2) (t_msec 45)))))
+ (let (($x337 (t_T1f 45)))
+ (ite $x337 $x4057 (not $x4057)))))
+(assert
+ (let (($x344 (t_T1f 46)))
+ (let (($x4194 (or (and (t_T1s 1) (= (d_msec 1 46) 2) (t_msec 46)) (and (t_T1s 2) (= (d_msec 2 46) 2) (t_msec 46)) (and (t_T1s 3) (= (d_msec 3 46) 2) (t_msec 46)) (and (t_T1s 4) (= (d_msec 4 46) 2) (t_msec 46)) (and (t_T1s 5) (= (d_msec 5 46) 2) (t_msec 46)) (and (t_T1s 6) (= (d_msec 6 46) 2) (t_msec 46)) (and (t_T1s 7) (= (d_msec 7 46) 2) (t_msec 46)) (and (t_T1s 8) (= (d_msec 8 46) 2) (t_msec 46)) (and (t_T1s 9) (= (d_msec 9 46) 2) (t_msec 46)) (and (t_T1s 10) (= (d_msec 10 46) 2) (t_msec 46)) (and (t_T1s 11) (= (d_msec 11 46) 2) (t_msec 46)) (and (t_T1s 12) (= (d_msec 12 46) 2) (t_msec 46)) (and (t_T1s 13) (= (d_msec 13 46) 2) (t_msec 46)) (and (t_T1s 14) (= (d_msec 14 46) 2) (t_msec 46)) (and (t_T1s 15) (= (d_msec 15 46) 2) (t_msec 46)) (and (t_T1s 16) (= (d_msec 16 46) 2) (t_msec 46)) (and (t_T1s 17) (= (d_msec 17 46) 2) (t_msec 46)) (and (t_T1s 18) (= (d_msec 18 46) 2) (t_msec 46)) (and (t_T1s 19) (= (d_msec 19 46) 2) (t_msec 46)) (and (t_T1s 20) (= (d_msec 20 46) 2) (t_msec 46)) (and (t_T1s 21) (= (d_msec 21 46) 2) (t_msec 46)) (and (t_T1s 22) (= (d_msec 22 46) 2) (t_msec 46)) (and (t_T1s 23) (= (d_msec 23 46) 2) (t_msec 46)) (and (t_T1s 24) (= (d_msec 24 46) 2) (t_msec 46)) (and (t_T1s 25) (= (d_msec 25 46) 2) (t_msec 46)) (and (t_T1s 26) (= (d_msec 26 46) 2) (t_msec 46)) (and (t_T1s 27) (= (d_msec 27 46) 2) (t_msec 46)) (and (t_T1s 28) (= (d_msec 28 46) 2) (t_msec 46)) (and (t_T1s 29) (= (d_msec 29 46) 2) (t_msec 46)) (and (t_T1s 30) (= (d_msec 30 46) 2) (t_msec 46)) (and (t_T1s 31) (= (d_msec 31 46) 2) (t_msec 46)) (and (t_T1s 32) (= (d_msec 32 46) 2) (t_msec 46)) (and (t_T1s 33) (= (d_msec 33 46) 2) (t_msec 46)) (and (t_T1s 34) (= (d_msec 34 46) 2) (t_msec 46)) (and (t_T1s 35) (= (d_msec 35 46) 2) (t_msec 46)) (and (t_T1s 36) (= (d_msec 36 46) 2) (t_msec 46)) (and (t_T1s 37) (= (d_msec 37 46) 2) (t_msec 46)) (and (t_T1s 38) (= (d_msec 38 46) 2) (t_msec 46)) (and (t_T1s 39) (= (d_msec 39 46) 2) (t_msec 46)) (and (t_T1s 40) (= (d_msec 40 46) 2) (t_msec 46)) (and (t_T1s 41) (= (d_msec 41 46) 2) (t_msec 46)) (and (t_T1s 42) (= (d_msec 42 46) 2) (t_msec 46)) (and (t_T1s 43) (= (d_msec 43 46) 2) (t_msec 46)) (and (t_T1s 44) (= (d_msec 44 46) 2) (t_msec 46)))))
+ (ite $x4194 $x344 (not $x344)))))
+(assert
+ (let (($x4194 (or (and (t_T1s 1) (= (d_msec 1 46) 2) (t_msec 46)) (and (t_T1s 2) (= (d_msec 2 46) 2) (t_msec 46)) (and (t_T1s 3) (= (d_msec 3 46) 2) (t_msec 46)) (and (t_T1s 4) (= (d_msec 4 46) 2) (t_msec 46)) (and (t_T1s 5) (= (d_msec 5 46) 2) (t_msec 46)) (and (t_T1s 6) (= (d_msec 6 46) 2) (t_msec 46)) (and (t_T1s 7) (= (d_msec 7 46) 2) (t_msec 46)) (and (t_T1s 8) (= (d_msec 8 46) 2) (t_msec 46)) (and (t_T1s 9) (= (d_msec 9 46) 2) (t_msec 46)) (and (t_T1s 10) (= (d_msec 10 46) 2) (t_msec 46)) (and (t_T1s 11) (= (d_msec 11 46) 2) (t_msec 46)) (and (t_T1s 12) (= (d_msec 12 46) 2) (t_msec 46)) (and (t_T1s 13) (= (d_msec 13 46) 2) (t_msec 46)) (and (t_T1s 14) (= (d_msec 14 46) 2) (t_msec 46)) (and (t_T1s 15) (= (d_msec 15 46) 2) (t_msec 46)) (and (t_T1s 16) (= (d_msec 16 46) 2) (t_msec 46)) (and (t_T1s 17) (= (d_msec 17 46) 2) (t_msec 46)) (and (t_T1s 18) (= (d_msec 18 46) 2) (t_msec 46)) (and (t_T1s 19) (= (d_msec 19 46) 2) (t_msec 46)) (and (t_T1s 20) (= (d_msec 20 46) 2) (t_msec 46)) (and (t_T1s 21) (= (d_msec 21 46) 2) (t_msec 46)) (and (t_T1s 22) (= (d_msec 22 46) 2) (t_msec 46)) (and (t_T1s 23) (= (d_msec 23 46) 2) (t_msec 46)) (and (t_T1s 24) (= (d_msec 24 46) 2) (t_msec 46)) (and (t_T1s 25) (= (d_msec 25 46) 2) (t_msec 46)) (and (t_T1s 26) (= (d_msec 26 46) 2) (t_msec 46)) (and (t_T1s 27) (= (d_msec 27 46) 2) (t_msec 46)) (and (t_T1s 28) (= (d_msec 28 46) 2) (t_msec 46)) (and (t_T1s 29) (= (d_msec 29 46) 2) (t_msec 46)) (and (t_T1s 30) (= (d_msec 30 46) 2) (t_msec 46)) (and (t_T1s 31) (= (d_msec 31 46) 2) (t_msec 46)) (and (t_T1s 32) (= (d_msec 32 46) 2) (t_msec 46)) (and (t_T1s 33) (= (d_msec 33 46) 2) (t_msec 46)) (and (t_T1s 34) (= (d_msec 34 46) 2) (t_msec 46)) (and (t_T1s 35) (= (d_msec 35 46) 2) (t_msec 46)) (and (t_T1s 36) (= (d_msec 36 46) 2) (t_msec 46)) (and (t_T1s 37) (= (d_msec 37 46) 2) (t_msec 46)) (and (t_T1s 38) (= (d_msec 38 46) 2) (t_msec 46)) (and (t_T1s 39) (= (d_msec 39 46) 2) (t_msec 46)) (and (t_T1s 40) (= (d_msec 40 46) 2) (t_msec 46)) (and (t_T1s 41) (= (d_msec 41 46) 2) (t_msec 46)) (and (t_T1s 42) (= (d_msec 42 46) 2) (t_msec 46)) (and (t_T1s 43) (= (d_msec 43 46) 2) (t_msec 46)) (and (t_T1s 44) (= (d_msec 44 46) 2) (t_msec 46)))))
+ (let (($x344 (t_T1f 46)))
+ (ite $x344 $x4194 (not $x4194)))))
+(assert
+ (let (($x351 (t_T1f 47)))
+ (let (($x4334 (or (and (t_T1s 1) (= (d_msec 1 47) 2) (t_msec 47)) (and (t_T1s 2) (= (d_msec 2 47) 2) (t_msec 47)) (and (t_T1s 3) (= (d_msec 3 47) 2) (t_msec 47)) (and (t_T1s 4) (= (d_msec 4 47) 2) (t_msec 47)) (and (t_T1s 5) (= (d_msec 5 47) 2) (t_msec 47)) (and (t_T1s 6) (= (d_msec 6 47) 2) (t_msec 47)) (and (t_T1s 7) (= (d_msec 7 47) 2) (t_msec 47)) (and (t_T1s 8) (= (d_msec 8 47) 2) (t_msec 47)) (and (t_T1s 9) (= (d_msec 9 47) 2) (t_msec 47)) (and (t_T1s 10) (= (d_msec 10 47) 2) (t_msec 47)) (and (t_T1s 11) (= (d_msec 11 47) 2) (t_msec 47)) (and (t_T1s 12) (= (d_msec 12 47) 2) (t_msec 47)) (and (t_T1s 13) (= (d_msec 13 47) 2) (t_msec 47)) (and (t_T1s 14) (= (d_msec 14 47) 2) (t_msec 47)) (and (t_T1s 15) (= (d_msec 15 47) 2) (t_msec 47)) (and (t_T1s 16) (= (d_msec 16 47) 2) (t_msec 47)) (and (t_T1s 17) (= (d_msec 17 47) 2) (t_msec 47)) (and (t_T1s 18) (= (d_msec 18 47) 2) (t_msec 47)) (and (t_T1s 19) (= (d_msec 19 47) 2) (t_msec 47)) (and (t_T1s 20) (= (d_msec 20 47) 2) (t_msec 47)) (and (t_T1s 21) (= (d_msec 21 47) 2) (t_msec 47)) (and (t_T1s 22) (= (d_msec 22 47) 2) (t_msec 47)) (and (t_T1s 23) (= (d_msec 23 47) 2) (t_msec 47)) (and (t_T1s 24) (= (d_msec 24 47) 2) (t_msec 47)) (and (t_T1s 25) (= (d_msec 25 47) 2) (t_msec 47)) (and (t_T1s 26) (= (d_msec 26 47) 2) (t_msec 47)) (and (t_T1s 27) (= (d_msec 27 47) 2) (t_msec 47)) (and (t_T1s 28) (= (d_msec 28 47) 2) (t_msec 47)) (and (t_T1s 29) (= (d_msec 29 47) 2) (t_msec 47)) (and (t_T1s 30) (= (d_msec 30 47) 2) (t_msec 47)) (and (t_T1s 31) (= (d_msec 31 47) 2) (t_msec 47)) (and (t_T1s 32) (= (d_msec 32 47) 2) (t_msec 47)) (and (t_T1s 33) (= (d_msec 33 47) 2) (t_msec 47)) (and (t_T1s 34) (= (d_msec 34 47) 2) (t_msec 47)) (and (t_T1s 35) (= (d_msec 35 47) 2) (t_msec 47)) (and (t_T1s 36) (= (d_msec 36 47) 2) (t_msec 47)) (and (t_T1s 37) (= (d_msec 37 47) 2) (t_msec 47)) (and (t_T1s 38) (= (d_msec 38 47) 2) (t_msec 47)) (and (t_T1s 39) (= (d_msec 39 47) 2) (t_msec 47)) (and (t_T1s 40) (= (d_msec 40 47) 2) (t_msec 47)) (and (t_T1s 41) (= (d_msec 41 47) 2) (t_msec 47)) (and (t_T1s 42) (= (d_msec 42 47) 2) (t_msec 47)) (and (t_T1s 43) (= (d_msec 43 47) 2) (t_msec 47)) (and (t_T1s 44) (= (d_msec 44 47) 2) (t_msec 47)) (and (t_T1s 45) (= (d_msec 45 47) 2) (t_msec 47)))))
+ (ite $x4334 $x351 (not $x351)))))
+(assert
+ (let (($x4334 (or (and (t_T1s 1) (= (d_msec 1 47) 2) (t_msec 47)) (and (t_T1s 2) (= (d_msec 2 47) 2) (t_msec 47)) (and (t_T1s 3) (= (d_msec 3 47) 2) (t_msec 47)) (and (t_T1s 4) (= (d_msec 4 47) 2) (t_msec 47)) (and (t_T1s 5) (= (d_msec 5 47) 2) (t_msec 47)) (and (t_T1s 6) (= (d_msec 6 47) 2) (t_msec 47)) (and (t_T1s 7) (= (d_msec 7 47) 2) (t_msec 47)) (and (t_T1s 8) (= (d_msec 8 47) 2) (t_msec 47)) (and (t_T1s 9) (= (d_msec 9 47) 2) (t_msec 47)) (and (t_T1s 10) (= (d_msec 10 47) 2) (t_msec 47)) (and (t_T1s 11) (= (d_msec 11 47) 2) (t_msec 47)) (and (t_T1s 12) (= (d_msec 12 47) 2) (t_msec 47)) (and (t_T1s 13) (= (d_msec 13 47) 2) (t_msec 47)) (and (t_T1s 14) (= (d_msec 14 47) 2) (t_msec 47)) (and (t_T1s 15) (= (d_msec 15 47) 2) (t_msec 47)) (and (t_T1s 16) (= (d_msec 16 47) 2) (t_msec 47)) (and (t_T1s 17) (= (d_msec 17 47) 2) (t_msec 47)) (and (t_T1s 18) (= (d_msec 18 47) 2) (t_msec 47)) (and (t_T1s 19) (= (d_msec 19 47) 2) (t_msec 47)) (and (t_T1s 20) (= (d_msec 20 47) 2) (t_msec 47)) (and (t_T1s 21) (= (d_msec 21 47) 2) (t_msec 47)) (and (t_T1s 22) (= (d_msec 22 47) 2) (t_msec 47)) (and (t_T1s 23) (= (d_msec 23 47) 2) (t_msec 47)) (and (t_T1s 24) (= (d_msec 24 47) 2) (t_msec 47)) (and (t_T1s 25) (= (d_msec 25 47) 2) (t_msec 47)) (and (t_T1s 26) (= (d_msec 26 47) 2) (t_msec 47)) (and (t_T1s 27) (= (d_msec 27 47) 2) (t_msec 47)) (and (t_T1s 28) (= (d_msec 28 47) 2) (t_msec 47)) (and (t_T1s 29) (= (d_msec 29 47) 2) (t_msec 47)) (and (t_T1s 30) (= (d_msec 30 47) 2) (t_msec 47)) (and (t_T1s 31) (= (d_msec 31 47) 2) (t_msec 47)) (and (t_T1s 32) (= (d_msec 32 47) 2) (t_msec 47)) (and (t_T1s 33) (= (d_msec 33 47) 2) (t_msec 47)) (and (t_T1s 34) (= (d_msec 34 47) 2) (t_msec 47)) (and (t_T1s 35) (= (d_msec 35 47) 2) (t_msec 47)) (and (t_T1s 36) (= (d_msec 36 47) 2) (t_msec 47)) (and (t_T1s 37) (= (d_msec 37 47) 2) (t_msec 47)) (and (t_T1s 38) (= (d_msec 38 47) 2) (t_msec 47)) (and (t_T1s 39) (= (d_msec 39 47) 2) (t_msec 47)) (and (t_T1s 40) (= (d_msec 40 47) 2) (t_msec 47)) (and (t_T1s 41) (= (d_msec 41 47) 2) (t_msec 47)) (and (t_T1s 42) (= (d_msec 42 47) 2) (t_msec 47)) (and (t_T1s 43) (= (d_msec 43 47) 2) (t_msec 47)) (and (t_T1s 44) (= (d_msec 44 47) 2) (t_msec 47)) (and (t_T1s 45) (= (d_msec 45 47) 2) (t_msec 47)))))
+ (let (($x351 (t_T1f 47)))
+ (ite $x351 $x4334 (not $x4334)))))
+(assert
+ (let (($x358 (t_T1f 48)))
+ (let (($x4477 (or (and (t_T1s 1) (= (d_msec 1 48) 2) (t_msec 48)) (and (t_T1s 2) (= (d_msec 2 48) 2) (t_msec 48)) (and (t_T1s 3) (= (d_msec 3 48) 2) (t_msec 48)) (and (t_T1s 4) (= (d_msec 4 48) 2) (t_msec 48)) (and (t_T1s 5) (= (d_msec 5 48) 2) (t_msec 48)) (and (t_T1s 6) (= (d_msec 6 48) 2) (t_msec 48)) (and (t_T1s 7) (= (d_msec 7 48) 2) (t_msec 48)) (and (t_T1s 8) (= (d_msec 8 48) 2) (t_msec 48)) (and (t_T1s 9) (= (d_msec 9 48) 2) (t_msec 48)) (and (t_T1s 10) (= (d_msec 10 48) 2) (t_msec 48)) (and (t_T1s 11) (= (d_msec 11 48) 2) (t_msec 48)) (and (t_T1s 12) (= (d_msec 12 48) 2) (t_msec 48)) (and (t_T1s 13) (= (d_msec 13 48) 2) (t_msec 48)) (and (t_T1s 14) (= (d_msec 14 48) 2) (t_msec 48)) (and (t_T1s 15) (= (d_msec 15 48) 2) (t_msec 48)) (and (t_T1s 16) (= (d_msec 16 48) 2) (t_msec 48)) (and (t_T1s 17) (= (d_msec 17 48) 2) (t_msec 48)) (and (t_T1s 18) (= (d_msec 18 48) 2) (t_msec 48)) (and (t_T1s 19) (= (d_msec 19 48) 2) (t_msec 48)) (and (t_T1s 20) (= (d_msec 20 48) 2) (t_msec 48)) (and (t_T1s 21) (= (d_msec 21 48) 2) (t_msec 48)) (and (t_T1s 22) (= (d_msec 22 48) 2) (t_msec 48)) (and (t_T1s 23) (= (d_msec 23 48) 2) (t_msec 48)) (and (t_T1s 24) (= (d_msec 24 48) 2) (t_msec 48)) (and (t_T1s 25) (= (d_msec 25 48) 2) (t_msec 48)) (and (t_T1s 26) (= (d_msec 26 48) 2) (t_msec 48)) (and (t_T1s 27) (= (d_msec 27 48) 2) (t_msec 48)) (and (t_T1s 28) (= (d_msec 28 48) 2) (t_msec 48)) (and (t_T1s 29) (= (d_msec 29 48) 2) (t_msec 48)) (and (t_T1s 30) (= (d_msec 30 48) 2) (t_msec 48)) (and (t_T1s 31) (= (d_msec 31 48) 2) (t_msec 48)) (and (t_T1s 32) (= (d_msec 32 48) 2) (t_msec 48)) (and (t_T1s 33) (= (d_msec 33 48) 2) (t_msec 48)) (and (t_T1s 34) (= (d_msec 34 48) 2) (t_msec 48)) (and (t_T1s 35) (= (d_msec 35 48) 2) (t_msec 48)) (and (t_T1s 36) (= (d_msec 36 48) 2) (t_msec 48)) (and (t_T1s 37) (= (d_msec 37 48) 2) (t_msec 48)) (and (t_T1s 38) (= (d_msec 38 48) 2) (t_msec 48)) (and (t_T1s 39) (= (d_msec 39 48) 2) (t_msec 48)) (and (t_T1s 40) (= (d_msec 40 48) 2) (t_msec 48)) (and (t_T1s 41) (= (d_msec 41 48) 2) (t_msec 48)) (and (t_T1s 42) (= (d_msec 42 48) 2) (t_msec 48)) (and (t_T1s 43) (= (d_msec 43 48) 2) (t_msec 48)) (and (t_T1s 44) (= (d_msec 44 48) 2) (t_msec 48)) (and (t_T1s 45) (= (d_msec 45 48) 2) (t_msec 48)) (and (t_T1s 46) (= (d_msec 46 48) 2) (t_msec 48)))))
+ (ite $x4477 $x358 (not $x358)))))
+(assert
+ (let (($x4477 (or (and (t_T1s 1) (= (d_msec 1 48) 2) (t_msec 48)) (and (t_T1s 2) (= (d_msec 2 48) 2) (t_msec 48)) (and (t_T1s 3) (= (d_msec 3 48) 2) (t_msec 48)) (and (t_T1s 4) (= (d_msec 4 48) 2) (t_msec 48)) (and (t_T1s 5) (= (d_msec 5 48) 2) (t_msec 48)) (and (t_T1s 6) (= (d_msec 6 48) 2) (t_msec 48)) (and (t_T1s 7) (= (d_msec 7 48) 2) (t_msec 48)) (and (t_T1s 8) (= (d_msec 8 48) 2) (t_msec 48)) (and (t_T1s 9) (= (d_msec 9 48) 2) (t_msec 48)) (and (t_T1s 10) (= (d_msec 10 48) 2) (t_msec 48)) (and (t_T1s 11) (= (d_msec 11 48) 2) (t_msec 48)) (and (t_T1s 12) (= (d_msec 12 48) 2) (t_msec 48)) (and (t_T1s 13) (= (d_msec 13 48) 2) (t_msec 48)) (and (t_T1s 14) (= (d_msec 14 48) 2) (t_msec 48)) (and (t_T1s 15) (= (d_msec 15 48) 2) (t_msec 48)) (and (t_T1s 16) (= (d_msec 16 48) 2) (t_msec 48)) (and (t_T1s 17) (= (d_msec 17 48) 2) (t_msec 48)) (and (t_T1s 18) (= (d_msec 18 48) 2) (t_msec 48)) (and (t_T1s 19) (= (d_msec 19 48) 2) (t_msec 48)) (and (t_T1s 20) (= (d_msec 20 48) 2) (t_msec 48)) (and (t_T1s 21) (= (d_msec 21 48) 2) (t_msec 48)) (and (t_T1s 22) (= (d_msec 22 48) 2) (t_msec 48)) (and (t_T1s 23) (= (d_msec 23 48) 2) (t_msec 48)) (and (t_T1s 24) (= (d_msec 24 48) 2) (t_msec 48)) (and (t_T1s 25) (= (d_msec 25 48) 2) (t_msec 48)) (and (t_T1s 26) (= (d_msec 26 48) 2) (t_msec 48)) (and (t_T1s 27) (= (d_msec 27 48) 2) (t_msec 48)) (and (t_T1s 28) (= (d_msec 28 48) 2) (t_msec 48)) (and (t_T1s 29) (= (d_msec 29 48) 2) (t_msec 48)) (and (t_T1s 30) (= (d_msec 30 48) 2) (t_msec 48)) (and (t_T1s 31) (= (d_msec 31 48) 2) (t_msec 48)) (and (t_T1s 32) (= (d_msec 32 48) 2) (t_msec 48)) (and (t_T1s 33) (= (d_msec 33 48) 2) (t_msec 48)) (and (t_T1s 34) (= (d_msec 34 48) 2) (t_msec 48)) (and (t_T1s 35) (= (d_msec 35 48) 2) (t_msec 48)) (and (t_T1s 36) (= (d_msec 36 48) 2) (t_msec 48)) (and (t_T1s 37) (= (d_msec 37 48) 2) (t_msec 48)) (and (t_T1s 38) (= (d_msec 38 48) 2) (t_msec 48)) (and (t_T1s 39) (= (d_msec 39 48) 2) (t_msec 48)) (and (t_T1s 40) (= (d_msec 40 48) 2) (t_msec 48)) (and (t_T1s 41) (= (d_msec 41 48) 2) (t_msec 48)) (and (t_T1s 42) (= (d_msec 42 48) 2) (t_msec 48)) (and (t_T1s 43) (= (d_msec 43 48) 2) (t_msec 48)) (and (t_T1s 44) (= (d_msec 44 48) 2) (t_msec 48)) (and (t_T1s 45) (= (d_msec 45 48) 2) (t_msec 48)) (and (t_T1s 46) (= (d_msec 46 48) 2) (t_msec 48)))))
+ (let (($x358 (t_T1f 48)))
+ (ite $x358 $x4477 (not $x4477)))))
+(assert
+ (let (($x365 (t_T1f 49)))
+ (let (($x4623 (or (and (t_T1s 1) (= (d_msec 1 49) 2) (t_msec 49)) (and (t_T1s 2) (= (d_msec 2 49) 2) (t_msec 49)) (and (t_T1s 3) (= (d_msec 3 49) 2) (t_msec 49)) (and (t_T1s 4) (= (d_msec 4 49) 2) (t_msec 49)) (and (t_T1s 5) (= (d_msec 5 49) 2) (t_msec 49)) (and (t_T1s 6) (= (d_msec 6 49) 2) (t_msec 49)) (and (t_T1s 7) (= (d_msec 7 49) 2) (t_msec 49)) (and (t_T1s 8) (= (d_msec 8 49) 2) (t_msec 49)) (and (t_T1s 9) (= (d_msec 9 49) 2) (t_msec 49)) (and (t_T1s 10) (= (d_msec 10 49) 2) (t_msec 49)) (and (t_T1s 11) (= (d_msec 11 49) 2) (t_msec 49)) (and (t_T1s 12) (= (d_msec 12 49) 2) (t_msec 49)) (and (t_T1s 13) (= (d_msec 13 49) 2) (t_msec 49)) (and (t_T1s 14) (= (d_msec 14 49) 2) (t_msec 49)) (and (t_T1s 15) (= (d_msec 15 49) 2) (t_msec 49)) (and (t_T1s 16) (= (d_msec 16 49) 2) (t_msec 49)) (and (t_T1s 17) (= (d_msec 17 49) 2) (t_msec 49)) (and (t_T1s 18) (= (d_msec 18 49) 2) (t_msec 49)) (and (t_T1s 19) (= (d_msec 19 49) 2) (t_msec 49)) (and (t_T1s 20) (= (d_msec 20 49) 2) (t_msec 49)) (and (t_T1s 21) (= (d_msec 21 49) 2) (t_msec 49)) (and (t_T1s 22) (= (d_msec 22 49) 2) (t_msec 49)) (and (t_T1s 23) (= (d_msec 23 49) 2) (t_msec 49)) (and (t_T1s 24) (= (d_msec 24 49) 2) (t_msec 49)) (and (t_T1s 25) (= (d_msec 25 49) 2) (t_msec 49)) (and (t_T1s 26) (= (d_msec 26 49) 2) (t_msec 49)) (and (t_T1s 27) (= (d_msec 27 49) 2) (t_msec 49)) (and (t_T1s 28) (= (d_msec 28 49) 2) (t_msec 49)) (and (t_T1s 29) (= (d_msec 29 49) 2) (t_msec 49)) (and (t_T1s 30) (= (d_msec 30 49) 2) (t_msec 49)) (and (t_T1s 31) (= (d_msec 31 49) 2) (t_msec 49)) (and (t_T1s 32) (= (d_msec 32 49) 2) (t_msec 49)) (and (t_T1s 33) (= (d_msec 33 49) 2) (t_msec 49)) (and (t_T1s 34) (= (d_msec 34 49) 2) (t_msec 49)) (and (t_T1s 35) (= (d_msec 35 49) 2) (t_msec 49)) (and (t_T1s 36) (= (d_msec 36 49) 2) (t_msec 49)) (and (t_T1s 37) (= (d_msec 37 49) 2) (t_msec 49)) (and (t_T1s 38) (= (d_msec 38 49) 2) (t_msec 49)) (and (t_T1s 39) (= (d_msec 39 49) 2) (t_msec 49)) (and (t_T1s 40) (= (d_msec 40 49) 2) (t_msec 49)) (and (t_T1s 41) (= (d_msec 41 49) 2) (t_msec 49)) (and (t_T1s 42) (= (d_msec 42 49) 2) (t_msec 49)) (and (t_T1s 43) (= (d_msec 43 49) 2) (t_msec 49)) (and (t_T1s 44) (= (d_msec 44 49) 2) (t_msec 49)) (and (t_T1s 45) (= (d_msec 45 49) 2) (t_msec 49)) (and (t_T1s 46) (= (d_msec 46 49) 2) (t_msec 49)) (and (t_T1s 47) (= (d_msec 47 49) 2) (t_msec 49)))))
+ (ite $x4623 $x365 (not $x365)))))
+(assert
+ (let (($x4623 (or (and (t_T1s 1) (= (d_msec 1 49) 2) (t_msec 49)) (and (t_T1s 2) (= (d_msec 2 49) 2) (t_msec 49)) (and (t_T1s 3) (= (d_msec 3 49) 2) (t_msec 49)) (and (t_T1s 4) (= (d_msec 4 49) 2) (t_msec 49)) (and (t_T1s 5) (= (d_msec 5 49) 2) (t_msec 49)) (and (t_T1s 6) (= (d_msec 6 49) 2) (t_msec 49)) (and (t_T1s 7) (= (d_msec 7 49) 2) (t_msec 49)) (and (t_T1s 8) (= (d_msec 8 49) 2) (t_msec 49)) (and (t_T1s 9) (= (d_msec 9 49) 2) (t_msec 49)) (and (t_T1s 10) (= (d_msec 10 49) 2) (t_msec 49)) (and (t_T1s 11) (= (d_msec 11 49) 2) (t_msec 49)) (and (t_T1s 12) (= (d_msec 12 49) 2) (t_msec 49)) (and (t_T1s 13) (= (d_msec 13 49) 2) (t_msec 49)) (and (t_T1s 14) (= (d_msec 14 49) 2) (t_msec 49)) (and (t_T1s 15) (= (d_msec 15 49) 2) (t_msec 49)) (and (t_T1s 16) (= (d_msec 16 49) 2) (t_msec 49)) (and (t_T1s 17) (= (d_msec 17 49) 2) (t_msec 49)) (and (t_T1s 18) (= (d_msec 18 49) 2) (t_msec 49)) (and (t_T1s 19) (= (d_msec 19 49) 2) (t_msec 49)) (and (t_T1s 20) (= (d_msec 20 49) 2) (t_msec 49)) (and (t_T1s 21) (= (d_msec 21 49) 2) (t_msec 49)) (and (t_T1s 22) (= (d_msec 22 49) 2) (t_msec 49)) (and (t_T1s 23) (= (d_msec 23 49) 2) (t_msec 49)) (and (t_T1s 24) (= (d_msec 24 49) 2) (t_msec 49)) (and (t_T1s 25) (= (d_msec 25 49) 2) (t_msec 49)) (and (t_T1s 26) (= (d_msec 26 49) 2) (t_msec 49)) (and (t_T1s 27) (= (d_msec 27 49) 2) (t_msec 49)) (and (t_T1s 28) (= (d_msec 28 49) 2) (t_msec 49)) (and (t_T1s 29) (= (d_msec 29 49) 2) (t_msec 49)) (and (t_T1s 30) (= (d_msec 30 49) 2) (t_msec 49)) (and (t_T1s 31) (= (d_msec 31 49) 2) (t_msec 49)) (and (t_T1s 32) (= (d_msec 32 49) 2) (t_msec 49)) (and (t_T1s 33) (= (d_msec 33 49) 2) (t_msec 49)) (and (t_T1s 34) (= (d_msec 34 49) 2) (t_msec 49)) (and (t_T1s 35) (= (d_msec 35 49) 2) (t_msec 49)) (and (t_T1s 36) (= (d_msec 36 49) 2) (t_msec 49)) (and (t_T1s 37) (= (d_msec 37 49) 2) (t_msec 49)) (and (t_T1s 38) (= (d_msec 38 49) 2) (t_msec 49)) (and (t_T1s 39) (= (d_msec 39 49) 2) (t_msec 49)) (and (t_T1s 40) (= (d_msec 40 49) 2) (t_msec 49)) (and (t_T1s 41) (= (d_msec 41 49) 2) (t_msec 49)) (and (t_T1s 42) (= (d_msec 42 49) 2) (t_msec 49)) (and (t_T1s 43) (= (d_msec 43 49) 2) (t_msec 49)) (and (t_T1s 44) (= (d_msec 44 49) 2) (t_msec 49)) (and (t_T1s 45) (= (d_msec 45 49) 2) (t_msec 49)) (and (t_T1s 46) (= (d_msec 46 49) 2) (t_msec 49)) (and (t_T1s 47) (= (d_msec 47 49) 2) (t_msec 49)))))
+ (let (($x365 (t_T1f 49)))
+ (ite $x365 $x4623 (not $x4623)))))
+(assert
+ (let (($x371 (t_T1f 50)))
+ (let (($x4772 (or (and (t_T1s 1) (= (d_msec 1 50) 2) (t_msec 50)) (and (t_T1s 2) (= (d_msec 2 50) 2) (t_msec 50)) (and (t_T1s 3) (= (d_msec 3 50) 2) (t_msec 50)) (and (t_T1s 4) (= (d_msec 4 50) 2) (t_msec 50)) (and (t_T1s 5) (= (d_msec 5 50) 2) (t_msec 50)) (and (t_T1s 6) (= (d_msec 6 50) 2) (t_msec 50)) (and (t_T1s 7) (= (d_msec 7 50) 2) (t_msec 50)) (and (t_T1s 8) (= (d_msec 8 50) 2) (t_msec 50)) (and (t_T1s 9) (= (d_msec 9 50) 2) (t_msec 50)) (and (t_T1s 10) (= (d_msec 10 50) 2) (t_msec 50)) (and (t_T1s 11) (= (d_msec 11 50) 2) (t_msec 50)) (and (t_T1s 12) (= (d_msec 12 50) 2) (t_msec 50)) (and (t_T1s 13) (= (d_msec 13 50) 2) (t_msec 50)) (and (t_T1s 14) (= (d_msec 14 50) 2) (t_msec 50)) (and (t_T1s 15) (= (d_msec 15 50) 2) (t_msec 50)) (and (t_T1s 16) (= (d_msec 16 50) 2) (t_msec 50)) (and (t_T1s 17) (= (d_msec 17 50) 2) (t_msec 50)) (and (t_T1s 18) (= (d_msec 18 50) 2) (t_msec 50)) (and (t_T1s 19) (= (d_msec 19 50) 2) (t_msec 50)) (and (t_T1s 20) (= (d_msec 20 50) 2) (t_msec 50)) (and (t_T1s 21) (= (d_msec 21 50) 2) (t_msec 50)) (and (t_T1s 22) (= (d_msec 22 50) 2) (t_msec 50)) (and (t_T1s 23) (= (d_msec 23 50) 2) (t_msec 50)) (and (t_T1s 24) (= (d_msec 24 50) 2) (t_msec 50)) (and (t_T1s 25) (= (d_msec 25 50) 2) (t_msec 50)) (and (t_T1s 26) (= (d_msec 26 50) 2) (t_msec 50)) (and (t_T1s 27) (= (d_msec 27 50) 2) (t_msec 50)) (and (t_T1s 28) (= (d_msec 28 50) 2) (t_msec 50)) (and (t_T1s 29) (= (d_msec 29 50) 2) (t_msec 50)) (and (t_T1s 30) (= (d_msec 30 50) 2) (t_msec 50)) (and (t_T1s 31) (= (d_msec 31 50) 2) (t_msec 50)) (and (t_T1s 32) (= (d_msec 32 50) 2) (t_msec 50)) (and (t_T1s 33) (= (d_msec 33 50) 2) (t_msec 50)) (and (t_T1s 34) (= (d_msec 34 50) 2) (t_msec 50)) (and (t_T1s 35) (= (d_msec 35 50) 2) (t_msec 50)) (and (t_T1s 36) (= (d_msec 36 50) 2) (t_msec 50)) (and (t_T1s 37) (= (d_msec 37 50) 2) (t_msec 50)) (and (t_T1s 38) (= (d_msec 38 50) 2) (t_msec 50)) (and (t_T1s 39) (= (d_msec 39 50) 2) (t_msec 50)) (and (t_T1s 40) (= (d_msec 40 50) 2) (t_msec 50)) (and (t_T1s 41) (= (d_msec 41 50) 2) (t_msec 50)) (and (t_T1s 42) (= (d_msec 42 50) 2) (t_msec 50)) (and (t_T1s 43) (= (d_msec 43 50) 2) (t_msec 50)) (and (t_T1s 44) (= (d_msec 44 50) 2) (t_msec 50)) (and (t_T1s 45) (= (d_msec 45 50) 2) (t_msec 50)) (and (t_T1s 46) (= (d_msec 46 50) 2) (t_msec 50)) (and (t_T1s 47) (= (d_msec 47 50) 2) (t_msec 50)) (and (t_T1s 48) (= (d_msec 48 50) 2) (t_msec 50)))))
+ (ite $x4772 $x371 (not $x371)))))
+(assert
+ (let (($x4772 (or (and (t_T1s 1) (= (d_msec 1 50) 2) (t_msec 50)) (and (t_T1s 2) (= (d_msec 2 50) 2) (t_msec 50)) (and (t_T1s 3) (= (d_msec 3 50) 2) (t_msec 50)) (and (t_T1s 4) (= (d_msec 4 50) 2) (t_msec 50)) (and (t_T1s 5) (= (d_msec 5 50) 2) (t_msec 50)) (and (t_T1s 6) (= (d_msec 6 50) 2) (t_msec 50)) (and (t_T1s 7) (= (d_msec 7 50) 2) (t_msec 50)) (and (t_T1s 8) (= (d_msec 8 50) 2) (t_msec 50)) (and (t_T1s 9) (= (d_msec 9 50) 2) (t_msec 50)) (and (t_T1s 10) (= (d_msec 10 50) 2) (t_msec 50)) (and (t_T1s 11) (= (d_msec 11 50) 2) (t_msec 50)) (and (t_T1s 12) (= (d_msec 12 50) 2) (t_msec 50)) (and (t_T1s 13) (= (d_msec 13 50) 2) (t_msec 50)) (and (t_T1s 14) (= (d_msec 14 50) 2) (t_msec 50)) (and (t_T1s 15) (= (d_msec 15 50) 2) (t_msec 50)) (and (t_T1s 16) (= (d_msec 16 50) 2) (t_msec 50)) (and (t_T1s 17) (= (d_msec 17 50) 2) (t_msec 50)) (and (t_T1s 18) (= (d_msec 18 50) 2) (t_msec 50)) (and (t_T1s 19) (= (d_msec 19 50) 2) (t_msec 50)) (and (t_T1s 20) (= (d_msec 20 50) 2) (t_msec 50)) (and (t_T1s 21) (= (d_msec 21 50) 2) (t_msec 50)) (and (t_T1s 22) (= (d_msec 22 50) 2) (t_msec 50)) (and (t_T1s 23) (= (d_msec 23 50) 2) (t_msec 50)) (and (t_T1s 24) (= (d_msec 24 50) 2) (t_msec 50)) (and (t_T1s 25) (= (d_msec 25 50) 2) (t_msec 50)) (and (t_T1s 26) (= (d_msec 26 50) 2) (t_msec 50)) (and (t_T1s 27) (= (d_msec 27 50) 2) (t_msec 50)) (and (t_T1s 28) (= (d_msec 28 50) 2) (t_msec 50)) (and (t_T1s 29) (= (d_msec 29 50) 2) (t_msec 50)) (and (t_T1s 30) (= (d_msec 30 50) 2) (t_msec 50)) (and (t_T1s 31) (= (d_msec 31 50) 2) (t_msec 50)) (and (t_T1s 32) (= (d_msec 32 50) 2) (t_msec 50)) (and (t_T1s 33) (= (d_msec 33 50) 2) (t_msec 50)) (and (t_T1s 34) (= (d_msec 34 50) 2) (t_msec 50)) (and (t_T1s 35) (= (d_msec 35 50) 2) (t_msec 50)) (and (t_T1s 36) (= (d_msec 36 50) 2) (t_msec 50)) (and (t_T1s 37) (= (d_msec 37 50) 2) (t_msec 50)) (and (t_T1s 38) (= (d_msec 38 50) 2) (t_msec 50)) (and (t_T1s 39) (= (d_msec 39 50) 2) (t_msec 50)) (and (t_T1s 40) (= (d_msec 40 50) 2) (t_msec 50)) (and (t_T1s 41) (= (d_msec 41 50) 2) (t_msec 50)) (and (t_T1s 42) (= (d_msec 42 50) 2) (t_msec 50)) (and (t_T1s 43) (= (d_msec 43 50) 2) (t_msec 50)) (and (t_T1s 44) (= (d_msec 44 50) 2) (t_msec 50)) (and (t_T1s 45) (= (d_msec 45 50) 2) (t_msec 50)) (and (t_T1s 46) (= (d_msec 46 50) 2) (t_msec 50)) (and (t_T1s 47) (= (d_msec 47 50) 2) (t_msec 50)) (and (t_T1s 48) (= (d_msec 48 50) 2) (t_msec 50)))))
+ (let (($x371 (t_T1f 50)))
+ (ite $x371 $x4772 (not $x4772)))))
+(check-sat)
