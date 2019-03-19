@@ -1,9 +1,7 @@
-from z3 import *
-
-x, y = Bools('x y')
-s = SimpleSolver()
-s.set(auto_config=False,relevancy=2)
-s.add(Or(x, y))
-print(s.to_smt2())
-print(s.check())
-print(s.model())
+import time
+Sum = 0
+start = time.time()
+for i in range(100000000):
+    Sum += i * i
+print(Sum)
+print(time.time() - start)

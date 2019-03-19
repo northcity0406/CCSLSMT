@@ -737,6 +737,7 @@ class CCSLSMTTransfer:
             self.solver.add(self.p == p)
         start = time.time()
         state = self.solver.check()
+        print(self.solver.statistics())
         print(time.time() - start)
         print(state)
         while state == z3.sat:
