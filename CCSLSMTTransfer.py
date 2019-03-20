@@ -729,7 +729,7 @@ class CCSLSMTTransfer:
     def LoopFor10Results(self, p):
         html = ""
         self.work()
-        f = open("m.txt", "w")
+        f = open("out.smt2", "w")
         i = 0
         f.write(self.solver.to_smt2())
         if self.period > 0:
@@ -751,7 +751,7 @@ class CCSLSMTTransfer:
                 break
             state = self.solver.check()
             print(state)
-        f = open("ouput.html", "a+", encoding="utf-8")
+        f = open("output.html", "a+", encoding="utf-8")
         f.write(html)
         f.flush()
         f.close()
@@ -761,14 +761,14 @@ def HtmlHeader():
     for each in open("output.css", "r").readlines():
         html += each
     html += "</style>"
-    f = open("ouput.html", "w", encoding="utf-8")
+    f = open("output.html", "w", encoding="utf-8")
     f.write(html)
     f.flush()
     f.close()
 
 def HTMLFooter():
     html = "</body></html>"
-    f = open("ouput.html", "a+", encoding="utf-8")
+    f = open("output.html", "a+", encoding="utf-8")
     f.write(html)
     f.flush()
     f.close()
