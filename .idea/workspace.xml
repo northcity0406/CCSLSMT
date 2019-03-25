@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/ccsl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ccsl.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/m.txt" beforeDir="false" afterPath="$PROJECT_DIR$/m.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ouput.html" beforeDir="false" afterPath="$PROJECT_DIR$/ouput.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s.py" beforeDir="false" afterPath="$PROJECT_DIR$/s.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,44 +18,45 @@
     <SUITE FILE_PATH="coverage/CCSLSMT$check.coverage" NAME="check Coverage Results" MODIFIED="1552305158411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CCSLSMT$Transfer.coverage" NAME="Transfer Coverage Results" MODIFIED="1551886652411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/CCSLSMT$s.coverage" NAME="s Coverage Results" MODIFIED="1552911757537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/CCSLSMT$CCSLSMTTransfer.coverage" NAME="CCSLSMTTransfer Coverage Results" MODIFIED="1552915615545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/CCSLSMT$CCSLSMTTransfer.coverage" NAME="CCSLSMTTransfer Coverage Results" MODIFIED="1553521033014" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-67457482">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="4034" />
+          <entry key="py" value="4096" />
           <entry key="smt2" value="4" />
-          <entry key="txt" value="239" />
+          <entry key="txt" value="338" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="243" />
-          <entry key="Python" value="4034" />
+          <entry key="PLAIN_TEXT" value="342" />
+          <entry key="Python" value="4096" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="py" value="5" />
           <entry key="smt" value="2" />
-          <entry key="smt2" value="2" />
+          <entry key="smt2" value="3" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="PLAIN_TEXT" value="7" />
           <entry key="Python" value="5" />
         </counts>
       </usages-collector>
@@ -64,7 +64,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ouput.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2619">
@@ -76,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/m.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7980">
-              <caret line="1282" column="374" lean-forward="true" selection-start-line="1282" selection-start-column="374" selection-end-line="1282" selection-end-column="374" />
+            <state relative-caret-position="816">
+              <caret line="1184" column="11" selection-start-line="1184" selection-start-column="11" selection-end-line="1184" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -85,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state>
               <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
             </state>
           </provider>
@@ -94,8 +94,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ccsl.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state relative-caret-position="27">
+              <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/print.smt2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="816">
+              <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -109,17 +118,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CCSLSMTTransfer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="739" column="39" selection-start-line="739" selection-start-column="39" selection-end-line="739" selection-end-column="39" />
+            <state relative-caret-position="402">
+              <caret line="513" selection-start-line="513" selection-end-line="513" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#172#1659#0" />
-                <element signature="e#1706#2116#0" />
-                <element signature="e#2160#8835#0" />
-                <element signature="e#8872#9562#0" />
               </folding>
             </state>
           </provider>
@@ -136,6 +141,8 @@
       <find>z3.If</find>
       <find>self.solver.add(z3.Or(t) == tick1(i))</find>
       <find>forall</find>
+      <find>p_p1</find>
+      <find>sta</find>
     </findStrings>
     <replaceStrings>
       <replace>(assert(</replace>
@@ -155,8 +162,8 @@
         <option value="$PROJECT_DIR$/print.smt2" />
         <option value="$PROJECT_DIR$/CCSL测试用例.txt" />
         <option value="$PROJECT_DIR$/s.py" />
-        <option value="$PROJECT_DIR$/ccsl.txt" />
         <option value="$PROJECT_DIR$/CCSLSMTTransfer.py" />
+        <option value="$PROJECT_DIR$/ccsl.txt" />
       </list>
     </option>
   </component>
@@ -338,7 +345,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32793137" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49893278" weight="0.38358778" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49893278" weight="0.9150763" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010672" side_tool="true" weight="0.53244275" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" weight="0.32824427" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32824427" />
@@ -348,7 +355,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="right" id="SciView" order="4" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info active="true" anchor="right" id="Run" order="6" sideWeight="0.4994664" visible="true" weight="0.45410886" />
+      <window_info active="true" anchor="right" id="Run" order="6" sideWeight="0.4994664" visible="true" weight="0.8073639" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,38 +398,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/print.smt2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="73" column="63" lean-forward="true" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/s.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
+        <state>
           <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/m.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7980">
-          <caret line="1282" column="374" lean-forward="true" selection-start-line="1282" selection-start-column="374" selection-end-line="1282" selection-end-column="374" />
+        <state relative-caret-position="816">
+          <caret line="1184" column="11" selection-start-line="1184" selection-start-column="11" selection-end-line="1184" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ouput.html">
+    <entry file="file://$PROJECT_DIR$/print.smt2">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2619">
-          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ccsl.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="816">
+          <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -435,15 +428,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CCSLSMTTransfer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="739" column="39" selection-start-line="739" selection-start-column="39" selection-end-line="739" selection-end-column="39" />
+        <state relative-caret-position="402">
+          <caret line="513" selection-start-line="513" selection-end-line="513" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#172#1659#0" />
-            <element signature="e#1706#2116#0" />
-            <element signature="e#2160#8835#0" />
-            <element signature="e#8872#9562#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ccsl.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ouput.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2619">
+          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
         </state>
       </provider>
     </entry>

@@ -521,7 +521,10 @@ class CCSLSMTTransfer:
                             t = []
                             for j in range(i - int(tmp[2]),0,-1):
                                 t.append(z3.And(
-                                    tick2(j), (history3(i) - history3(j)) == delay,tick3(i)
+                                    tick2(j),
+                                    (history3(i) - history3(j)) >= int(tmp[2]),
+                                    (history3(i) - history3(j)) <= int(tmp[3]),
+                                    tick3(i)
                                 ))
                             self.solver.add(z3.Or(t) == tick1(i))
                             # self.solver.add(z3.If(z3.Or(t), tick1(i), z3.Not(tick1(i))))
@@ -667,32 +670,32 @@ class CCSLSMTTransfer:
             html += "</ul>"
         # html += "<hr>"
 
-        # for w in self.CCSLConstraintList:
-        #     if w[0] != "∈":
-        #         html += "<ul><li class='name'>%s</li>" % (w)
-        #         for each in w[1:]:
-        #             if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
-        #                 html += "<ul><li class='name'>%s</li>" % (each)
-        #                 cnt = 0
-        #                 res = ""
-        #                 for i in range(1, self.bound + 1):
-        #                     if i in self.Tick_result[each]:
-        #                         if i - 1 in self.Tick_result[each] or i - 1 == 0:
-        #                             html += "<li class='up'></li>"
-        #                         else:
-        #                             html += "<li class='upl'></li>"
-        #                     else:
-        #                         if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-        #                             html += "<li class='down'></li>"
-        #                         else:
-        #                             html += "<li class='downl'></li>"
-        #                     if i - 1 in self.Tick_result[each]:
-        #                         cnt += 1
-        #                     res += "<li class='history'>%s</li>" % (cnt)
-        #                 html += "</ul>"
-        #                 html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-        #         html += "<ul><li></li></ul></ul>"
-        #         html += "</ul>"
+        for w in self.CCSLConstraintList:
+            if w[0] != "∈":
+                html += "<ul><li class='name'>%s</li>" % (w)
+                for each in w[1:]:
+                    if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
+                        html += "<ul><li class='name'>%s</li>" % (each)
+                        cnt = 0
+                        res = ""
+                        for i in range(1, self.bound + 1):
+                            if i in self.Tick_result[each]:
+                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='up'></li>"
+                                else:
+                                    html += "<li class='upl'></li>"
+                            else:
+                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='down'></li>"
+                                else:
+                                    html += "<li class='downl'></li>"
+                            if i - 1 in self.Tick_result[each]:
+                                cnt += 1
+                            res += "<li class='history'>%s</li>" % (cnt)
+                        html += "</ul>"
+                        html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+                html += "<ul><li></li></ul></ul>"
+                html += "</ul>"
 
         html += "<hr>"
         html += "</div>"
@@ -737,7 +740,7 @@ class CCSLSMTTransfer:
             self.solver.add(self.p == p)
         start = time.time()
         state = self.solver.check()
-        print(self.solver.statistics())
+        # print(self.solver.statistics())
         print(time.time() - start)
         print(state)
         while state == z3.sat:
@@ -778,6 +781,6 @@ if __name__ == "__main__":
     ccslConstraints = ""
     for each in open("ccsl.txt", "r", encoding="utf-8").readlines():
         ccslConstraints += each
-    bound = 50
+    bound = 30
     ccsl = CCSLSMTTransfer(ccslConstraints, bound=bound, period=0, realPeroid=0)
     ccsl.LoopFor10Results(0)
