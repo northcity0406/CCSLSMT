@@ -24,6 +24,7 @@ class CCSLSMTTransfer:
         self.newCCSLConstraintList = []
         self.oldClocks = set()
         self.newClocks = set()
+        self.parameterRange = []
         if self.period > 0:
             self.solver = z3.Optimize()
         else:
@@ -639,10 +640,15 @@ class CCSLSMTTransfer:
                 if model.eval(tick(i)) == True:
                     TmpTickList.append(i)
             self.Tick_result[each] = TmpTickList
-        # for each in self.Tick_result.keys():
-        #     print(each, self.Tick_result[each])
+        if len(self.printParameter.keys()) == 0:
+            for each in self.Tick_result.keys():
+                print(each, self.Tick_result[each])
+        t = {}
         for each in self.printParameter.keys():
-            print(each,model.eval(self.printParameter[each]))
+            t[each] = model.eval(self.printParameter[each])
+            print(each,model.eval(self.printParameter[each]),end="\t")
+        print()
+        self.parameterRange.append(t)
 
     def outPutTickByHTML(self):
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
@@ -670,34 +676,34 @@ class CCSLSMTTransfer:
             html += "</ul>"
         # html += "<hr>"
 
-        for w in self.oldCCSLConstraintList:
-            if w[0] != "∈":
-                html += "<ul><li class='name'>%s</li>" % (w)
-                for each in w[1:]:
-                    if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
-                        html += "<ul><li class='name'>%s</li>" % (each)
-                        cnt = 0
-                        res = ""
-                        for i in range(1, self.bound + 1):
-                            if i in self.Tick_result[each]:
-                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='up'></li>"
-                                else:
-                                    html += "<li class='upl'></li>"
-                            else:
-                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='down'></li>"
-                                else:
-                                    html += "<li class='downl'></li>"
-                            if i - 1 in self.Tick_result[each]:
-                                cnt += 1
-                            res += "<li class='history'>%s</li>" % (cnt)
-                        html += "</ul>"
-                        html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-                html += "<ul><li></li></ul></ul>"
-                html += "</ul>"
-
-        html += "<hr>"
+        # for w in self.oldCCSLConstraintList:
+        #     if w[0] != "∈":
+        #         html += "<ul><li class='name'>%s</li>" % (w)
+        #         for each in w[1:]:
+        #             if self.is_number(str(each)) is False and str(each) not in self.parameter.keys():
+        #                 html += "<ul><li class='name'>%s</li>" % (each)
+        #                 cnt = 0
+        #                 res = ""
+        #                 for i in range(1, self.bound + 1):
+        #                     if i in self.Tick_result[each]:
+        #                         if i - 1 in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='up'></li>"
+        #                         else:
+        #                             html += "<li class='upl'></li>"
+        #                     else:
+        #                         if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='down'></li>"
+        #                         else:
+        #                             html += "<li class='downl'></li>"
+        #                     if i - 1 in self.Tick_result[each]:
+        #                         cnt += 1
+        #                     res += "<li class='history'>%s</li>" % (cnt)
+        #                 html += "</ul>"
+        #                 html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+        #         html += "<ul><li></li></ul></ul>"
+        #         html += "</ul>"
+        #
+        # html += "<hr>"
         html += "</div>"
 
         return html
@@ -708,7 +714,7 @@ class CCSLSMTTransfer:
             for i in range(self.bound):
                 if (i + 1) in self.Tick_result[each]:
                     result[i].append(each)
-        print(result)
+        # print(result)
 
     def work(self):
         self.RealProduce()
@@ -720,11 +726,12 @@ class CCSLSMTTransfer:
     def addExtraConstraints(self):
         model = self.solver.model()
         ExtraConstraints = []
-        # for each in self.newClocks:
-        #     self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
-        #     for i in range(1, self.bound + 1):
-        #         tmp = self.tickDict["t_%s" % (each)]
-        #         ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
+        if len(self.printParameter.keys()) == 0:
+            for each in self.newClocks:
+                self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
+                for i in range(1, self.bound + 1):
+                    tmp = self.tickDict["t_%s" % (each)]
+                    ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
         for each in self.printParameter.keys():
             ExtraConstraints.append(self.printParameter[each] != model.eval(self.printParameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
@@ -743,7 +750,7 @@ class CCSLSMTTransfer:
         state = self.solver.check()
         # print(self.solver.statistics())
         print(time.time() - start)
-        print(state)
+        print(state,end=" ")
         while state == z3.sat:
             # print(self.solver.to_smt2())
             self.getWorkOut()
@@ -755,11 +762,13 @@ class CCSLSMTTransfer:
             # if i == 10:
             #     break
             state = self.solver.check()
-            print(state)
+            print(state,end=" ")
         f = open("output.html", "a+", encoding="utf-8")
         f.write(html)
         f.flush()
         f.close()
+        # if len(self.printParameter.keys()) != 0:
+        #     print(self.parameterRange)
 
 def HtmlHeader():
     html = "<html><body><style type=\"text/css\">\n"
