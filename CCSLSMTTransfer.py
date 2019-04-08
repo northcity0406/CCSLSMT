@@ -545,30 +545,33 @@ class CCSLSMTTransfer:
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 history3 = self.historyDict["h_%s" % (each[4])]
+                tickStep1 = self.tickStep["s_%s" % (each[1])]
+                tickStep2 = self.tickStep["s_%s" % (each[2])]
+                tickStep3 = self.tickStep["s_%s" % (each[4])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1,int(each[3]) + 1):
-                        self.solver.add(z3.Not(tick1(i)))
-                    for i in range(int(each[3]) + 1,self.bound + 1):
-                        t = []
-                        for j in range(1,i - int(each[3]) + 1):
-                            t.append(z3.And(
-                                tick3(i),tick2(j),history3(i) - history3(j) == int(each[3])
-                            ))
-                        self.solver.add(z3.Or(t) == tick1(i))
-                        # self.solver.add(z3.If(tick1(i),tick3(i),True))
-
-                        # self.solver.add(z3.If(z3.Or(t),tick1(i),z3.Not(tick1(i))))
-                        # self.solver.add(z3.If(tick1(i),z3.Or(t),z3.Not(z3.Or(t))))
-                else:
-                    m = z3.Int("m")
                     self.solver.add(
                         z3.ForAll(
                             x,
                             z3.Implies(
-                                z3.And(x >= 1, z3.Exists(m, m >= x + int(each[3]))),
-                                tick1(m) ==
-                                z3.And(tick3(m), tick2(x), history3(m) - history3(x) == int(each[3]))
+                                z3.And(x >= 1, x <= (z3.If(history1(self.bound + 1) <= history3(self.bound + 1),history1(self.bound + 1),history3(self.bound + 1)))),
+                                z3.And(
+                                    tick3(tickStep1(x)),
+                                    history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])
+                                )
+                            )
+                        )
+                    )
+                else:
+                    self.solver.add(
+                        z3.ForAll(
+                            x,
+                            z3.Implies(
+                                x >= 1,
+                                z3.And(
+                                    tick3(tickStep1(x)),
+                                    history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])
+                                )
                             )
                         )
                     )
