@@ -131,7 +131,6 @@ class CCSL:
             self.oldClocks.add(c3)
             self.oldCCSLConstraintList.append(clockTmp)
         elif str(each).__contains__("∝") and "±" in str(each):
-            print(each)
             tmp = str(each).split("∝")
             clockTmp = ["∝±"]
             clockTmp.extend(tmp[0].split("="))
@@ -152,7 +151,7 @@ class CCSL:
             self.oldClocks.add(c2)
             self.oldCCSLConstraintList.append(clockTmp)
         elif str(each).__contains__("⋈") and "±" in str(each):
-            print(each)
+            # print(each)
             tmp = str(each).split("⋈")
             clockTmp = ["⋈±"]
             clockTmp.extend(tmp[0].split("="))
@@ -200,14 +199,11 @@ class CCSL:
                 para = self.parameter[m[3]]
                 self.newCCSLConstraintList.append(["on","tmp%s" %(cnt),m[2],para[2],m[4]])
                 self.newCCSLConstraintList.append(["≤","tmp%s" %(cnt),m[1]])
-                self.newCCSLConstraintList.append(["<","tmp%s" %(cnt),1,m[1]])
-                self.newCCSLConstraintList.append(["<","tmp%s" %(cnt),1,m[2]])
                 self.newClocks.add("tmp%s" %(cnt))
                 cnt += 1
                 self.newCCSLConstraintList.append(["on","tmp%s" %(cnt),m[2],para[3],m[4]])
                 self.newCCSLConstraintList.append(["≤", m[1],"tmp%s" % (cnt)])
-                self.newCCSLConstraintList.append(["<","tmp%s" %(cnt),1,m[1]])
-                self.newCCSLConstraintList.append(["<","tmp%s" %(cnt),1,m[2]])
+                self.newCCSLConstraintList.append(["<", "tmp%s" %(cnt),1,"tmp%s" % (cnt - 1)])
                 self.newClocks.add("tmp%s" % (cnt))
                 cnt += 1
             elif m[0] == "∝±":

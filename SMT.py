@@ -2,7 +2,7 @@ from tools import is_number,HtmlHeader,HTMLFooter
 from z3 import z3
 from z3 import *
 from CCSL import  CCSL
-import time
+import time,random
 
 class SMT:
     def __init__(self,file,bound=0, period=0, realPeroid=0):
@@ -17,8 +17,11 @@ class SMT:
         self.period = period
         self.realPeroid = realPeroid
         self.parameterRange = []
-        self.solver = z3.Solver()
-
+        self.solver = z3.SolverFor("AUFLIRA")
+        z3.set_param("smt.random_seed", random.randint(100,1000000))
+        self.solver.set(unsat_core=True)
+        # self.solver.set(produce_models=True)
+        # self.solver.set(print_success=False)
         self.printParameter = {}
         self.tickStep = {}
         self.n = z3.Int("n")
@@ -163,7 +166,7 @@ class SMT:
                 history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1,self.bound):
+                    for i in range(1,self.bound + 1):
                         self.solver.add(
                             z3.Implies(
                                 history1(i) == history2(i),
@@ -186,7 +189,7 @@ class SMT:
                 history2 = self.historyDict["h_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound):
+                    for i in range(1, self.bound + 1):
                         self.solver.add(
                             z3.Implies(
                                 history2(i) - history1(i) == delay,
@@ -206,7 +209,7 @@ class SMT:
                 history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound + 1):
+                    for i in range(1, self.bound + 2):
                         self.solver.add(
                             history1(i) >= history2(i)
                         )
@@ -303,7 +306,7 @@ class SMT:
                 history3 = self.historyDict["h_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound + 1):
+                    for i in range(1, self.bound + 2):
                         self.solver.add(
                             history1(i) == z3.If(history2(i) >= history3(i), history2(i), history3(i))
                         )
@@ -321,7 +324,7 @@ class SMT:
                 history3 = self.historyDict["h_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound + 1):
+                    for i in range(1, self.bound + 2):
                         self.solver.add(
                             history1(i) == z3.If(history2(i) <= history3(i), history2(i), history3(i))
                         )
@@ -339,7 +342,7 @@ class SMT:
                 delay = z3.IntVal(int(each[3]))
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound + 1):
+                    for i in range(1, self.bound + 2):
                         self.solver.add(
                             history1(i) == z3.If(history2(i) >= delay, history2(i) - delay, 0)
                         )
@@ -358,80 +361,61 @@ class SMT:
                 history1 = self.historyDict["h_%s" % (each[1])]
                 history2 = self.historyDict["h_%s" % (each[2])]
                 history3 = self.historyDict["h_%s" % (each[4])]
+                self.addTickStep(each[1])
+                self.addTickStep(each[2])
+                self.addTickStep(each[4])
+                tickStep1 = self.tickStep["s_%s" % (each[1])]
+                tickStep2 = self.tickStep["s_%s" % (each[2])]
+                tickStep3 = self.tickStep["s_%s" % (each[4])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    if self.bound > 0:
-                        for i in range(1, int(each[3]) + 1):
-                            self.solver.add(z3.Not(tick1(i)))
-                        for i in range(int(each[3]) + 1, self.bound + 1):
-                            t = []
-                            for j in range(1, i - int(each[3]) + 1):
-                                t.append(z3.And(
-                                    tick3(i), tick2(j), history3(i) - history3(j) == int(each[3])
-                                ))
-                            self.solver.add(z3.Or(t) == tick1(i))
-                # tick1 = self.tickDict["t_%s" % (each[1])]
-                # tick2 = self.tickDict["t_%s" % (each[2])]
-                # tick3 = self.tickDict["t_%s" % (each[4])]
-                # history1 = self.historyDict["h_%s" % (each[1])]
-                # history2 = self.historyDict["h_%s" % (each[2])]
-                # history3 = self.historyDict["h_%s" % (each[4])]
-                # tickStep1 = self.tickStep["s_%s" % (each[1])]
-                # tickStep2 = self.tickStep["s_%s" % (each[2])]
-                # tickStep3 = self.tickStep["s_%s" % (each[4])]
-                # x = z3.Int("x")
-                # if self.bound > 0:
-                #     if is_number(each[3]):
-                        # for i in range(self.bound + 1):
-                        #     self.solver.add(history2(i) >= history1(i))
-                        # for i in range(self.bound):
-                        #     self.solver.add(
-                        #         z3.Implies(
-                        #             tick1(i), tick3(i)
-                        #         )
-                        #     )
-                        # for i in range(self.bound + 1):
-                        #     self.solver.add(
-                        #         history3(tickStep1(i)) - history3(tickStep2(i)) == int(each[3])
-                        #     )
-                        # self.solver.add(z3.ForAll(x, z3.And(
-                        #     z3.Implies(z3.And(x >= 1, x <= self.bound + 1),history2(x) >= history1(x)))))
-                        # self.solver.add(z3.ForAll(x, z3.And(
-                        #     z3.Implies(z3.And(x >= 1, x <= self.bound,tick1(x)),tick3(x)))))
-                        # self.solver.add(z3.ForAll(x, z3.And(
-                        #     z3.Implies(z3.And(x >= 1, x <= history1(self.bound + 1)),
-                        #          (history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])))
-                        #     )
-                        #   )
-                        # )
+                    for i in range(1, int(each[3]) + 1):
+                        self.solver.add(z3.Not(tick1(i)))
+                    for i in range(int(each[3]) + 1, self.bound + 1):
+                        t = []
+                        for j in range(1, i - int(each[3]) + 1):
+                            t.append(z3.And(
+                                tick2(j), history3(i) - history3(j) == int(each[3])
+                            ))
+                        self.solver.add(z3.And(tick3(i),z3.Or(t)) == tick1(i))
+                    # self.solver.add(z3.ForAll(x,z3.Implies(
+                    #     z3.And(x > 0,x <= self.n + 1),
+                    #     history2(x) >= history1(x)
+                    # )))
+                    # self.solver.add(z3.ForAll(x, z3.Implies(
+                    #     z3.And(x > 0, x <= self.n,tick1(x)),
+                    #     tick3(x)
+                    # )))
+                    # self.solver.add(
+                    #     z3.ForAll(x, z3.Implies(
+                    #         z3.And(x > 0, x <= history1(self.bound + 1)),
+                    #         history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])
+                    # )))
+                    # for i in range(self.bound + 1):
+                    #     self.solver.add(history2(i) >= history1(i))
+                    # for i in range(self.bound):
+                    #     self.solver.add(
+                    #         z3.Implies(
+                    #             tick1(i), tick3(i)
+                    #         )
+                    #     )
+                    # for i in range(self.bound + 1):
+                    #     self.solver.add(
+                    #         history3(tickStep1(i)) - history3(tickStep2(i)) == int(each[3])
+                    #     )
 
-                    # else:
-                    #     parameter = self.parameter[each[3]]
-                    #     self.solver.add(z3.ForAll(x, z3.And(
-                    #         z3.Implies(z3.And(x >= 1, x <= self.bound + 1), history2(x) >= history1(x)))))
-                    #     self.solver.add(z3.ForAll(x, z3.And(
-                    #         z3.Implies(z3.And(x >= 1, x <= self.bound + 1, tick1(x)), tick3(x)))))
-                    #     self.solver.add(z3.ForAll(x, z3.And(
-                    #         z3.Implies(z3.And(x >= 1, x <= self.bound),
-                    #            z3.And(
-                    #                history3(tickStep1(x)) - history3(tickStep2(x)) >= int(parameter[2]),
-                    #                history3(tickStep1(x)) - history3(tickStep2(x)) <= int(parameter[3])
-                    #            )
+                    # self.solver.add(z3.ForAll(x, z3.And(
+                    #     z3.Implies(z3.And(x >= 1, x <= history1(self.bound + 1),tick2(x)),
+                    #         tick1(tickStep3(history3(x) + int(each[3])))
                     #     ))))
-                # else:
-                #     if is_number(each[3]):
-                #         self.solver.add(z3.ForAll(x,z3.Implies(x >= 1,
-                #             z3.And(tick3(tickStep1(x)),history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])))))
-                #     else:
-                #         parameter = self.parameter[each[3]]
-                #         self.solver.add(z3.ForAll(x, z3.Implies(
-                #             x >= 1,
-                #             tick3(tickStep1(x)) == z3.And(
-                #                 history3(tickStep1(x)) - history3(tickStep2(x)) >= int(parameter[2]),
-                #                 history3(tickStep1(x)) - history3(tickStep2(x)) <= int(parameter[3])
-                #             )
-                #         )))
-
+                else:
+                    self.solver.add(z3.ForAll(x, z3.And(
+                        z3.Implies(x >= 1, history2(x) >= history1(x)))))
+                    self.solver.add(z3.ForAll(x, z3.And(
+                        z3.Implies(z3.And(x >= 1,tick1(x)), tick3(x)))))
+                    self.solver.add(z3.ForAll(x, z3.And(
+                        z3.Implies(x >= 1,(history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])))
+                            )))
             elif each[0] == "∝":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
@@ -444,6 +428,7 @@ class SMT:
                     self.solver.add(k >= 0, k < int(each[3]))
                     right = z3.And(tick2(x), history2(x) >= 0, (history2(x) + k) % z3.IntVal(each[3]) == 0)
                     cnt += 1
+                    # right = z3.And(tick2(x), history2(x) > 0, (history2(x)) % z3.IntVal(each[3]) == 0)
                 else:
                     period = z3.Int("%s" % each[3])
                     tmp = self.parameter[each[3]]
@@ -478,9 +463,7 @@ class SMT:
                     #     self.solver.add(history2(i) >= history1(i))
                     #     self.solver.add(
                     #         z3.Implies(
-                    #             tick1(tickStep1(i)),
-                    #             history2(tickStep3(i)) - history2(tickStep3(i - 1)) >= 1)
-                    #         )
+
                     self.solver.add(
                         z3.ForAll(
                             x,
@@ -530,18 +513,13 @@ class SMT:
                 upper = int(each[3]) + int(each[4])
                 x = z3.Int("x")
                 if self.bound > 0:
-                    # self.solver.add(
-                    #     tickStep1(1) <= tickStep2(lower)
-                    # )
                     self.solver.add(
                         z3.ForAll(
                             x,
                             z3.Implies(
                                 z3.And(x >= 1, x <= self.bound + 1,tick1(x)),
-                                z3.And(
-                                    history1(tickStep2(history2(x) + lower)) -
-                                    history1(tickStep2(history2(x) + upper)) == 1
-                                )
+                                history1(tickStep2(history2(x) + upper)) -
+                                history1(tickStep2(history2(x) + lower)) == 1
                             )
                         )
                     )
@@ -597,7 +575,7 @@ class SMT:
 
     def outPutTickByHTML(self):
         html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
-        for each in range(0, self.bound):
+        for each in range(1, self.bound + 1):
             html += "<li>%s</li>" % (each)
         html += "</ul>"
         for each in self.Tick_result.keys():
@@ -671,6 +649,8 @@ class SMT:
         self.addHistory()
         # self.addTickForever()
         self.addOriginSMTConstraints()
+        tick = self.tickDict["t_%s" %("T1s")]
+        self.solver.add(tick(1))
         f = open("out.smt2","w")
         f.write(self.solver.to_smt2())
         f.flush()
@@ -686,20 +666,20 @@ class SMT:
         print(state)
         while state == z3.sat:
             self.getWorkOut()
-            html += "<h1>%s</h1>" % (i)
+            html = "<h1>%s</h1>" % (i)
             html += self.outPutTickByHTML()
             self.addExtraConstraints()
             i += 1
             if len(self.printParameter.keys()) == 0:
-                if i == 100:
+                if i == 10:
                     break
             state = self.solver.check()
             print(state)
             print(time.time() - start)
-        f = open("output.html", "a+", encoding="utf-8")
-        f.write(html)
-        f.flush()
-        f.close()
+            f = open("output.html", "a+", encoding="utf-8")
+            f.write(html)
+            f.flush()
+            f.close()
         if len(self.printParameter.keys()) != 0:
             print(self.parameterRange)
         print(time.time() - start)
@@ -707,8 +687,7 @@ class SMT:
 
 if __name__ == "__main__":
     HtmlHeader()
-    bound = 50
+    bound = 30
     smt = SMT("ccsl.txt", bound=bound, period=0, realPeroid=0)
     smt.getAllSchedule()
     HTMLFooter()
-
