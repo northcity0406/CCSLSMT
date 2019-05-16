@@ -166,7 +166,7 @@ class SMT:
                 history2 = self.historyDict["h_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1,self.bound + 1):
+                    for i in range(1,self.bound + 2):
                         self.solver.add(
                             z3.Implies(
                                 history1(i) == history2(i),
@@ -189,7 +189,7 @@ class SMT:
                 history2 = self.historyDict["h_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound + 1):
+                    for i in range(1, self.bound + 2):
                         self.solver.add(
                             z3.Implies(
                                 history2(i) - history1(i) == delay,
@@ -226,7 +226,7 @@ class SMT:
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound):
+                    for i in range(1, self.bound + 1):
                         self.solver.add(
                             z3.Implies(
                                 tick1(i),
@@ -246,7 +246,7 @@ class SMT:
                 tick2 = self.tickDict["t_%s" % (each[2])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound):
+                    for i in range(1, self.bound + 1):
                         self.solver.add(
                             z3.Or(z3.Not(tick1(i)), z3.Not(tick2(i)))
                         )
@@ -264,12 +264,10 @@ class SMT:
                 tick3 = self.tickDict["t_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound):
+                    for i in range(1, self.bound + 1):
                         self.solver.add(
-                            z3.Implies(
-                                tick1(i),
+                                tick1(i) ==
                                 z3.Or(tick2(i), tick3(i))
-                            )
                         )
                     # self.solver.add(z3.ForAll(x, z3.Implies(
                     #         z3.And(x >= 1, x <= self.n),
@@ -285,7 +283,7 @@ class SMT:
                 tick3 = self.tickDict["t_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    for i in range(1, self.bound):
+                    for i in range(1, self.bound + 1):
                         self.solver.add(
                             z3.Implies(
                                 tick1(i),
@@ -378,18 +376,18 @@ class SMT:
                                 tick2(j), history3(i) - history3(j) == int(each[3])
                             ))
                         self.solver.add(z3.And(tick3(i),z3.Or(t)) == tick1(i))
-                    # self.solver.add(z3.ForAll(x,z3.Implies(
-                    #     z3.And(x > 0,x <= self.n + 1),
-                    #     history2(x) >= history1(x)
-                    # )))
-                    # self.solver.add(z3.ForAll(x, z3.Implies(
-                    #     z3.And(x > 0, x <= self.n,tick1(x)),
-                    #     tick3(x)
-                    # )))
+                    self.solver.add(z3.ForAll(x,z3.Implies(
+                        z3.And(x > 0,x <= self.n + 1),
+                        history2(x) >= history1(x)
+                    )))
+                    self.solver.add(z3.ForAll(x, z3.Implies(
+                        z3.And(x > 0, x <= self.n,tick1(x)),
+                        tick3(x)
+                    )))
                     # self.solver.add(
                     #     z3.ForAll(x, z3.Implies(
                     #         z3.And(x > 0, x <= history1(self.bound + 1)),
-                    #         history3(tickStep1(x)) - history3(tickStep2(x)) == int(each[3])
+                    #         history3(tickStep2(x)) - history3(tickStep1(x)) == int(each[3])
                     # )))
                     # for i in range(self.bound + 1):
                     #     self.solver.add(history2(i) >= history1(i))
@@ -446,6 +444,7 @@ class SMT:
                     self.solver.add(z3.ForAll(x, z3.And(
                         z3.Implies(x >= 1, left == right) )))
 
+
             elif each[0] == "☇":
                 tick1 = self.tickDict["t_%s" % (each[1])]
                 tick2 = self.tickDict["t_%s" % (each[2])]
@@ -459,11 +458,6 @@ class SMT:
                 tickStep3 = self.tickStep["s_%s" % (each[3])]
                 x = z3.Int("x")
                 if self.bound > 0:
-                    # for i in range(2,self.bound + 1):
-                    #     self.solver.add(history2(i) >= history1(i))
-                    #     self.solver.add(
-                    #         z3.Implies(
-
                     self.solver.add(
                         z3.ForAll(
                             x,
@@ -578,55 +572,79 @@ class SMT:
         for each in range(1, self.bound + 1):
             html += "<li>%s</li>" % (each)
         html += "</ul>"
-        for each in self.Tick_result.keys():
-            html += "<ul><li class='name'>%s</li>" % (each)
-            cnt = 0
-            res = ""
-            for i in range(1, self.bound + 1):
-                if i in self.Tick_result[each]:
-                    if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                        html += "<li class='up'></li>"
+        d = sorted(self.Tick_result.keys())
+        # for each in self.Tick_result.keys():
+        for each in d:
+            if each != "msec":
+                html += "<ul><li class='name'>%s</li>" % (each)
+                cnt = 0
+                res = ""
+                for i in range(1, self.bound + 1):
+                    if i in self.Tick_result[each]:
+                        if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                            html += "<li class='up'></li>"
+                        else:
+                            html += "<li class='upl'></li>"
                     else:
-                        html += "<li class='upl'></li>"
-                else:
-                    if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                        html += "<li class='down'></li>"
-                    else:
-                        html += "<li class='downl'></li>"
-                if i in self.Tick_result[each]:
-                    cnt += 1
-                res += "<li>%s</li>" % (cnt)
-            html += "</ul>"
-        # html += "<hr>"
-
-        for w in self.oldCCSLConstraintList:
-        # for w in self.newCCSLConstraintList:
-            if w[0] != "∈":
-                html += "<ul><li class='name'>%s</li>" % (w)
-                for each in w[1:]:
-                    if is_number(str(each)) is False and str(each) not in self.parameter.keys():
-                        html += "<ul><li class='name'>%s</li>" % (each)
-                        cnt = 0
-                        res = ""
-                        for i in range(1, self.bound + 1):
-                            if i in self.Tick_result[each]:
-                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='up'></li>"
-                                else:
-                                    html += "<li class='upl'></li>"
-                            else:
-                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='down'></li>"
-                                else:
-                                    html += "<li class='downl'></li>"
-                            if i - 1 in self.Tick_result[each]:
-                                cnt += 1
-                            res += "<li class='history'>%s</li>" % (cnt)
-                        html += "</ul>"
-                        html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-                html += "<ul><li></li></ul></ul>"
+                        if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                            html += "<li class='down'></li>"
+                        else:
+                            html += "<li class='downl'></li>"
+                    if i in self.Tick_result[each]:
+                        cnt += 1
+                    res += "<li>%s</li>" % (cnt)
                 html += "</ul>"
-        html += "<hr>"
+
+        each = "msec"
+        html += "<ul><li class='name'>%s</li>" % (each)
+        cnt = 0
+        res = ""
+        for i in range(1, self.bound + 1):
+            if i in self.Tick_result[each]:
+                if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                    html += "<li class='up'></li>"
+                else:
+                    html += "<li class='upl'></li>"
+            else:
+                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                    html += "<li class='down'></li>"
+                else:
+                    html += "<li class='downl'></li>"
+            res += "<li>%s</li>" % (cnt)
+            if i in self.Tick_result[each]:
+                cnt += 1
+        html += "</ul>"
+        html += "<ul><li class='name'>history</li>" + res + "</ul>"
+
+
+        # for w in self.oldCCSLConstraintList:
+        # # for w in self.newCCSLConstraintList:
+        #     if w[0] != "∈":
+        #         html += "<ul><li class='name'>%s</li>" % (w)
+        #         for each in w[1:]:
+        #             if is_number(str(each)) is False and str(each) not in self.parameter.keys():
+        #                 html += "<ul><li class='name'>%s</li>" % (each)
+        #                 cnt = 0
+        #                 res = ""
+        #                 for i in range(1, self.bound + 1):
+        #                     if i in self.Tick_result[each]:
+        #                         if i - 1 in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='up'></li>"
+        #                         else:
+        #                             html += "<li class='upl'></li>"
+        #                     else:
+        #                         if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='down'></li>"
+        #                         else:
+        #                             html += "<li class='downl'></li>"
+        #                     if i - 1 in self.Tick_result[each]:
+        #                         cnt += 1
+        #                     res += "<li class='history'>%s</li>" % (cnt)
+        #                 html += "</ul>"
+        #                 html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
+        #         html += "<ul><li></li></ul></ul>"
+        #         html += "</ul>"
+        # html += "<hr>"
         html += "</div>"
         return html
 
@@ -657,7 +675,6 @@ class SMT:
         f.close()
 
     def getAllSchedule(self):
-        html = ""
         self.work()
         i = 0
         start = time.time()
@@ -673,13 +690,14 @@ class SMT:
             if len(self.printParameter.keys()) == 0:
                 if i == 10:
                     break
-            state = self.solver.check()
-            print(state)
-            print(time.time() - start)
             f = open("output.html", "a+", encoding="utf-8")
             f.write(html)
             f.flush()
             f.close()
+            state = self.solver.check()
+            print(state)
+            print(time.time() - start)
+
         if len(self.printParameter.keys()) != 0:
             print(self.parameterRange)
         print(time.time() - start)

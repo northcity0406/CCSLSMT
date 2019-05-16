@@ -164,13 +164,31 @@ T2s < T2f
 T2f [1] < T2s
 T2f = T2s $ p_p1 on msec
 p_p1 ∈ [4,5]
+T3s1 == T2f
 T3s < T3f
 T3f [1] < T3s
 T3f = T3s $ 2 on msec
-T3s= msec ⋈ 4 ± 1
-//T4s [3] < T3f
+T3s = msec ⋈ 3 ± 1
+T3s = T3s1 + T3s2
+T3f = T3f1 + T3f2
+T3s1 < T3f1
+T3f1 [1] < T3s1
+T3s2 < T3f2
+T3f2 [1] < T3s2
+T3s1 # T3s2
+T3f1 # T3f2
+T4s2 [3] < T3f1
+T3f1 < T4s2
 T4s < T4f
 T4f [1] < T4s
-T4f = T4s $ p_p2 on msec
-p_p2 ∈ [2,3]
-T4s=msec ⋈ 10 ± 1
+T4s = T4s1 + T4s2
+T4s1 # T4s2
+T4f = T4f1 + T4f2
+T4f1 # T4f2
+T4s1 < T4f1
+T4f1 [1] < T4s1
+T4s2 < T4f2
+T4f2 [1] < T4s2
+T4f1 = T4s1 $ 1 on msec
+T4f2 = T4s2 $ 3 on msec
+T4s=msec ⋈ 5 ± 1
