@@ -24,7 +24,8 @@ html, body {
 }
 
 #dpic {
-    margin-top: 30px;
+    margin-top: 5px;
+    margin-bottom: -5px;
 }
 
 #dpic ul {
@@ -44,7 +45,7 @@ html, body {
 }
 
 #dpic ul .name {
-    width: 100px;
+    /*width: 10px;*/
     color: #df3b3b;
     font-size: 12px;
     text-align: left;
@@ -95,3 +96,4 @@ html, body {
     font-weight: bold;
     margin-top: 0;
 }
+

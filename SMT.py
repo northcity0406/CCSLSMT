@@ -103,6 +103,7 @@ class SMT:
                 self.historyDict["h_%s" % (clock)] = history
             else:
                 history = self.historyDict["h_%s" % (clock)]
+            # self.solver.add(history(0) == z3.IntVal(0))
             self.solver.add(history(1) == z3.IntVal(0))
             if self.bound > 0:
                 # If the bound is finite, we define the history of the clock with a fixed bound.
@@ -110,6 +111,9 @@ class SMT:
                     self.solver.add(z3.If(tick(i),
                                           history(i + 1) == history(i) + 1,
                                           history(i + 1) == history(i)))
+                    # self.solver.add(z3.If(tick(i),
+                    #                       history(i + 1) == history(i) + 1,
+                    #                       history(i + 1) == history(i)))
             elif self.bound == 0:
                 x = z3.Int("x")
                 # If the bound is infinite, we define the history of the clock infinitely.
@@ -568,7 +572,7 @@ class SMT:
         self.parameterRange.append(t)
 
     def outPutTickByHTML(self):
-        html = "<div id='dpic'><ul><li class='name'>clock/step</li>"
+        html = "<div id='dpic'><ul><li class='name'></li>"
         for each in range(1, self.bound + 1):
             html += "<li>%s</li>" % (each)
         html += "</ul>"
@@ -594,57 +598,57 @@ class SMT:
                         cnt += 1
                     res += "<li>%s</li>" % (cnt)
                 html += "</ul>"
-
-        each = "msec"
-        html += "<ul><li class='name'>%s</li>" % (each)
-        cnt = 0
-        res = ""
-        for i in range(1, self.bound + 1):
-            if i in self.Tick_result[each]:
-                if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                    html += "<li class='up'></li>"
+        if "msec" in d:
+            each = "msec"
+            html += "<ul><li class='name'>%s</li>" % (each)
+            cnt = 0
+            res = ""
+            for i in range(1, self.bound + 1):
+                if i in self.Tick_result[each]:
+                    if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                        html += "<li class='up'></li>"
+                    else:
+                        html += "<li class='upl'></li>"
                 else:
-                    html += "<li class='upl'></li>"
-            else:
-                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                    html += "<li class='down'></li>"
-                else:
-                    html += "<li class='downl'></li>"
-            res += "<li>%s</li>" % (cnt)
-            if i in self.Tick_result[each]:
-                cnt += 1
-        html += "</ul>"
-        html += "<ul><li class='name'>history</li>" + res + "</ul>"
+                    if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                        html += "<li class='down'></li>"
+                    else:
+                        html += "<li class='downl'></li>"
+                res += "<li>%s</li>" % (cnt)
+                if i in self.Tick_result[each]:
+                    cnt += 1
+            html += "</ul>"
+            html += "<ul><li class='name'>H</li>" + res + "</ul>"
 
 
-        # for w in self.oldCCSLConstraintList:
-        # # for w in self.newCCSLConstraintList:
-        #     if w[0] != "∈":
-        #         html += "<ul><li class='name'>%s</li>" % (w)
-        #         for each in w[1:]:
-        #             if is_number(str(each)) is False and str(each) not in self.parameter.keys():
-        #                 html += "<ul><li class='name'>%s</li>" % (each)
-        #                 cnt = 0
-        #                 res = ""
-        #                 for i in range(1, self.bound + 1):
-        #                     if i in self.Tick_result[each]:
-        #                         if i - 1 in self.Tick_result[each] or i - 1 == 0:
-        #                             html += "<li class='up'></li>"
-        #                         else:
-        #                             html += "<li class='upl'></li>"
-        #                     else:
-        #                         if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-        #                             html += "<li class='down'></li>"
-        #                         else:
-        #                             html += "<li class='downl'></li>"
-        #                     if i - 1 in self.Tick_result[each]:
-        #                         cnt += 1
-        #                     res += "<li class='history'>%s</li>" % (cnt)
-        #                 html += "</ul>"
-        #                 html += "<ul><li class='name'>%s_history</li>" % (each) + res + "</ul>"
-        #         html += "<ul><li></li></ul></ul>"
-        #         html += "</ul>"
-        # html += "<hr>"
+        for w in self.oldCCSLConstraintList:
+        # for w in self.newCCSLConstraintList:
+            if w[0] != "∈":
+                # html += "<ul><li class='name'>%s</li>" % (w)
+                for each in w[1:]:
+                    if is_number(str(each)) is False and str(each) not in self.parameter.keys():
+                        html += "<ul><li class='name'>%s</li>" % (each)
+                        cnt = 0
+                        res = ""
+                        for i in range(1, self.bound + 1):
+                            if i in self.Tick_result[each]:
+                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='up'></li>"
+                                else:
+                                    html += "<li class='upl'></li>"
+                            else:
+                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+                                    html += "<li class='down'></li>"
+                                else:
+                                    html += "<li class='downl'></li>"
+                            if i - 1 in self.Tick_result[each]:
+                                cnt += 1
+                            res += "<li class='history'>%s</li>" % (cnt)
+                        html += "</ul>"
+                        html += "<ul><li class='name'>H%s</li>" % (each) + res + "</ul>"
+                html += "<ul><li></li></ul></ul>"
+                html += "</ul>"
+        html += "<hr>"
         html += "</div>"
         return html
 
@@ -667,8 +671,8 @@ class SMT:
         self.addHistory()
         # self.addTickForever()
         self.addOriginSMTConstraints()
-        tick = self.tickDict["t_%s" %("T1s")]
-        self.solver.add(tick(1))
+        # tick = self.tickDict["t_%s" %("T2s")]
+        # self.solver.add(tick(1))
         f = open("out.smt2","w")
         f.write(self.solver.to_smt2())
         f.flush()
@@ -683,13 +687,14 @@ class SMT:
         print(state)
         while state == z3.sat:
             self.getWorkOut()
-            html = "<h1>%s</h1>" % (i)
+            # html = "<h1>%s</h1>" % (i)
+            html = ""
             html += self.outPutTickByHTML()
             self.addExtraConstraints()
             i += 1
-            if len(self.printParameter.keys()) == 0:
-                if i == 10:
-                    break
+            # if len(self.printParameter.keys()) == 0:
+            #     if i == 10:
+            #         break
             f = open("output.html", "a+", encoding="utf-8")
             f.write(html)
             f.flush()
@@ -705,7 +710,7 @@ class SMT:
 
 if __name__ == "__main__":
     HtmlHeader()
-    bound = 30
+    bound = 20
     smt = SMT("ccsl.txt", bound=bound, period=0, realPeroid=0)
     smt.getAllSchedule()
     HTMLFooter()

@@ -139,7 +139,6 @@ p_p4∈[3,6]
 
 T1f=T1s⋈3±1
 T1f=T1s∝3±1
-
 T1s<T1f
 T1f[1]<T1s
 T1f≤T2s
@@ -157,13 +156,13 @@ p_p4∈[3,6]
 
 T1s < T1f
 T1f [1] < T1s
-T1f = T1s $ 7 on msec
-T1s=msec ⋈ 10 ± 1
+T1f = T1s $ 3 on msec
+T1s=msec ⋈ 5 ± 1
 T1f==T2s
 T2s < T2f
 T2f [1] < T2s
 T2f = T2s $ p_p1 on msec
-p_p1 ∈ [4,5]
+p_p1 ∈ [2,3]
 T3s1 == T2f
 T3s < T3f
 T3f [1] < T3s
@@ -191,4 +190,43 @@ T4s2 < T4f2
 T4f2 [1] < T4s2
 T4f1 = T4s1 $ 1 on msec
 T4f2 = T4s2 $ 3 on msec
+T4s=msec ⋈ 5 ± 1
+
+
+T1s < T1f
+T1f [1] < T1s
+T1f = T1s $ 3 on msec
+T1s = msec ⋈ 5 ± 1
+T1f ≤ T2s
+T2s < T2f
+T2f [1] < T2s
+T2f = T2s $ p_p1 on msec
+p_p1 ∈ [2,3]
+T2f ≤ T3s1
+T3s < T3f
+T3f [1] < T3s
+T3f = T3s $ 2 on msec
+T3s = msec ⋈ 3 ± 1
+T3s = T3s1 + T3s2
+T3f = T3f1 + T3f2
+T3s1 < T3f1
+T3f1 [1] < T3s1
+T3s2 < T3f2
+T3f2 [1] < T3s2
+T3s1 # T3s2
+T3f1 # T3f2
+T4s1 [3] < T3f1
+T3f1 < T4s1
+T4s < T4f
+T4f [1] < T4s
+T4s = T4s1 + T4s2
+T4s1 # T4s2
+T4f = T4f1 + T4f2
+T4f1 # T4f2
+T4s1 < T4f1
+T4f1 [1] < T4s1
+T4s2 < T4f2
+T4f2 [1] < T4s2
+T4f1 = T4s1 $ 3 on msec
+T4f2 = T4s2 $ 1 on msec
 T4s=msec ⋈ 5 ± 1
