@@ -10,7 +10,7 @@ class CCSL:
         self.parameter = {}              #All the parameter
         self.printParameter = {}         #The parameter of periodicity
     def readCCSLFromFile(self):
-        f = open(self.CCSLFile,"r")
+        f = open(self.CCSLFile,"r",encoding="utf-8")
         for each in f.readlines():
             if str(each).startswith("//") is False:
                 self.constraintsProduce(each.strip("\n").replace(" ",""))

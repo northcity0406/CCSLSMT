@@ -621,33 +621,33 @@ class SMT:
             html += "<ul><li class='name'>H</li>" + res + "</ul>"
 
 
-        for w in self.oldCCSLConstraintList:
-        # for w in self.newCCSLConstraintList:
-            if w[0] != "∈":
-                # html += "<ul><li class='name'>%s</li>" % (w)
-                for each in w[1:]:
-                    if is_number(str(each)) is False and str(each) not in self.parameter.keys():
-                        html += "<ul><li class='name'>%s</li>" % (each)
-                        cnt = 0
-                        res = ""
-                        for i in range(1, self.bound + 1):
-                            if i in self.Tick_result[each]:
-                                if i - 1 in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='up'></li>"
-                                else:
-                                    html += "<li class='upl'></li>"
-                            else:
-                                if i - 1 not in self.Tick_result[each] or i - 1 == 0:
-                                    html += "<li class='down'></li>"
-                                else:
-                                    html += "<li class='downl'></li>"
-                            if i - 1 in self.Tick_result[each]:
-                                cnt += 1
-                            res += "<li class='history'>%s</li>" % (cnt)
-                        html += "</ul>"
-                        html += "<ul><li class='name'>H%s</li>" % (each) + res + "</ul>"
-                html += "<ul><li></li></ul></ul>"
-                html += "</ul>"
+        # for w in self.oldCCSLConstraintList:
+        # # for w in self.newCCSLConstraintList:
+        #     if w[0] != "∈":
+        #         # html += "<ul><li class='name'>%s</li>" % (w)
+        #         for each in w[1:]:
+        #             if is_number(str(each)) is False and str(each) not in self.parameter.keys():
+        #                 html += "<ul><li class='name'>%s</li>" % (each)
+        #                 cnt = 0
+        #                 res = ""
+        #                 for i in range(1, self.bound + 1):
+        #                     if i in self.Tick_result[each]:
+        #                         if i - 1 in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='up'></li>"
+        #                         else:
+        #                             html += "<li class='upl'></li>"
+        #                     else:
+        #                         if i - 1 not in self.Tick_result[each] or i - 1 == 0:
+        #                             html += "<li class='down'></li>"
+        #                         else:
+        #                             html += "<li class='downl'></li>"
+        #                     if i - 1 in self.Tick_result[each]:
+        #                         cnt += 1
+        #                     res += "<li class='history'>%s</li>" % (cnt)
+        #                 html += "</ul>"
+        #                 html += "<ul><li class='name'>H%s</li>" % (each) + res + "</ul>"
+        #         html += "<ul><li></li></ul></ul>"
+        #         html += "</ul>"
         html += "<hr>"
         html += "</div>"
         return html
@@ -655,12 +655,12 @@ class SMT:
     def addExtraConstraints(self):
         model = self.solver.model()
         ExtraConstraints = []
-        if len(self.printParameter.keys()) == 0:
-            for each in self.newClocks:
-                self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
-                for i in range(1, self.bound + 1):
-                    tmp = self.tickDict["t_%s" % (each)]
-                    ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
+        # if len(self.printParameter.keys()) == 0:
+        #     for each in self.newClocks:
+        #         self.tickDict["t_%s" % (each)] = z3.Function("t_%s" % (each), z3.IntSort(), z3.BoolSort())
+        #         for i in range(1, self.bound + 1):
+        #             tmp = self.tickDict["t_%s" % (each)]
+        #             ExtraConstraints.append(tmp(i) != model.eval(tmp(i)))
         for each in self.printParameter.keys():
             ExtraConstraints.append(self.printParameter[each] != model.eval(self.printParameter[each]))
         self.solver.add(z3.Or(ExtraConstraints))
@@ -671,8 +671,8 @@ class SMT:
         self.addHistory()
         # self.addTickForever()
         self.addOriginSMTConstraints()
-        # tick = self.tickDict["t_%s" %("T2s")]
-        # self.solver.add(tick(1))
+        tick = self.tickDict["t_%s" %("T1s")]
+        self.solver.add(tick(1))
         f = open("out.smt2","w")
         f.write(self.solver.to_smt2())
         f.flush()
@@ -701,6 +701,8 @@ class SMT:
             f.close()
             state = self.solver.check()
             print(state)
+            # if i == 10:
+            #     break
             print(time.time() - start)
 
         if len(self.printParameter.keys()) != 0:
@@ -710,7 +712,7 @@ class SMT:
 
 if __name__ == "__main__":
     HtmlHeader()
-    bound = 20
+    bound = 30
     smt = SMT("ccsl.txt", bound=bound, period=0, realPeroid=0)
     smt.getAllSchedule()
     HTMLFooter()
