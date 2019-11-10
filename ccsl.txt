@@ -1,14 +1,23 @@
-T1s<T1f
-T1f[1]<T1s
-T1f≤T2s
-T2f[4]<T1s
-T2s<T2f
-T2f[1]<T2s
-T1s=msec∝p_p1
-T2s=msec∝p_p2
-T1f=T1s$p_p3onmsec
-T2f=T2s$p_p4onmsec
-p_p1∈[4,7]
-p_p2∈[5,8]
-p_p3∈[4,5]
-p_p4∈[4,6]
+T5s1 < T5f1
+T5f1 [1] < T5s1
+T5f1 = T5s1 $ 1 on msec
+T5s1 = msec ⋈ 25 ± 1
+
+T5s2 < T5f2
+T5f2 [1] < T5s2
+T5f2 = T5s2 $ p_p1 on msec
+p_p1 ∈ [3,4]
+
+T6s < T6f
+T6f [1] < T6s
+T6f = T6s $ p_p2 on msec
+p_p2 ∈ [1,2]
+
+T7s < T7f
+T7f [1] < T7s
+T7f = T7s $ p_p3 on msec
+p_p3 ∈ [2,4]
+
+T6s == T5f1
+T5s2 == T6f
+T7s == T5f2

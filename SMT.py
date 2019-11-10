@@ -671,7 +671,7 @@ class SMT:
         self.addHistory()
         # self.addTickForever()
         self.addOriginSMTConstraints()
-        tick = self.tickDict["t_%s" %("T1s")]
+        tick = self.tickDict["t_%s" %("T5s1")]
         self.solver.add(tick(1))
         f = open("out.smt2","w")
         f.write(self.solver.to_smt2())
@@ -712,7 +712,7 @@ class SMT:
 
 if __name__ == "__main__":
     HtmlHeader()
-    bound = 30
+    bound = 40
     smt = SMT("ccsl.txt", bound=bound, period=0, realPeroid=0)
     smt.getAllSchedule()
     HTMLFooter()
